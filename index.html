@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QuantumCoin — Quantum-Resistant Proof-of-Work</title>
+  <meta name="description" content="QuantumCoin (QC) is a quantum-resistant Layer-1 with Bitcoin-style economics, 22,000,000 hard cap, RevStop self-protection, and a fixed-cap wQC IOU for early liquidity." />
+  <meta property="og:title" content="QuantumCoin — Quantum-Resistant Proof-of-Work" />
+  <meta property="og:description" content="22M hard cap • post-quantum signatures • RevStop • wQC IOU • mining & roadmap" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0ff" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+</head>
+<body>
+  <!-- ===== NAVBAR (glass, sticky) ===== -->
+  <header class="nav">
+    <div class="container nav__inner">
+      <a class="brand" href="#">⚛︎ QuantumCoin</a>
+      <nav class="nav__links">
+        <a href="#about">About</a>
+        <a href="#tech">Tech</a>
+        <a href="#revstop">RevStop</a>
+        <a href="#tokenomics">Tokenomics</a>
+        <a href="#wqc">wQC</a>
+        <a href="#mining">Mining</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== HERO (animated quantum field + orbits) ===== -->
+  <section class="hero">
+    <div class="fx fx--grid"></div>
+    <div class="fx fx--particles"></div>
+    <div class="hero__orbital">
+      <div class="orbital orbital--a"></div>
+      <div class="orbital orbital--b"></div>
+      <div class="orbital orbital--c"></div>
+      <div class="nucleus"></div>
+    </div>
+    <div class="container hero__inner">
+      <h1 class="display">
+        Quantum-Resistant <span class="gradient">Proof-of-Work</span>
+      </h1>
+      <p class="lead">
+        A Layer-1 built for the long term: post-quantum signatures, <strong>22,000,000</strong> hard-capped supply,
+        and <em>RevStop</em> — an owner-controlled safety pause. A fixed-cap wrapped token (<strong>wQC</strong>)
+        bootstraps early liquidity, redeemable 1:1 at mainnet.
+      </p>
+      <div class="actions">
+        <a class="btn btn--primary" href="#about">How it works</a>
+        <a class="btn btn--ghost" href="#wqc">About wQC</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section id="about" class="section">
+    <div class="container grid two">
+      <div>
+        <h2>What is QuantumCoin?</h2>
+        <p>
+          <strong>QuantumCoin (QC)</strong> is a clean-room Layer-1 focused on durability.
+          We keep Bitcoin-style simplicity where it matters (issuance, consensus) and
+          adopt <strong>post-quantum</strong> cryptography where the future demands it.
+        </p>
+        <ul class="bullets">
+          <li><strong>Consensus:</strong> Proof-of-Work (permissionless, time-tested)</li>
+          <li><strong>Supply:</strong> <em>Hard cap 22,000,000 QC</em> with predictable halvings</li>
+          <li><strong>Security:</strong> Post-quantum signatures (future-ready)</li>
+          <li><strong>Self-Protection:</strong> <em>RevStop</em> — opt-in, owner-local pause</li>
+        </ul>
+      </div>
+      <div class="card glass card--tilt">
+        <h3 class="kicker">Design Goals</h3>
+        <ul class="ticks">
+          <li>Credible scarcity • auditable issuance</li>
+          <li>Simple node operation (archival, pruned, light)</li>
+          <li>Open standards • reproducible builds</li>
+          <li>Neutral monetary policy, no premine</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TECH ===== -->
+  <section id="tech" class="section section--alt">
+    <div class="container">
+      <h2>Technology at a Glance</h2>
+      <div class="grid three">
+        <div class="card glass glow">
+          <h3>Post-Quantum Signatures</h3>
+          <p>Modern cryptography designed to resist quantum adversaries while remaining practical for users and nodes.</p>
+        </div>
+        <div class="card glass glow">
+          <h3>Lean Node Profiles</h3>
+          <p>Archival for explorers, <strong>pruned</strong> for everyday users (5–20 GB), and light/SPV for mobile.</p>
+        </div>
+        <div class="card glass glow">
+          <h3>Deterministic Economics</h3>
+          <p>Bitcoin-like emission curve, fixed max supply, no inflation after the cap — easy to verify on-chain.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== REVSTOP ===== -->
+  <section id="revstop" class="section">
+    <div class="container grid two">
+      <div>
+        <h2>RevStop — Owner-Controlled Safety</h2>
+        <p>
+          <strong>RevStop</strong> lets a wallet owner temporarily pause <em>their own</em> outgoing transfers
+          during emergencies (compromised keys, lost device). That’s it — no central seizure, no global kill-switch.
+        </p>
+        <div class="pill-list">
+          <span class="pill">Opt-in</span>
+          <span class="pill">Owner-local</span>
+          <span class="pill">Transparent</span>
+          <span class="pill">Reversible</span>
+        </div>
+      </div>
+      <div class="card glass card--striped">
+        <h3 class="kicker">What it’s not</h3>
+        <ul class="cross">
+          <li>Not a custodial freeze</li>
+          <li>Not protocol-wide censorship</li>
+          <li>Not mandatory for wallets or exchanges</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TOKENOMICS ===== -->
+  <section id="tokenomics" class="section section--alt">
+    <div class="container">
+      <h2>Tokenomics</h2>
+      <div class="grid three">
+        <div class="metric">
+          <div class="metric__value">22,000,000</div>
+          <div class="metric__label">MAX SUPPLY</div>
+        </div>
+        <div class="metric">
+          <div class="metric__value">PoW</div>
+          <div class="metric__label">ISSUANCE</div>
+        </div>
+        <div class="metric">
+          <div class="metric__value">0</div>
+          <div class="metric__label">PREMINE</div>
+        </div>
+      </div>
+      <p class="muted center">Predictable halvings; all QC enters circulation through mining.</p>
+    </div>
+  </section>
+
+  <!-- ===== WQC ===== -->
+  <section id="wqc" class="section">
+    <div class="container grid two">
+      <div>
+        <h2>wQC — Wrapped QuantumCoin (IOU)</h2>
+        <p>
+          <strong>wQC</strong> is a fixed-cap ERC-20 (<em>100,000</em> supply) redeemable
+          <strong>1:1</strong> for native QC when mainnet launches. It enables early liquidity without inflating QC.
+        </p>
+        <ol class="steps">
+          <li>Deploy wQC (100k total)</li>
+          <li>List on a DEX (seed liquidity)</li>
+          <li>Launch QC mainnet</li>
+          <li>Redeem 1 wQC → 1 QC (public window)</li>
+          <li>Sunset wQC, QC remains</li>
+        </ol>
+        <div class="actions">
+          <a class="btn btn--primary" href="#roadmap">See Roadmap</a>
+          <a class="btn btn--ghost" href="#">(Contract link soon)</a>
+        </div>
+      </div>
+      <div class="card glass card--tilt">
+        <h3 class="kicker">Why it works</h3>
+        <ul class="ticks">
+          <li>Fixed supply prevents drift from QC scarcity</li>
+          <li>Unit-for-unit redemption (not USD-pegged)</li>
+          <li>Transparent burn → mint ledger at redemption</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MINING ===== -->
+  <section id="mining" class="section section--alt">
+    <div class="container grid two">
+      <div class="card glass glow">
+        <h3>Node Profiles</h3>
+        <ul class="bullets">
+          <li><strong>Archival:</strong> explorers & researchers</li>
+          <li><strong>Pruned:</strong> 5–20 GB typical (default)</li>
+          <li><strong>Light/SPV:</strong> mobile and low-power</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Mining</h2>
+        <p>Anyone can mine QC by running a node and miner. Parameters target global participation and modest hardware requirements.</p>
+        <p class="muted">Testnet binaries and guides will be published prior to mainnet.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ROADMAP (animated timeline) ===== -->
+  <section id="roadmap" class="section">
+    <div class="container">
+      <h2>Roadmap</h2>
+      <div class="timeline">
+        <div class="tl__item">
+          <span class="tl__dot"></span>
+          <h4>Phase 1 — wQC IOU</h4>
+          <p>Deploy fixed-cap wQC and seed DEX liquidity with transparent documentation.</p>
+        </div>
+        <div class="tl__item">
+          <span class="tl__dot"></span>
+          <h4>Phase 2 — Public Testnet</h4>
+          <p>Open multi-node network, explorer, wallets; RevStop opt-in testing.</p>
+        </div>
+        <div class="tl__item">
+          <span class="tl__dot"></span>
+          <h4>Phase 3 — Mainnet</h4>
+          <p>Launch QC; mine the 100k redemption reserve under normal PoW rules.</p>
+        </div>
+        <div class="tl__item">
+          <span class="tl__dot"></span>
+          <h4>Phase 4 — Redemption</h4>
+          <p>Public 1:1 redemption window; publish live burn→mint ledger.</p>
+        </div>
+        <div class="tl__item">
+          <span class="tl__dot"></span>
+          <h4>Phase 5 — Sunset wQC</h4>
+          <p>Retire the wrapped token; QC remains the sole live asset.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section id="faq" class="section section--alt">
+    <div class="container grid two">
+      <div>
+        <h2>FAQ</h2>
+        <h4>Is wQC pegged to USD?</h4>
+        <p>No — market sets the price. Redemption is 1:1 in units (wQC → QC), not dollars.</p>
+        <h4>Is RevStop a central freeze?</h4>
+        <p>No. It is opt-in and local to the wallet owner; no third party can seize funds.</p>
+      </div>
+      <div class="card glass">
+        <h3 class="kicker">Contact</h3>
+        <p>GitHub: <a href="https://github.com/aeonith/quantumcoin-ui-" target="_blank" rel="noreferrer">/aeonith</a><br/>
+           Email: <a href="mailto:contact@quantumcoincrypto.com">contact@quantumcoincrypto.com</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© <span id="y"></span> QuantumCoin • All rights reserved</p>
+      <div class="social">
+        <a href="#">Explorer</a>
+        <a href="#">Docs</a>
+        <a href="#">Uniswap (soon)</a>
+      </div>
+    </div>
+    <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+  </footer>
+</body>
+</html>
