@@ -1,13 +1,9 @@
-/* =========================================
-   QuantumCoin Premium Landing (CSS-only)
-   – neon gradients, glassmorphism, 3D cards,
-     animated grid + particles, orbiting nucleus
-   ========================================= */
+/* QuantumCoin™ premium landing — neon/glass/orbits/sparks/fog */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
 
 :root{
   --ink:#E6F0FF; --muted:#9BB5D4;
-  --bg:#060A12; --panel:#0B1220; --panel-2:#0E1728;
+  --bg:#05080F; --panel:#0B1220;
   --line:#13223C; --glass:rgba(255,255,255,.06);
   --glow-a:#60A5FA; --glow-b:#22D3EE; --hot:#7C3AED;
   --brand: conic-gradient(from 0deg at 50% 50%, #22D3EE, #60A5FA, #7C3AED, #22D3EE);
@@ -16,12 +12,15 @@
 *{box-sizing:border-box} html,body{height:100%}
 body{
   margin:0; font-family:Inter,system-ui,Arial,sans-serif;
-  color:var(--ink); background: radial-gradient(1200px 700px at 80% -10%, #0a1426 0, transparent 60%),
-                      radial-gradient(900px 600px at -10% 0%, #0a1628 0, transparent 55%), #05080F;
+  color:var(--ink);
+  background:
+    radial-gradient(1000px 600px at 80% -10%, #0a1426 0, transparent 60%),
+    radial-gradient(900px 600px at -10% 0%, #0a1628 0, transparent 55%),
+    #05080F;
   line-height:1.7; overflow-x:hidden;
 }
 
-/* Containers */
+/* containers */
 .container{max-width:1100px;margin:0 auto;padding:0 22px}
 .center{text-align:center}
 
@@ -29,7 +28,7 @@ body{
 .nav{
   position:sticky; top:0; z-index:80;
   backdrop-filter:saturate(140%) blur(8px);
-  background:linear-gradient(180deg, rgba(10,18,32,.8), rgba(10,18,32,.5) 60%, transparent);
+  background:linear-gradient(180deg, rgba(10,18,32,.85), rgba(10,18,32,.55) 60%, transparent);
   border-bottom:1px solid #0d1930;
 }
 .nav__inner{display:flex;align-items:center;justify-content:space-between;height:64px}
@@ -41,16 +40,16 @@ body{
 
 /* HERO */
 .hero{
-  position:relative; min-height:72vh; display:grid; place-items:center; overflow:hidden;
+  position:relative; min-height:78vh; display:grid; place-items:center; overflow:hidden;
   border-bottom:1px solid var(--line);
 }
-.hero__inner{position:relative; z-index:4; text-align:center; padding:80px 0}
-.display{font-size: clamp(2rem, 1.6rem + 2.2vw, 3.4rem); letter-spacing:.2px; margin:0 0 14px}
+.hero__inner{position:relative; z-index:5; text-align:center; padding:92px 0 72px}
+.display{font-size: clamp(2rem, 1.6rem + 2.2vw, 3.6rem); letter-spacing:.2px; margin:0 0 14px}
 .display .gradient{
   background:var(--brand); -webkit-background-clip:text; background-clip:text; color:transparent;
   filter:drop-shadow(0 0 18px rgba(96,165,250,.35));
 }
-.lead{max-width:860px;margin:0 auto 20px; color:#D6E6FF; opacity:.95}
+.lead{max-width:880px;margin:0 auto 20px; color:#D6E6FF; opacity:.95}
 .actions{display:flex; gap:14px; justify-content:center; margin-top:10px}
 .btn{
   display:inline-block; padding:12px 18px; border-radius:12px; text-decoration:none; font-weight:800; letter-spacing:.2px;
@@ -63,39 +62,66 @@ body{
 .btn--ghost{border:1px solid #183054; color:#BFE1FF; background:rgba(12,20,36,.4)}
 .btn:hover{transform:translateY(-2px); opacity:.95}
 
-/* FX: animated grid + particles */
-.fx{position:absolute; inset:0; z-index:1; pointer-events:none}
+/* HERO background: your coin render + fog + vignette */
+.hero__bg{
+  position:absolute; inset:-40px -40px -40px -40px; z-index:1; pointer-events:none;
+  background:
+    radial-gradient(1200px 700px at 85% 10%, rgba(34,211,238,.10), transparent 60%),
+    radial-gradient(1000px 600px at 15% 15%, rgba(96,165,250,.10), transparent 60%),
+    url('hero-coin.jpg') center/cover no-repeat,
+    radial-gradient(circle at center, transparent 0 60%, rgba(0,0,0,.65) 100%);
+  filter:contrast(1.05) saturate(1.15) brightness(.88);
+}
+.hero__bg::after{
+  /* cinematic vignette + grain */
+  content:""; position:absolute; inset:0;
+  background:
+    radial-gradient(80% 60% at 50% 70%, transparent 0, rgba(3,6,14,.6) 100%),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.03), rgba(255,255,255,.03) 1px, transparent 1px, transparent 2px);
+  mix-blend-mode:overlay; opacity:.7;
+}
+
+/* FX: grid */
+.fx{position:absolute; inset:0; z-index:2; pointer-events:none}
 .fx--grid{
   background:
-    linear-gradient(transparent 98%, rgba(96,165,250,.35) 100%) center/2px 42px,
-    linear-gradient(90deg, transparent 98%, rgba(96,165,250,.25) 100%) center/42px 2px;
-  opacity:.25; transform:perspective(800px) rotateX(62deg) translateY(-16%);
+    linear-gradient(transparent 98%, rgba(96,165,250,.30) 100%) center/2px 42px,
+    linear-gradient(90deg, transparent 98%, rgba(96,165,250,.22) 100%) center/42px 2px;
+  opacity:.22; transform:perspective(820px) rotateX(62deg) translateY(-10%);
   animation:gridFloat 14s ease-in-out infinite alternate;
   filter:drop-shadow(0 0 10px rgba(34,211,238,.35));
 }
 @keyframes gridFloat{
-  from{transform:perspective(800px) rotateX(62deg) translateY(-16%) translateX(-2%)}
-  to  {transform:perspective(800px) rotateX(62deg) translateY(-8%)  translateX(2%)}
-}
-.fx--particles{
-  background:
-    radial-gradient(2px 2px at 10% 30%, rgba(96,165,250,.7), transparent 60%),
-    radial-gradient(2px 2px at 80% 40%, rgba(34,211,238,.7), transparent 60%),
-    radial-gradient(1.5px 1.5px at 40% 70%, rgba(124,58,237,.7), transparent 60%),
-    radial-gradient(1.8px 1.8px at 55% 20%, rgba(96,165,250,.6), transparent 60%),
-    radial-gradient(1.6px 1.6px at 25% 50%, rgba(34,211,238,.6), transparent 60%);
-  opacity:.9; animation: twinkle 5s linear infinite;
-}
-@keyframes twinkle{
-  0%,100%{filter:brightness(1)}
-  50%{filter:brightness(1.35)}
+  from{transform:perspective(820px) rotateX(62deg) translateY(-12%) translateX(-1.5%)}
+  to  {transform:perspective(820px) rotateX(62deg) translateY(-6%)  translateX(1.5%)}
 }
 
-/* Hero orbital atom */
-.hero__orbital{position:absolute; width:420px; height:420px; z-index:2; pointer-events:none}
-@media (max-width: 700px){ .hero__orbital{width:300px; height:300px} }
+/* FX: sparks */
+.fx--sparks{
+  background:
+    radial-gradient(2px 2px at 10% 30%, rgba(96,165,250,.85), transparent 60%),
+    radial-gradient(2px 2px at 82% 40%, rgba(34,211,238,.85), transparent 60%),
+    radial-gradient(1.5px 1.5px at 40% 70%, rgba(124,58,237,.85), transparent 60%),
+    radial-gradient(1.8px 1.8px at 55% 20%, rgba(96,165,250,.75), transparent 60%),
+    radial-gradient(1.6px 1.6px at 25% 50%, rgba(34,211,238,.75), transparent 60%);
+  animation: twinkle 5.2s linear infinite;
+}
+@keyframes twinkle{ 0%,100%{filter:brightness(1)} 50%{filter:brightness(1.35)} }
+
+/* FX: ground mist/fog */
+.fx--mist{
+  background:
+    radial-gradient(1600px 260px at 50% 92%, rgba(12,22,38,.85), transparent 70%),
+    radial-gradient(1200px 220px at 45% 94%, rgba(24,58,92,.55), transparent 70%),
+    radial-gradient(900px 200px at 55% 96%, rgba(46,158,181,.18), transparent 70%);
+  z-index:3; opacity:.9;
+}
+
+/* Orbital atom overlay */
+.hero__orbital{position:absolute; width:460px; height:460px; z-index:4; pointer-events:none}
+@media (max-width: 700px){ .hero__orbital{width:320px; height:320px} }
 .orbital{
-  position:absolute; inset:0; border:1px dashed rgba(96,165,250,.25); border-radius:50%;
+  position:absolute; inset:0; border:1px dashed rgba(96,165,250,.28); border-radius:50%;
   animation:orbitSpin 16s linear infinite;
 }
 .orbital--a{transform:rotateX(62deg)}
@@ -180,20 +206,13 @@ h3{margin:0 0 8px}
   box-shadow:0 0 16px 6px rgba(34,211,238,.35);
   animation:pulse 2.8s ease-in-out infinite;
 }
-@keyframes pulse{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.15)}
-}
+@keyframes pulse{ 0%,100%{transform:scale(1)} 50%{transform:scale(1.15)} }
 
-/* Footer */
+/* FOOTER */
 .footer{border-top:1px solid var(--line); padding:22px 0; background:#0A1322}
 .footer__inner{display:flex; align-items:center; justify-content:space-between}
 .footer a{color:#A5F3FC; text-decoration:none}
 .footer a:hover{text-decoration:underline}
-
-/* Utilities */
-.muted{color:var(--muted)}
-.kicker{color:#9ED8FF}
 
 /* Responsiveness */
 @media (max-width: 720px){
