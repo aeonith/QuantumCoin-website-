@@ -4,36 +4,26 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>QuantumCoin™ — Quantum-Resistant Proof-of-Work</title>
-  <meta name="description" content="QuantumCoin™ (QC): a post-quantum Layer-1 with Bitcoin-style economics, 22,000,000 hard cap, RevStop self-protection, and wQC wrapped IOU." />
-  <meta property="og:title" content="QuantumCoin™ — Quantum-Resistant Proof-of-Work" />
-  <meta property="og:description" content="22M hard cap • post-quantum signatures • RevStop • wQC IOU • mining & roadmap" />
-  <meta property="og:type" content="website" />
+  <meta name="description" content="QuantumCoin™ (QC): a post-quantum Layer-1 with 22,000,000 hard cap, Proof-of-Work issuance, RevStop self-protection, and wQC wrapped IOU for early liquidity." />
   <meta name="theme-color" content="#0ff" />
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 </head>
 <body>
 
-  <!-- ==================== SPLASH INTRO VIDEO ==================== -->
-  <!-- Plays once per visit (config below), 29s safety cap, skip button -->
+  <!-- ===== SPLASH INTRO VIDEO (plays on visit, 29s cap) ===== -->
   <div id="qc-splash" class="splash hidden" aria-hidden="true">
-    <video id="qc-splash-video"
-           class="splash__video"
-           playsinline
-           muted
-           autoplay
-           preload="auto"
-           poster="qc-intro-29s.jpg">
+    <video id="qc-splash-video" class="splash__video" playsinline muted autoplay preload="auto" poster="qc-intro-29s.jpg">
       <source src="qc-intro-29s.webm" type="video/webm" />
       <source src="qc-intro-29s.mp4"  type="video/mp4" />
     </video>
     <button id="qc-skip" class="splash__skip" aria-label="Skip intro">Skip ▸</button>
   </div>
 
-  <!-- ==================== NAV ==================== -->
+  <!-- ===== NAV ===== -->
   <header class="nav">
     <div class="container nav__inner">
-      <a class="brand" href="#">⚛︎ QuantumCoin™</a>
+      <a class="brand" href="#home">⚛︎ QuantumCoin™</a>
       <nav class="nav__links">
         <a href="#about">About</a>
         <a href="#tech">Tech</a>
@@ -47,51 +37,60 @@
     </div>
   </header>
 
-  <!-- ==================== HERO ==================== -->
-  <section class="hero">
-    <!-- layered effects -->
-    <div class="hero__bg"></div>
-    <div class="fx fx--grid"></div>
-    <div class="fx fx--sparks"></div>
-    <div class="fx fx--mist"></div>
+  <!-- ===== EPIC HERO ===== -->
+  <section class="hero epic" id="home">
+    <!-- depth layers -->
+    <div class="layer layer--bg"></div>
+    <div class="layer layer--grid"></div>
+    <div class="layer layer--glow"></div>
+    <canvas id="qc-particles" class="layer layer--particles" aria-hidden="true"></canvas>
 
-    <!-- orbital overlay -->
-    <div class="hero__orbital">
-      <div class="orbital orbital--a"></div>
-      <div class="orbital orbital--b"></div>
-      <div class="orbital orbital--c"></div>
-      <div class="nucleus"></div>
+    <!-- interactive coin -->
+    <div class="coin-tilt" data-tilt>
+      <img src="hero-coin.png" alt="QuantumCoin™" class="coin-img" />
+      <div class="coin-glow"></div>
     </div>
 
-    <div class="container hero__inner">
-      <h1 class="display">Quantum-Resistant <span class="gradient">Proof-of-Work</span></h1>
-      <p class="lead">
-        <strong>QuantumCoin™ (QC)</strong> is a Layer-1 built for the long term:
-        post-quantum signatures, a <strong>22,000,000</strong> hard-capped supply,
-        and <em>RevStop</em> — an owner-controlled wallet pause. Early liquidity arrives via
-        a fixed-cap wrapped token (<strong>wQC</strong>) redeemable 1:1 at mainnet.
+    <!-- copy -->
+    <div class="container hero__content">
+      <h1 class="display mega">The <span class="gradient">Quantum-Resistant</span> Cryptocurrency</h1>
+      <p class="lead xlead">
+        <strong>QuantumCoin™ (QC)</strong> brings post-quantum security to Proof-of-Work with a
+        <strong>22,000,000</strong> hard cap and <em>RevStop</em> self-protection. The wrapped token
+        <strong>wQC</strong> ignites early liquidity — redeemable 1:1 at mainnet.
       </p>
       <div class="actions">
-        <a class="btn btn--primary" href="#about">How it works</a>
-        <a class="btn btn--ghost" href="#wqc">About wQC</a>
+        <a class="btn btn--primary btn--xl" href="#about">Explore the Protocol</a>
+        <a class="btn btn--ghost btn--xl" href="#wqc">Learn about wQC</a>
+      </div>
+
+      <div class="marquee" role="presentation">
+        <div class="marquee__track">
+          <span>Post-Quantum Signatures</span>
+          <span>22,000,000 Max Supply</span>
+          <span>Proof-of-Work</span>
+          <span>RevStop™</span>
+          <span>Pruned Nodes</span>
+          <span>Open Source</span>
+        </div>
       </div>
     </div>
+
+    <!-- cosmetic -->
+    <div class="scanline"></div>
+    <div class="vignette"></div>
   </section>
 
-  <!-- ==================== ABOUT ==================== -->
+  <!-- ===== ABOUT ===== -->
   <section id="about" class="section">
     <div class="container grid two">
       <div>
         <h2>What is QuantumCoin™?</h2>
-        <p>
-          <strong>QuantumCoin™</strong> keeps Bitcoin-style simplicity where it matters
-          (issuance, consensus) and introduces <strong>post-quantum</strong> cryptography where
-          the future demands it.
-        </p>
+        <p><strong>QuantumCoin™</strong> keeps Bitcoin-style simplicity in issuance and consensus, and upgrades signatures for a post-quantum future.</p>
         <ul class="bullets">
           <li><strong>Consensus:</strong> Proof-of-Work (permissionless, time-tested)</li>
-          <li><strong>Supply:</strong> <em>Hard cap 22,000,000 QC</em> with predictable halvings</li>
-          <li><strong>Security:</strong> Post-quantum signatures (future-ready)</li>
+          <li><strong>Supply:</strong> Hard cap <em>22,000,000 QC</em> with predictable halvings</li>
+          <li><strong>Security:</strong> Post-quantum signatures</li>
           <li><strong>Self-Protection:</strong> <em>RevStop</em> — opt-in, owner-local pause</li>
         </ul>
       </div>
@@ -107,14 +106,14 @@
     </div>
   </section>
 
-  <!-- ==================== TECH ==================== -->
+  <!-- ===== TECH ===== -->
   <section id="tech" class="section section--alt">
     <div class="container">
       <h2>Technology at a Glance</h2>
       <div class="grid three">
         <div class="card glass glow">
           <h3>Post-Quantum Signatures</h3>
-          <p>Modern cryptography designed to resist quantum adversaries while remaining practical for users and nodes.</p>
+          <p>Future-ready cryptography designed to resist quantum adversaries while remaining practical for users and nodes.</p>
         </div>
         <div class="card glass glow">
           <h3>Lean Node Profiles</h3>
@@ -122,26 +121,21 @@
         </div>
         <div class="card glass glow">
           <h3>Deterministic Economics</h3>
-          <p>Bitcoin-like emission curve, fixed max supply, no inflation after the cap — easy to verify on-chain.</p>
+          <p>Bitcoin-like emission curve, fixed max supply, zero inflation after the cap — easy to verify on-chain.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== REVSTOP ==================== -->
+  <!-- ===== REVSTOP ===== -->
   <section id="revstop" class="section">
     <div class="container grid two">
       <div>
         <h2>RevStop — Owner-Controlled Safety</h2>
-        <p>
-          <strong>RevStop</strong> lets a wallet owner temporarily pause <em>their own</em> outgoing transfers
-          during emergencies (compromised keys, lost device). No central seizure; no global kill-switch.
-        </p>
+        <p><strong>RevStop</strong> lets a wallet owner temporarily pause <em>their own</em> outgoing transfers during emergencies (compromised keys, lost device). No central seizure; no global kill-switch.</p>
         <div class="pill-list">
-          <span class="pill">Opt-in</span>
-          <span class="pill">Owner-local</span>
-          <span class="pill">Transparent</span>
-          <span class="pill">Reversible</span>
+          <span class="pill">Opt-in</span><span class="pill">Owner-local</span>
+          <span class="pill">Transparent</span><span class="pill">Reversible</span>
         </div>
       </div>
       <div class="card glass card--striped">
@@ -155,37 +149,25 @@
     </div>
   </section>
 
-  <!-- ==================== TOKENOMICS ==================== -->
+  <!-- ===== TOKENOMICS ===== -->
   <section id="tokenomics" class="section section--alt">
     <div class="container">
       <h2>Tokenomics</h2>
       <div class="grid three">
-        <div class="metric">
-          <div class="metric__value">22,000,000</div>
-          <div class="metric__label">MAX SUPPLY</div>
-        </div>
-        <div class="metric">
-          <div class="metric__value">PoW</div>
-          <div class="metric__label">ISSUANCE</div>
-        </div>
-        <div class="metric">
-          <div class="metric__value">0</div>
-          <div class="metric__label">PREMINE</div>
-        </div>
+        <div class="metric"><div class="metric__value">22,000,000</div><div class="metric__label">MAX SUPPLY</div></div>
+        <div class="metric"><div class="metric__value">PoW</div><div class="metric__label">ISSUANCE</div></div>
+        <div class="metric"><div class="metric__value">0</div><div class="metric__label">PREMINE</div></div>
       </div>
       <p class="muted center">Predictable halvings; all QC enters circulation through mining.</p>
     </div>
   </section>
 
-  <!-- ==================== WQC ==================== -->
+  <!-- ===== WQC ===== -->
   <section id="wqc" class="section">
     <div class="container grid two">
       <div>
         <h2>wQC — Wrapped QuantumCoin™ (IOU)</h2>
-        <p>
-          <strong>wQC</strong> is a fixed-cap ERC-20 (<em>100,000</em> supply) redeemable
-          <strong>1:1</strong> for native QC when QuantumCoin™ mainnet launches.
-        </p>
+        <p><strong>wQC</strong> is a fixed-cap ERC-20 (<em>100,000</em> supply) redeemable <strong>1:1</strong> for native QC when QuantumCoin™ mainnet launches.</p>
         <ol class="steps">
           <li>Deploy wQC (100k total)</li>
           <li>List on a DEX (seed liquidity)</li>
@@ -209,7 +191,7 @@
     </div>
   </section>
 
-  <!-- ==================== MINING ==================== -->
+  <!-- ===== MINING ===== -->
   <section id="mining" class="section section--alt">
     <div class="container grid two">
       <div class="card glass glow">
@@ -228,49 +210,27 @@
     </div>
   </section>
 
-  <!-- ==================== ROADMAP ==================== -->
+  <!-- ===== ROADMAP ===== -->
   <section id="roadmap" class="section">
     <div class="container">
       <h2>Roadmap</h2>
       <div class="timeline">
-        <div class="tl__item">
-          <span class="tl__dot"></span>
-          <h4>Phase 1 — wQC IOU</h4>
-          <p>Deploy fixed-cap wQC and seed DEX liquidity with transparent documentation.</p>
-        </div>
-        <div class="tl__item">
-          <span class="tl__dot"></span>
-          <h4>Phase 2 — Public Testnet</h4>
-          <p>Open multi-node network, explorer, wallets; RevStop opt-in testing.</p>
-        </div>
-        <div class="tl__item">
-          <span class="tl__dot"></span>
-          <h4>Phase 3 — QuantumCoin™ Mainnet</h4>
-          <p>Launch QC; mine the 100k redemption reserve under normal PoW rules.</p>
-        </div>
-        <div class="tl__item">
-          <span class="tl__dot"></span>
-          <h4>Phase 4 — Redemption</h4>
-          <p>Public 1:1 redemption window; publish live burn→mint ledger.</p>
-        </div>
-        <div class="tl__item">
-          <span class="tl__dot"></span>
-          <h4>Phase 5 — Sunset wQC</h4>
-          <p>Retire the wrapped token; QC remains the sole live asset.</p>
-        </div>
+        <div class="tl__item"><span class="tl__dot"></span><h4>Phase 1 — wQC IOU</h4><p>Deploy fixed-cap wQC and seed DEX liquidity with transparent documentation.</p></div>
+        <div class="tl__item"><span class="tl__dot"></span><h4>Phase 2 — Public Testnet</h4><p>Open multi-node network, explorer, wallets; RevStop opt-in testing.</p></div>
+        <div class="tl__item"><span class="tl__dot"></span><h4>Phase 3 — QuantumCoin™ Mainnet</h4><p>Launch QC; mine the 100k redemption reserve under normal PoW rules.</p></div>
+        <div class="tl__item"><span class="tl__dot"></span><h4>Phase 4 — Redemption</h4><p>Public 1:1 redemption window; publish live burn→mint ledger.</p></div>
+        <div class="tl__item"><span class="tl__dot"></span><h4>Phase 5 — Sunset wQC</h4><p>Retire the wrapped token; QC remains the sole live asset.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== FAQ ==================== -->
+  <!-- ===== FAQ ===== -->
   <section id="faq" class="section section--alt">
     <div class="container grid two">
       <div>
         <h2>FAQ</h2>
-        <h4>Is wQC pegged to USD?</h4>
-        <p>No — market sets the price. Redemption is 1:1 in units (wQC → QC), not dollars.</p>
-        <h4>Is RevStop a central freeze?</h4>
-        <p>No. It is opt-in and local to the wallet owner; no third party can seize funds.</p>
+        <h4>Is wQC pegged to USD?</h4><p>No — market sets the price. Redemption is 1:1 in units (wQC → QC), not dollars.</p>
+        <h4>Is RevStop a central freeze?</h4><p>No. It is opt-in and local to the wallet owner; no third party can seize funds.</p>
       </div>
       <div class="card glass">
         <h3 class="kicker">Contact</h3>
@@ -280,7 +240,7 @@
     </div>
   </section>
 
-  <!-- ==================== FOOTER ==================== -->
+  <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="container footer__inner">
       <p>© <span id="y"></span> QuantumCoin™ • All rights reserved</p>
@@ -290,63 +250,86 @@
         <a href="#">Uniswap (soon)</a>
       </div>
     </div>
-    <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+    <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
   </footer>
 
-  <!-- ==================== SPLASH CONTROLLER (JS) ==================== -->
+  <!-- ===== Splash controller ===== -->
   <script>
-  (function () {
-    // —— SETTINGS ——
-    const PLAY_ON_EVERY_VISIT = true;        // set to false to play once/day
-    const INTRO_MAX_MS = 29000;              // 29s safety cap
+  (function(){
+    const PLAY_ON_EVERY_VISIT = true;   // set false to play once/day
+    const INTRO_MAX_MS = 29000;         // 29s cap
     const STORAGE_KEY = "qc_intro_last_seen";
 
     const splash = document.getElementById('qc-splash');
     const video  = document.getElementById('qc-splash-video');
     const skip   = document.getElementById('qc-skip');
 
-    function shouldPlay() {
+    function shouldPlay(){
       if (PLAY_ON_EVERY_VISIT) return true;
-      try {
-        const t = localStorage.getItem(STORAGE_KEY);
-        if (!t) return true;
-        return Date.now() - Number(t) > 24*60*60*1000;
-      } catch { return true; }
+      try{ const t = localStorage.getItem(STORAGE_KEY); return !t || Date.now()-Number(t) > 86400000; }catch{ return true; }
     }
-    function markPlayed(){ try{ localStorage.setItem(STORAGE_KEY, String(Date.now())); }catch{} }
-
-    function showSplash(){
-      splash.classList.remove('hidden'); splash.classList.add('visible');
-      splash.setAttribute('aria-hidden','false');
-      document.documentElement.style.overflow = 'hidden';
-    }
-    function hideSplash(){
-      splash.classList.remove('visible'); splash.classList.add('out');
-      setTimeout(() => {
-        splash.classList.add('hidden'); splash.setAttribute('aria-hidden','true');
-        document.documentElement.style.overflow = '';
-        try { video.pause(); video.removeAttribute('src'); video.load(); } catch {}
-      }, 600); // match CSS transition
-    }
+    function mark(){ try{ localStorage.setItem(STORAGE_KEY, String(Date.now())); }catch{} }
+    function show(){ splash.classList.remove('hidden'); splash.classList.add('visible'); document.documentElement.style.overflow='hidden'; }
+    function hide(){ splash.classList.remove('visible'); splash.classList.add('out'); setTimeout(()=>{ splash.classList.add('hidden'); document.documentElement.style.overflow=''; try{video.pause(); video.removeAttribute('src'); video.load();}catch{} },600); }
 
     function start(){
       if (!shouldPlay()) return;
-      showSplash(); markPlayed();
-
-      const safety = setTimeout(hideSplash, INTRO_MAX_MS + 600);
-      video.addEventListener('ended', () => { clearTimeout(safety); hideSplash(); });
-      skip.addEventListener('click', () => { clearTimeout(safety); hideSplash(); });
-
-      const p = video.play();
-      if (p && p.catch) p.catch(() => {
-        // Rare autoplay block: enable controls as fallback
-        video.setAttribute('controls','controls');
-      });
+      show(); mark();
+      const safety = setTimeout(hide, INTRO_MAX_MS+600);
+      video.addEventListener('ended', ()=>{ clearTimeout(safety); hide(); });
+      skip.addEventListener('click', ()=>{ clearTimeout(safety); hide(); });
+      const p = video.play(); if (p && p.catch) p.catch(()=> video.setAttribute('controls','controls'));
     }
 
-    (document.readyState === 'loading')
-      ? document.addEventListener('DOMContentLoaded', start)
-      : start();
+    (document.readyState==='loading') ? document.addEventListener('DOMContentLoaded', start) : start();
+  })();
+  </script>
+
+  <!-- ===== Epic hero effects (parallax • 3D coin • particles) ===== -->
+  <script>
+  (function(){
+    const coin = document.querySelector('.coin-tilt');
+    const canvas = document.getElementById('qc-particles');
+    if (!coin || !canvas) return;
+
+    const ctx = canvas.getContext('2d', { alpha:true });
+    function fit(){ canvas.width = innerWidth; canvas.height = Math.max(innerHeight*0.9, 600); }
+    addEventListener('resize', fit, { passive:true }); fit();
+
+    let px=0, py=0;
+    function onMove(e){
+      const x = (e.touches ? e.touches[0].clientX : e.clientX)/innerWidth - .5;
+      const y = (e.touches ? e.touches[0].clientY : e.clientY)/innerHeight - .5;
+      px=x; py=y;
+    }
+    addEventListener('mousemove', onMove, { passive:true });
+    addEventListener('touchmove', onMove, { passive:true });
+
+    const P = Array.from({length: 120}).map(()=>({
+      x: Math.random()*canvas.width,
+      y: Math.random()*canvas.height,
+      r: Math.random()*1.6+0.4,
+      s: Math.random()*0.6+0.2,
+      c: Math.random()<.33 ? 'rgba(34,211,238,.75)' :
+          Math.random()<.66 ? 'rgba(96,165,250,.75)' : 'rgba(124,58,237,.75)'
+    }));
+
+    function tick(){
+      const rx = py * -12, ry = px * 14, tx = px * 30, ty = py * 24;
+      coin.style.transform = `translate3d(${tx}px, ${ty}px, 0) rotateX(${rx}deg) rotateY(${ry}deg)`;
+
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      for (const p of P){
+        p.x += p.s*(.6 + px*1.2); p.y -= p.s*(.2 + py*.8);
+        if (p.x<-10) p.x=canvas.width+10; if (p.x>canvas.width+10) p.x=-10;
+        if (p.y<-10) p.y=canvas.height+10; if (p.y>canvas.height+10) p.y=-10;
+        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle = p.c; ctx.globalAlpha = 0.6 + Math.sin((p.x+p.y)*0.01)*0.2; ctx.fill();
+      }
+      ctx.globalAlpha=1;
+      requestAnimationFrame(tick);
+    }
+    tick();
   })();
   </script>
 </body>
