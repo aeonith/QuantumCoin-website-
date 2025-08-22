@@ -3,334 +3,197 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>QuantumCoin™ — Quantum-Resistant Proof-of-Work</title>
-  <meta name="description" content="QuantumCoin™ (QC): a post-quantum Layer-1 with 22,000,000 hard cap, Proof-of-Work issuance, RevStop self-protection, and wQC wrapped IOU for early liquidity." />
-  <meta name="theme-color" content="#0ff" />
-  <link rel="stylesheet" href="style.css" />
+  <title>QuantumCoin™ — Moneta Vera Proprietate</title>
+  <meta name="description" content="QuantumCoin™ — post-quantum, Proof-of-Work Layer-1 with a fixed 22M supply, RevStop™, and a wrapped ERC-20 IOU (wQC) for early liquidity. Informational website." />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
 
-  <!-- ===== SPLASH INTRO VIDEO (plays on visit, 29s cap) ===== -->
-  <div id="qc-splash" class="splash hidden" aria-hidden="true">
-    <video id="qc-splash-video" class="splash__video" playsinline muted autoplay preload="auto" poster="qc-intro-29s.jpg">
-      <source src="qc-intro-29s.webm" type="video/webm" />
-      <source src="qc-intro-29s.mp4"  type="video/mp4" />
+<body>
+  <!-- =================== SPLASH VIDEO (plays once per tab) =================== -->
+  <div id="splash" aria-hidden="true">
+    <video id="introVideo" autoplay muted playsinline>
+      <source src="intro.mp4" type="video/mp4" />
+      <!-- Fallback text for very old browsers -->
+      Your browser does not support the video tag.
     </video>
-    <button id="qc-skip" class="splash__skip" aria-label="Skip intro">Skip ▸</button>
+    <button id="skipBtn" type="button" aria-label="Skip intro">Skip</button>
   </div>
 
-  <!-- ===== NAV ===== -->
-  <header class="nav">
-    <div class="container nav__inner">
-      <a class="brand" href="#home">⚛︎ QuantumCoin™</a>
-      <nav class="nav__links">
-        <a href="#about">About</a>
-        <a href="#tech">Tech</a>
-        <a href="#revstop">RevStop</a>
-        <a href="#tokenomics">Tokenomics</a>
-        <a href="#wqc">wQC</a>
-        <a href="#mining">Mining</a>
-        <a href="#roadmap">Roadmap</a>
-        <a href="#faq">FAQ</a>
-      </nav>
-    </div>
-  </header>
-
-  <!-- ===== EPIC HERO ===== -->
-  <section class="hero epic" id="home">
-    <!-- depth layers -->
-    <div class="layer layer--bg"></div>
-    <div class="layer layer--grid"></div>
-    <div class="layer layer--glow"></div>
-    <canvas id="qc-particles" class="layer layer--particles" aria-hidden="true"></canvas>
-
-    <!-- interactive coin -->
-    <div class="coin-tilt" data-tilt>
-      <img src="hero-coin.png" alt="QuantumCoin™" class="coin-img" />
-      <div class="coin-glow"></div>
-    </div>
-
-    <!-- copy -->
-    <div class="container hero__content">
-      <h1 class="display mega">The <span class="gradient">Quantum-Resistant</span> Cryptocurrency</h1>
-      <p class="lead xlead">
-        <strong>QuantumCoin™ (QC)</strong> brings post-quantum security to Proof-of-Work with a
-        <strong>22,000,000</strong> hard cap and <em>RevStop</em> self-protection. The wrapped token
-        <strong>wQC</strong> ignites early liquidity — redeemable 1:1 at mainnet.
-      </p>
-      <div class="actions">
-        <a class="btn btn--primary btn--xl" href="#about">Explore the Protocol</a>
-        <a class="btn btn--ghost btn--xl" href="#wqc">Learn about wQC</a>
+  <!-- =================== SITE CONTENT =================== -->
+  <div id="siteContent" style="display:none">
+    <!-- NAVBAR -->
+    <header class="nav">
+      <div class="container nav__inner">
+        <a class="brand" href="#home" aria-label="QuantumCoin home">
+          <img class="brand__logo" src="logo-mark.png" alt="" />
+          <span class="brand__name">MONETA VERA PROPRIETATE</span>
+        </a>
+        <nav class="nav__links" aria-label="Primary">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#features">Features</a>
+          <a href="#contact">Contact</a>
+        </nav>
       </div>
+    </header>
 
-      <div class="marquee" role="presentation">
-        <div class="marquee__track">
-          <span>Post-Quantum Signatures</span>
-          <span>22,000,000 Max Supply</span>
-          <span>Proof-of-Work</span>
-          <span>RevStop™</span>
-          <span>Pruned Nodes</span>
-          <span>Open Source</span>
+    <!-- HERO -->
+    <section id="home" class="hero">
+      <div class="hero__bg"></div>
+      <div class="hero__scrim"></div>
+
+      <div class="container hero__inner">
+        <h1 class="hero__title">MONETA VERA PROPRIETATE</h1>
+        <h2 class="hero__subtitle">REVOLUTIONIZE DIGITAL OWNERSHIP</h2>
+        <p class="hero__lead">
+          <strong>QuantumCoin™ (QC)</strong> is a post-quantum, Proof-of-Work Layer-1 with a
+          fixed <strong>22,000,000</strong> supply and <em>RevStop™</em> self-protection.
+          This site is informational—learn the protocol, tokenomics, and the wrapped IOU
+          <strong>wQC</strong> plan for early liquidity and 1:1 redemption at mainnet.
+        </p>
+
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#about">Discover More</a>
+          <a class="btn btn--ghost" href="#features">See the Features</a>
         </div>
       </div>
-    </div>
 
-    <!-- cosmetic -->
-    <div class="scanline"></div>
-    <div class="vignette"></div>
-  </section>
+      <div class="hero__sparks" aria-hidden="true"></div>
+      <div class="vignette" aria-hidden="true"></div>
+    </section>
 
-  <!-- ===== ABOUT ===== -->
-  <section id="about" class="section">
-    <div class="container grid two">
-      <div>
-        <h2>What is QuantumCoin™?</h2>
-        <p><strong>QuantumCoin™</strong> keeps Bitcoin-style simplicity in issuance and consensus, and upgrades signatures for a post-quantum future.</p>
-        <ul class="bullets">
-          <li><strong>Consensus:</strong> Proof-of-Work (permissionless, time-tested)</li>
-          <li><strong>Supply:</strong> Hard cap <em>22,000,000 QC</em> with predictable halvings</li>
-          <li><strong>Security:</strong> Post-quantum signatures</li>
-          <li><strong>Self-Protection:</strong> <em>RevStop</em> — opt-in, owner-local pause</li>
-        </ul>
-      </div>
-      <div class="card glass card--tilt">
-        <h3 class="kicker">Design Goals</h3>
-        <ul class="ticks">
-          <li>Credible scarcity • auditable issuance</li>
-          <li>Simple node operation (archival, <strong>pruned</strong>, light/SPV)</li>
-          <li>Open standards • reproducible builds</li>
-          <li>Neutral monetary policy, no premine</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== TECH ===== -->
-  <section id="tech" class="section section--alt">
-    <div class="container">
-      <h2>Technology at a Glance</h2>
-      <div class="grid three">
-        <div class="card glass glow">
-          <h3>Post-Quantum Signatures</h3>
-          <p>Future-ready cryptography designed to resist quantum adversaries while remaining practical for users and nodes.</p>
+    <!-- INTRO / ABOUT -->
+    <section id="about" class="section intro">
+      <div class="container intro__grid">
+        <div class="intro__text card glass">
+          <h3 class="kicker">Introduction</h3>
+          <h2 class="h2">What is QuantumCoin™?</h2>
+          <p>
+            <strong>QuantumCoin™ (QC)</strong> keeps Bitcoin-style issuance and decentralization,
+            while upgrading signatures for a post-quantum world. Supply is hard-capped at
+            <strong>22,000,000</strong> coins via Proof-of-Work—no premine, no discretionary inflation.
+          </p>
+          <ul class="ticks">
+            <li>Post-quantum signature scheme</li>
+            <li>RevStop™ owner-local pause (opt-in emergency safety)</li>
+            <li>Node modes: archival, <strong>pruned</strong>, and light/SPV</li>
+            <li>Transparent economics, predictable halvings</li>
+          </ul>
         </div>
-        <div class="card glass glow">
-          <h3>Lean Node Profiles</h3>
-          <p>Archival for explorers, <strong>pruned</strong> for everyday users (~5–20&nbsp;GB), and light/SPV for mobile.</p>
-        </div>
-        <div class="card glass glow">
-          <h3>Deterministic Economics</h3>
-          <p>Bitcoin-like emission curve, fixed max supply, zero inflation after the cap — easy to verify on-chain.</p>
+
+        <div class="intro__art">
+          <img src="coin-focus.png" alt="QuantumCoin™ emblem" />
+          <div class="ring"></div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== REVSTOP ===== -->
-  <section id="revstop" class="section">
-    <div class="container grid two">
-      <div>
-        <h2>RevStop — Owner-Controlled Safety</h2>
-        <p><strong>RevStop</strong> lets a wallet owner temporarily pause <em>their own</em> outgoing transfers during emergencies (compromised keys, lost device). No central seizure; no global kill-switch.</p>
-        <div class="pill-list">
-          <span class="pill">Opt-in</span><span class="pill">Owner-local</span>
-          <span class="pill">Transparent</span><span class="pill">Reversible</span>
+    <!-- FEATURES -->
+    <section id="features" class="section features">
+      <div class="container">
+        <h3 class="kicker center">Core Features</h3>
+        <h2 class="h2 center">Why QuantumCoin™</h2>
+
+        <div class="grid three">
+          <div class="card glow">
+            <h3>Post-Quantum Ready</h3>
+            <p>
+              Signature layer designed to resist future quantum adversaries while remaining
+              practical for nodes and wallets.
+            </p>
+          </div>
+          <div class="card glow">
+            <h3>RevStop™</h3>
+            <p>
+              Owner-local, opt-in pause for emergencies (compromised key/device).
+              No global killswitch, no custodial freeze.
+            </p>
+          </div>
+          <div class="card glow">
+            <h3>Deterministic Supply</h3>
+            <p>Bitcoin-like emission curve, hard cap 22M, no premine. All QC is mined under PoW rules.</p>
+          </div>
+        </div>
+
+        <div class="grid three">
+          <div class="card">
+            <h3>Pruned Nodes</h3>
+            <p>
+              Run a validating node on modest disks (≈5–20&nbsp;GB typical) while full archives
+              power explorers & research.
+            </p>
+          </div>
+          <div class="card">
+            <h3>wQC IOU</h3>
+            <p>
+              Fixed-cap ERC-20 (e.g., 100k) to bootstrap liquidity; redeemable 1:1 for native QC at mainnet launch.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Open & Auditable</h3>
+            <p>Reproducible builds, open code, and transparent redemption/accounting flows.</p>
+          </div>
         </div>
       </div>
-      <div class="card glass card--striped">
-        <h3 class="kicker">What it’s not</h3>
-        <ul class="cross">
-          <li>Not a custodial freeze</li>
-          <li>Not protocol-wide censorship</li>
-          <li>Not mandatory for wallets or exchanges</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== TOKENOMICS ===== -->
-  <section id="tokenomics" class="section section--alt">
-    <div class="container">
-      <h2>Tokenomics</h2>
-      <div class="grid three">
-        <div class="metric"><div class="metric__value">22,000,000</div><div class="metric__label">MAX SUPPLY</div></div>
-        <div class="metric"><div class="metric__value">PoW</div><div class="metric__label">ISSUANCE</div></div>
-        <div class="metric"><div class="metric__value">0</div><div class="metric__label">PREMINE</div></div>
-      </div>
-      <p class="muted center">Predictable halvings; all QC enters circulation through mining.</p>
-    </div>
-  </section>
-
-  <!-- ===== WQC ===== -->
-  <section id="wqc" class="section">
-    <div class="container grid two">
-      <div>
-        <h2>wQC — Wrapped QuantumCoin™ (IOU)</h2>
-        <p><strong>wQC</strong> is a fixed-cap ERC-20 (<em>100,000</em> supply) redeemable <strong>1:1</strong> for native QC when QuantumCoin™ mainnet launches.</p>
-        <ol class="steps">
-          <li>Deploy wQC (100k total)</li>
-          <li>List on a DEX (seed liquidity)</li>
-          <li>Launch QuantumCoin™ mainnet</li>
-          <li>Redeem 1 wQC → 1 QC (public window)</li>
-          <li>Sunset wQC, QC remains</li>
-        </ol>
-        <div class="actions">
-          <a class="btn btn--primary" href="#roadmap">See Roadmap</a>
-          <a class="btn btn--ghost" href="#">(Contract link soon)</a>
+    <!-- CONTACT / FOOTER -->
+    <section id="contact" class="section contact">
+      <div class="container grid two">
+        <div class="card glass">
+          <h3 class="kicker">Documentation</h3>
+          <p>Explore the whitepaper, node guides, and the wQC redemption plan when released.</p>
+          <a class="btn btn--primary" href="#" aria-disabled="true">Docs (soon)</a>
+        </div>
+        <div class="card glass">
+          <h3 class="kicker">Contact</h3>
+          <p>
+            Email:
+            <a href="mailto:contact@quantumcoincrypto.com">contact@quantumcoincrypto.com</a><br />
+            GitHub:
+            <a href="https://github.com/aeonith/quantumcoin-ui-" target="_blank" rel="noreferrer">@aeonith</a>
+          </p>
         </div>
       </div>
-      <div class="card glass card--tilt">
-        <h3 class="kicker">Why it works</h3>
-        <ul class="ticks">
-          <li>Fixed supply preserves QC scarcity</li>
-          <li>Unit-for-unit redemption (not USD-pegged)</li>
-          <li>Transparent burn→mint ledger at redemption</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== MINING ===== -->
-  <section id="mining" class="section section--alt">
-    <div class="container grid two">
-      <div class="card glass glow">
-        <h3>Node Profiles</h3>
-        <ul class="bullets">
-          <li><strong>Archival:</strong> explorers & researchers</li>
-          <li><strong>Pruned:</strong> ~5–20&nbsp;GB typical (default)</li>
-          <li><strong>Light/SPV:</strong> mobile and low-power</li>
-        </ul>
+    <footer class="footer">
+      <div class="container footer__inner">
+        <p>© <span id="y"></span> QuantumCoin™ • Informational site</p>
+        <div class="social">
+          <a href="#">Explorer</a>
+          <a href="#">wQC Contract (soon)</a>
+          <a href="#">Audit (soon)</a>
+        </div>
       </div>
-      <div>
-        <h2>Mining</h2>
-        <p>Anyone can mine QC by running a node and miner. Parameters target global participation on modest hardware.</p>
-        <p class="muted">Testnet binaries and guides will be published prior to QuantumCoin™ mainnet.</p>
-      </div>
-    </div>
-  </section>
+      <script>
+        document.getElementById('y').textContent = new Date().getFullYear();
+      </script>
+    </footer>
+  </div><!-- /#siteContent -->
 
-  <!-- ===== ROADMAP ===== -->
-  <section id="roadmap" class="section">
-    <div class="container">
-      <h2>Roadmap</h2>
-      <div class="timeline">
-        <div class="tl__item"><span class="tl__dot"></span><h4>Phase 1 — wQC IOU</h4><p>Deploy fixed-cap wQC and seed DEX liquidity with transparent documentation.</p></div>
-        <div class="tl__item"><span class="tl__dot"></span><h4>Phase 2 — Public Testnet</h4><p>Open multi-node network, explorer, wallets; RevStop opt-in testing.</p></div>
-        <div class="tl__item"><span class="tl__dot"></span><h4>Phase 3 — QuantumCoin™ Mainnet</h4><p>Launch QC; mine the 100k redemption reserve under normal PoW rules.</p></div>
-        <div class="tl__item"><span class="tl__dot"></span><h4>Phase 4 — Redemption</h4><p>Public 1:1 redemption window; publish live burn→mint ledger.</p></div>
-        <div class="tl__item"><span class="tl__dot"></span><h4>Phase 5 — Sunset wQC</h4><p>Retire the wrapped token; QC remains the sole live asset.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== FAQ ===== -->
-  <section id="faq" class="section section--alt">
-    <div class="container grid two">
-      <div>
-        <h2>FAQ</h2>
-        <h4>Is wQC pegged to USD?</h4><p>No — market sets the price. Redemption is 1:1 in units (wQC → QC), not dollars.</p>
-        <h4>Is RevStop a central freeze?</h4><p>No. It is opt-in and local to the wallet owner; no third party can seize funds.</p>
-      </div>
-      <div class="card glass">
-        <h3 class="kicker">Contact</h3>
-        <p>GitHub: <a href="https://github.com/aeonith/quantumcoin-ui-" target="_blank" rel="noreferrer">/aeonith</a><br/>
-           Email: <a href="mailto:contact@quantumcoincrypto.com">contact@quantumcoincrypto.com</a></p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== FOOTER ===== -->
-  <footer class="footer">
-    <div class="container footer__inner">
-      <p>© <span id="y"></span> QuantumCoin™ • All rights reserved</p>
-      <div class="social">
-        <a href="#">Explorer</a>
-        <a href="#">Docs</a>
-        <a href="#">Uniswap (soon)</a>
-      </div>
-    </div>
-    <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
-  </footer>
-
-  <!-- ===== Splash controller ===== -->
+  <!-- =================== SPLASH LOGIC =================== -->
   <script>
-  (function(){
-    const PLAY_ON_EVERY_VISIT = true;   // set false to play once/day
-    const INTRO_MAX_MS = 29000;         // 29s cap
-    const STORAGE_KEY = "qc_intro_last_seen";
+    const splash = document.getElementById('splash');
+    const site   = document.getElementById('siteContent');
+    const video  = document.getElementById('introVideo');
+    const skip   = document.getElementById('skipBtn');
 
-    const splash = document.getElementById('qc-splash');
-    const video  = document.getElementById('qc-splash-video');
-    const skip   = document.getElementById('qc-skip');
-
-    function shouldPlay(){
-      if (PLAY_ON_EVERY_VISIT) return true;
-      try{ const t = localStorage.getItem(STORAGE_KEY); return !t || Date.now()-Number(t) > 86400000; }catch{ return true; }
+    // Play once per tab/session (remove these 2 lines to always play)
+    if (sessionStorage.getItem('qcIntroSeen') === '1') {
+      splash.style.display = 'none'; site.style.display = 'block';
+    } else {
+      // Reveal site after 29s, on ended, or on Skip
+      const endSplash = () => {
+        splash.style.opacity = '0';
+        setTimeout(() => { splash.style.display = 'none'; site.style.display = 'block'; }, 600);
+        sessionStorage.setItem('qcIntroSeen', '1');
+      };
+      setTimeout(endSplash, 29000);
+      video.addEventListener('ended', endSplash);
+      skip.addEventListener('click', endSplash);
     }
-    function mark(){ try{ localStorage.setItem(STORAGE_KEY, String(Date.now())); }catch{} }
-    function show(){ splash.classList.remove('hidden'); splash.classList.add('visible'); document.documentElement.style.overflow='hidden'; }
-    function hide(){ splash.classList.remove('visible'); splash.classList.add('out'); setTimeout(()=>{ splash.classList.add('hidden'); document.documentElement.style.overflow=''; try{video.pause(); video.removeAttribute('src'); video.load();}catch{} },600); }
-
-    function start(){
-      if (!shouldPlay()) return;
-      show(); mark();
-      const safety = setTimeout(hide, INTRO_MAX_MS+600);
-      video.addEventListener('ended', ()=>{ clearTimeout(safety); hide(); });
-      skip.addEventListener('click', ()=>{ clearTimeout(safety); hide(); });
-      const p = video.play(); if (p && p.catch) p.catch(()=> video.setAttribute('controls','controls'));
-    }
-
-    (document.readyState==='loading') ? document.addEventListener('DOMContentLoaded', start) : start();
-  })();
-  </script>
-
-  <!-- ===== Epic hero effects (parallax • 3D coin • particles) ===== -->
-  <script>
-  (function(){
-    const coin = document.querySelector('.coin-tilt');
-    const canvas = document.getElementById('qc-particles');
-    if (!coin || !canvas) return;
-
-    const ctx = canvas.getContext('2d', { alpha:true });
-    function fit(){ canvas.width = innerWidth; canvas.height = Math.max(innerHeight*0.9, 600); }
-    addEventListener('resize', fit, { passive:true }); fit();
-
-    let px=0, py=0;
-    function onMove(e){
-      const x = (e.touches ? e.touches[0].clientX : e.clientX)/innerWidth - .5;
-      const y = (e.touches ? e.touches[0].clientY : e.clientY)/innerHeight - .5;
-      px=x; py=y;
-    }
-    addEventListener('mousemove', onMove, { passive:true });
-    addEventListener('touchmove', onMove, { passive:true });
-
-    const P = Array.from({length: 120}).map(()=>({
-      x: Math.random()*canvas.width,
-      y: Math.random()*canvas.height,
-      r: Math.random()*1.6+0.4,
-      s: Math.random()*0.6+0.2,
-      c: Math.random()<.33 ? 'rgba(34,211,238,.75)' :
-          Math.random()<.66 ? 'rgba(96,165,250,.75)' : 'rgba(124,58,237,.75)'
-    }));
-
-    function tick(){
-      const rx = py * -12, ry = px * 14, tx = px * 30, ty = py * 24;
-      coin.style.transform = `translate3d(${tx}px, ${ty}px, 0) rotateX(${rx}deg) rotateY(${ry}deg)`;
-
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      for (const p of P){
-        p.x += p.s*(.6 + px*1.2); p.y -= p.s*(.2 + py*.8);
-        if (p.x<-10) p.x=canvas.width+10; if (p.x>canvas.width+10) p.x=-10;
-        if (p.y<-10) p.y=canvas.height+10; if (p.y>canvas.height+10) p.y=-10;
-        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fillStyle = p.c; ctx.globalAlpha = 0.6 + Math.sin((p.x+p.y)*0.01)*0.2; ctx.fill();
-      }
-      ctx.globalAlpha=1;
-      requestAnimationFrame(tick);
-    }
-    tick();
-  })();
   </script>
 </body>
 </html>
