@@ -11,8 +11,8 @@
 </head>
 <body>
 
-<header class="top">
-  <button class="burger" id="menuBtn" aria-label="Open navigation">
+<header class="top" id="topbar">
+  <button class="burger" id="menuBtn" aria-label="Open navigation" aria-controls="drawer" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
   <div class="brand">
@@ -21,11 +21,11 @@
   </div>
   <nav class="drawer" id="drawer">
     <a href="#story">Story</a>
-    <a href="#founder">Founder’s Note</a>
+    <a href="#founder">Founder’s Letter</a>
     <a href="#threat">Quantum Threat</a>
     <a href="#design">Design</a>
     <a href="#tokenomics">Policy</a>
-    <a href="#revstop">RevStop™</a>
+    <a href="#revstop">RevStop</a>
     <a href="#mining">Mining</a>
     <a href="#nodes">Nodes</a>
     <a href="#governance">Governance</a>
@@ -39,13 +39,13 @@
     <span class="chip">Layer-1 • Proof-of-Work • Post-Quantum</span>
     <h1 class="t">QUANTUM<span>COIN</span>™</h1>
     <p class="lead">
-      A chain engineered for the quantum era: <b>post-quantum signatures</b>, a fixed
+      A <b>quantum-resistant</b> Proof-of-Work chain with a fixed
       <b>22,000,000</b> cap, <b>~10-minute</b> blocks, <b>2-year halvings</b> over ~<b>66 years</b>,
       and <b>RevStop™</b> — an owner-local safety circuit you control.
     </p>
   </div>
 
-  <!-- Cinematic 3D coin animation (drop + bounce + 360° spin + tilt + shadow) -->
+  <!-- Cinematic 3D coin animation -->
   <div class="spin-wrap">
     <canvas id="coinSpin" width="360" height="360" aria-label="QuantumCoin emblem animation"></canvas>
   </div>
@@ -68,44 +68,61 @@
 <section id="story" class="section card">
   <h2 class="h">What QuantumCoin™ Is</h2>
   <p class="p">
-    QuantumCoin™ (QC) is a Bitcoin-style, proof-of-work Layer-1 that ships with
-    <b>post-quantum digital signatures</b> from day one. QC keeps issuance simple,
-    auditable, and fair, while upgrading the cryptography and adding one wallet-holder
-    protection — <b>RevStop™</b> — that’s triggered by the owner, not the network.
+    QuantumCoin™ (QC) is a <b>sound-money, Proof-of-Work Layer-1</b> that launches already
+    insulated against quantum-era cryptography shocks. QC preserves what made Bitcoin historic—
+    <b>fair distribution, simple rules, no premine</b>—and upgrades the signatures to
+    <b>post-quantum schemes</b> so value today isn’t compromised by the hardware breakthroughs of tomorrow.
   </p>
   <p class="p">
-    The result is a sound-money chain designed to survive cryptographic upheavals
-    and hardware revolutions without changing its fundamentals: decentralization,
-    simplicity, and predictable monetary policy.
+    The promise is straightforward: a chain you can run, audit, and hold for decades.
+    <b>Predictable issuance</b> (2-year halvings, ~66-year horizon) meets an <b>owner-local
+    safety circuit</b> (RevStop™) that gives holders last-resort control if keys are threatened—
+    without introducing a central authority.
   </p>
+  <div class="list-wrap">
+    <ul class="list">
+      <li><b>Investor clarity:</b> hard cap of 22,000,000 QC; no hidden allocations.</li>
+      <li><b>Security moat:</b> post-quantum signatures remove “upgrade-under-duress” risk.</li>
+      <li><b>Durability:</b> PoW issuance, client diversity, and documentation designed for decades.</li>
+    </ul>
+  </div>
 </section>
 
 <section id="founder" class="section">
-  <h2 class="h">Founder’s Note (Honest & Direct)</h2>
+  <h2 class="h">Founder’s Letter — From Breach to Blueprint</h2>
   <p class="p">
-    I started QuantumCoin™ after watching two trends collide: relentless progress
-    in quantum research and the fragility of legacy signature schemes if (when) large-scale
-    quantum computers arrive. I didn’t want a new meme or a complicated token machine —
-    just a hard-capped PoW network that ordinary people can run and understand, with
-    cryptography that won’t betray them later. That’s the entire motivation.
+    Markets reward the networks that <b>survive</b>. I built QuantumCoin™ after watching quantum
+    research outpace the plans most chains had for “fixing it later.” That gap—between the
+    pace of innovation and the pace of governance—creates a simple risk: when quantum breaks
+    legacy signatures, holders will be asked to trust <i>emergency upgrades under fire</i>.
   </p>
-  <p class="p small">
-    This project is built for longevity. No premine, no hidden allocations — just work,
-    validation, and code you can read.
+  <p class="p">
+    QC is my answer: <b>prepare now</b>. Keep issuance honest with Proof-of-Work. Keep
+    ownership honest with <b>post-quantum signatures</b>. Give users a personal safety lever
+    with <b>RevStop™</b> so if keys are targeted, the owner—not a committee—can pull a
+    cryptographic brake on <i>their</i> coins while the network continues moving.
+  </p>
+  <p class="p">
+    For investors, the thesis is discipline and timing:
+  </p>
+  <ul class="list">
+    <li><b>Timing tailwind:</b> quantum capability is a when-not-if event; QC is built for that regime today.</li>
+    <li><b>Moat via simplicity:</b> minimal rule-set, transparent policy, and credibility through refusal to “print.”</li>
+    <li><b>Adoption path:</b> pruned/light nodes widen participation; institutional-grade docs and stable APIs invite builders.</li>
+  </ul>
+  <p class="p">
+    I didn’t design QC to be the loudest. I designed it to be the <b>last one standing</b>.
   </p>
 </section>
 
 <section id="threat" class="section card">
-  <h2 class="h">The Quantum Threat (Why This Matters Now)</h2>
+  <h2 class="h">The Quantum Threat (Why This Matters)</h2>
   <ul class="list">
-    <li><b>Signature forgeries:</b> Shor’s algorithm can recover private keys from public keys once hardware scales.</li>
-    <li><b>Harvest-Now-Exploit-Later:</b> attackers archive data today and forge signatures later.</li>
-    <li><b>Economic longevity:</b> money systems must survive decades of hardware change, not just product cycles.</li>
+    <li><b>Signature forgeries:</b> scalable quantum computers can break legacy signatures.</li>
+    <li><b>Harvest-Now-Exploit-Later:</b> attackers archive today’s data to forge transactions later.</li>
+    <li><b>Longevity:</b> money needs cryptography that lasts decades, not product cycles.</li>
   </ul>
-  <p class="p">
-    QC removes the upgrade hazard by <b>starting</b> with post-quantum signatures. We don’t
-    need a crisis fork to be safe.
-  </p>
+  <p class="p">QC launches with <b>post-quantum signatures</b> so we don’t need an emergency fork later.</p>
 </section>
 
 <section id="design" class="section">
@@ -117,15 +134,15 @@
     </div>
     <div class="tile">
       <h3>Proof-of-Work</h3>
-      <p>Open participation and fair distribution. ~10-minute blocks keep validation lightweight and predictable.</p>
+      <p>Open participation and fair distribution. ~10-minute blocks keep validation predictable.</p>
     </div>
     <div class="tile">
       <h3>RevStop™</h3>
-      <p>Owner-local, optional “circuit breaker.” If your keys are compromised, you can temporarily stop spends of your UTXOs.</p>
+      <p>Owner-local, optional “circuit breaker.” If keys are compromised, the owner can pause spends of their UTXOs.</p>
     </div>
     <div class="tile">
       <h3>Broad Nodes</h3>
-      <p>Archival nodes for explorers, <b>pruned</b> nodes for low storage, and <b>light/SPV</b> for phones to maximize decentralization.</p>
+      <p>Archival for explorers, <b>pruned</b> for low storage, and <b>light/SPV</b> for phones—to maximize decentralization.</p>
     </div>
   </div>
 </section>
@@ -148,7 +165,7 @@
   <ul class="list">
     <li><b>Local, not global:</b> affects only your UTXOs; the protocol verifies your authority.</li>
     <li><b>Opt-in:</b> wallets can enable/disable; no central admin exists.</li>
-    <li><b>Forensics-friendly:</b> on-chain signals help distinguish a self-protective pause from a seizure.</li>
+    <li><b>Forensics-friendly:</b> on-chain signals distinguish a self-protective pause from seizure.</li>
   </ul>
 </section>
 
@@ -156,7 +173,7 @@
   <h2 class="h">Mining</h2>
   <p class="p">
     Mining secures the chain and distributes new QC. Difficulty targets ~10-minute blocks.
-    Hardware choice is open — run what you have, optimize if you want. The policy discourages
+    Hardware choice is open—run what you have, optimize if you want. The policy discourages
     surprises: predictable halvings, no stealth inflation, and validation code that favors readability.
   </p>
 </section>
@@ -220,17 +237,36 @@
   <small>© <span id="y"></span> QuantumCoin™</small>
 </footer>
 
-<!-- Mobile drawer -->
 <script>
+  // Drawer open/close
   const menuBtn = document.getElementById('menuBtn');
   const drawer  = document.getElementById('drawer');
-  menuBtn.addEventListener('click', ()=>drawer.classList.toggle('open'));
-  drawer.addEventListener('click', e=>{ if(e.target.tagName==='A') drawer.classList.remove('open'); });
+  menuBtn.addEventListener('click', ()=>{
+    const open = drawer.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if(open) drawer.scrollTop = 0;
+  });
+  drawer.addEventListener('click', e=>{
+    if(e.target.tagName==='A'){ drawer.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false'); }
+  });
+
+  // Anchor scroll offset for sticky header
+  const header = document.getElementById('topbar');
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', e=>{
+      const id = a.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if(!el) return;
+      e.preventDefault();
+      const y = el.getBoundingClientRect().top + window.scrollY - (header.offsetHeight + 10);
+      window.scrollTo({top:y, behavior:'smooth'});
+    });
+  });
 
   // Year
   document.getElementById('y').textContent = new Date().getFullYear();
 
-  // Epic coin animation (drop + bounce + tilt + 360 spin + shadow)
+  // Epic coin animation (drop + bounce + tilt + spin + shimmer)
   const c = document.getElementById('coinSpin');
   const ctx = c.getContext('2d');
   const DPR = Math.min(2, window.devicePixelRatio || 1);
@@ -238,7 +274,7 @@
   c.width = W * DPR; c.height = H * DPR; ctx.scale(DPR, DPR);
 
   const img = new Image();
-  img.src = 'qc_coin.png'; // <— your glowing coin image
+  img.src = 'qc_coin.png';
   let t = 0, y = -H, vy = 0, floor = H/2 + 18, settled = false, sweep = 0;
 
   function draw(){
@@ -255,38 +291,32 @@
     ctx.beginPath(); ctx.arc(0,0,80,0,Math.PI*2); ctx.fill();
     ctx.restore();
 
-    // Drop physics
+    // Physics
     if(!settled){
       vy += 0.9;
       y += vy;
       if(y > floor){ y=floor; vy *= -0.56; if(Math.abs(vy) < 1.4) settled = true; }
     } else {
-      y = floor + Math.sin(t*2)*1.2; // idle bob
+      y = floor + Math.sin(t*2)*1.2;
     }
 
     // Coin
     ctx.save();
     ctx.translate(W/2, y);
-
-    // 3D tilt
     const tilt = Math.sin(t*0.8) * 0.22;
     ctx.transform(1, tilt, tilt, 1, 0, 0);
-
-    // Spin
     ctx.rotate(t*1.15);
 
-    // Neon rim
     const R = 130;
     const rim = ctx.createConicGradient(t,0,0);
     rim.addColorStop(0,'#22d3ee'); rim.addColorStop(.5,'#60a5fa'); rim.addColorStop(1,'#22d3ee');
     ctx.lineWidth = 10; ctx.strokeStyle = rim;
     ctx.beginPath(); ctx.arc(0,0,R,0,Math.PI*2); ctx.stroke();
 
-    // Coin image
     const size = 260;
     ctx.drawImage(img, -size/2, -size/2, size, size);
 
-    // Shimmer sweep
+    // Shimmer
     sweep += 0.02;
     const sx = Math.cos(sweep)*R*0.9, sy = Math.sin(sweep)*R*0.6;
     const shine = ctx.createRadialGradient(sx, sy, 0, sx, sy, R*0.95);
@@ -297,7 +327,6 @@
     ctx.globalCompositeOperation = 'source-over';
 
     ctx.restore();
-
     t += 0.016;
     requestAnimationFrame(draw);
   }
