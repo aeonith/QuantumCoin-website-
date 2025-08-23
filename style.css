@@ -12,7 +12,7 @@ body{
   -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
 }
 
-/* Top */
+/* Top bar */
 .top{position:sticky; top:0; z-index:40; display:flex; align-items:center; justify-content:space-between;
   padding:12px 14px; background:linear-gradient(180deg, rgba(5,10,20,.98), rgba(5,10,20,.78)); border-bottom:1px solid #0e1730; backdrop-filter:blur(8px)}
 .brand{display:flex; align-items:center; gap:10px}
@@ -84,10 +84,15 @@ body{
 .kv b{font-size:.95rem}
 .m12{margin-top:12px}
 
-/* Clean orbits */
-.spiral-wrap{display:flex; flex-direction:column; align-items:center; margin-top:14px}
-#issuanceOrbits{max-width:92vw; width:360px; height:auto; border-radius:20px; background:radial-gradient(circle at 50% 50%, rgba(96,165,250,.06), transparent 70%);
-  box-shadow:0 20px 40px rgba(8,16,32,.55), inset 0 1px 0 rgba(255,255,255,.06)}
+/* Neon grid viz */
+.gridviz{
+  display:flex; flex-direction:column; align-items:center; margin-top:14px;
+}
+#matrixGrid{
+  max-width:92vw; width:360px; height:auto; border-radius:20px;
+  background:radial-gradient(circle at 50% 50%, rgba(34,211,238,.06), transparent 70%);
+  box-shadow:0 20px 40px rgba(8,16,32,.55), inset 0 1px 0 rgba(255,255,255,.06);
+}
 
 /* Nodes */
 .node-cards{display:grid; gap:10px}
