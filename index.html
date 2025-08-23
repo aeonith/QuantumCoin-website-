@@ -1,199 +1,542 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>QuantumCoin™ — Moneta Vera Proprietate</title>
-  <meta name="description" content="QuantumCoin™ — post-quantum, Proof-of-Work Layer-1 with a fixed 22M supply, RevStop™, and a wrapped ERC-20 IOU (wQC) for early liquidity. Informational website." />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="style.css" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>QuantumCoin™ — Moneta Vera Proprietate</title>
+<meta name="description" content="QuantumCoin™ (QC) — post-quantum Proof-of-Work Layer-1 with a hard 22M cap, RevStop™, pruned nodes, and a wrapped ERC-20 IOU (wQC) for early liquidity." />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+/* ===================== TOKENS / BASE ===================== */
+:root{
+  --ink:#E6F0FF; --muted:#9BB5D4;
+  --bg:#05080F; --panel:#0B1322; --line:#14243F;
+  --a:#22D3EE; --b:#60A5FA; --c:#7C3AED; --ok:#86EFAC;
+  --danger:#FB7185; --warn:#FDE047;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; color:var(--ink); background:var(--bg);
+  font:400 16px/1.7 Inter,system-ui,Arial,sans-serif; overflow-x:hidden;
+  background:
+    radial-gradient(1200px 900px at 10% -10%, #0c1a36 0 55%, transparent 65%),
+    radial-gradient(1000px 800px at 120% 0%, #0a1730 0 55%, transparent 65%),
+    var(--bg);
+}
+a{color:#BFE1FF; text-decoration:none} a:hover{text-decoration:underline}
+img{max-width:100%; height:auto}
+.container{max-width:1180px; margin:0 auto; padding:0 22px}
+.center{text-align:center}
+hr.sep{border:0; height:1px; background:linear-gradient(90deg, transparent, #163057, transparent); margin:22px 0}
+
+/* ===================== NAV ===================== */
+.nav{
+  position:sticky; top:0; z-index:50;
+  background:linear-gradient(180deg, rgba(8,14,26,.85), rgba(8,14,26,.55) 60%, transparent);
+  border-bottom:1px solid #0d1c37; backdrop-filter:blur(8px) saturate(140%);
+}
+.nav__inner{display:flex; align-items:center; justify-content:space-between; height:66px}
+.brand{display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:.12em}
+.brand__logo{width:30px; height:30px; border-radius:50%; background:
+  radial-gradient(circle at 40% 40%, #7cf 0 30%, #25d 31% 60%, transparent 61%);}
+.brand__name{font-size:.92rem; color:#E7FAFF}
+.nav__links a{margin-left:18px; font-weight:600; opacity:.9}
+.nav__links a:hover{opacity:1; text-shadow:0 0 12px rgba(34,211,238,.45)}
+@media (max-width:880px){ .nav__links{display:none} }
+
+/* ===================== HERO ===================== */
+.hero{position:relative; min-height:96vh; display:grid; place-items:center; overflow:hidden; border-bottom:1px solid #0f2141}
+.layer{position:absolute; inset:0}
+#hex{z-index:1}
+#net{z-index:3}
+.scanline{z-index:4; background:repeating-linear-gradient(180deg, rgba(255,255,255,.04) 0 1px, transparent 1px 3px); mix-blend-mode:soft-light; opacity:.35; animation:scan 6s linear infinite}
+@keyframes scan{0%{background-position:0 0}100%{background-position:0 1000px}}
+.vignette{z-index:6; box-shadow:inset 0 0 220px 80px rgba(0,0,0,.9)}
+
+.hero__inner{position:relative; z-index:7; text-align:center; transform:translate(var(--parx,0), var(--pary,0))}
+.badge{display:inline-block; padding:6px 10px; font-weight:700; letter-spacing:.1em; font-size:.70rem;
+  color:#09233a; background:linear-gradient(135deg, var(--a), var(--b)); border-radius:999px; margin-bottom:18px;
+  box-shadow:0 10px 24px rgba(34,211,238,.25), inset 0 0 0 1px rgba(255,255,255,.15);}
+
+.glitch{position:relative; font-weight:800; line-height:1.03;
+  font-size:clamp(2.2rem, 1.6rem + 3.9vw, 5.4rem); text-transform:uppercase; letter-spacing:.06em;
+  color:#eaffff; text-shadow:0 0 22px rgba(96,165,250,.45); animation:glow 3.6s ease-in-out infinite}
+.glitch::before,.glitch::after{content:attr(data-text); position:absolute; inset:0; pointer-events:none; mix-blend-mode:screen; opacity:.8}
+.glitch::before{transform:translate(-2px,0); color:#5ef; filter:blur(.6px)}
+.glitch::after {transform:translate(2px,0);  color:#a9f; filter:blur(.6px)}
+@keyframes glow{50%{text-shadow:0 0 34px rgba(96,165,250,.7)}}
+
+.lead{max-width:880px; margin:12px auto 0}
+.actions{display:flex; gap:14px; justify-content:center; margin:18px 0 18px}
+.btn{
+  display:inline-block; padding:12px 18px; border-radius:14px; font-weight:800; letter-spacing:.2px; position:relative; overflow:hidden;
+  transition:.25s transform, .25s box-shadow, .25s opacity; text-decoration:none}
+.btn:hover{transform:translateY(-2px); opacity:.96}
+.btn--primary{background:linear-gradient(135deg, var(--a), var(--b)); color:#04101e; box-shadow:0 10px 28px rgba(34,211,238,.28), inset 0 0 0 1px rgba(255,255,255,.15)}
+.btn--wire{color:#BFE1FF; border:1px solid #183054; background:rgba(12,20,36,.35)}
+.btn--wire::after{content:""; position:absolute; inset:-2px; border-radius:14px; padding:1px;
+  background:conic-gradient(from 0deg, transparent, rgba(34,211,238,.6), rgba(96,165,250,.6), transparent 75%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; opacity:0; transition:opacity .25s}
+.btn--wire:hover::after{opacity:.7}
+
+.pills{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:6px}
+.pill{border:1px solid #183054; border-radius:999px; padding:6px 10px; font-size:.78rem; background:rgba(12,20,36,.35); color:#aee4ff}
+
+/* ===================== SECTIONS / CARDS ===================== */
+.section{padding:78px 0; border-top:1px solid var(--line); background:linear-gradient(180deg, transparent, rgba(16,28,48,.18) 50%, transparent)}
+.section.dim{background:radial-gradient(800px 500px at 80% -10%, rgba(124,58,237,.07), transparent 60%), linear-gradient(180deg, transparent, rgba(10,18,34,.5) 50%, transparent)}
+.grid{display:grid; gap:22px}
+.grid.two{grid-template-columns:repeat(2,1fr)}
+.grid.three{grid-template-columns:repeat(3,1fr)}
+@media (max-width:980px){ .grid.two, .grid.three{grid-template-columns:1fr} }
+
+.kicker{opacity:.8; letter-spacing:.18em; font-size:.78rem; text-transform:uppercase; margin-bottom:6px}
+h2{margin:.15rem 0 .5rem; font-size:1.9rem}
+h3{margin:0 0 .2rem; font-size:1.15rem}
+h4{margin:.25rem 0}
+
+/* Cards */
+.card{
+  padding:22px; border-radius:16px;
+  background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.02));
+  border:1px solid rgba(120,170,255,.22);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04), 0 6px 24px rgba(10,20,36,.35);
+  transform-style:preserve-3d; will-change:transform;
+}
+.card.glass{backdrop-filter: blur(8px) saturate(130%); background:rgba(255,255,255,.06)}
+.card.neon::before{
+  content:""; position:absolute; inset:-2px; border-radius:16px; z-index:-1;
+  background: radial-gradient(600px 200px at 30% -20%, rgba(34,211,238,.25), transparent 60%),
+              radial-gradient(600px 200px at 120% 120%, rgba(96,165,250,.25), transparent 60%);
+  filter:blur(16px)
+}
+.card.wire{position:relative; background:rgba(12,22,38,.35)}
+.card.wire::after{
+  content:""; position:absolute; inset:-1px; border-radius:16px; pointer-events:none;
+  background:conic-gradient(from 180deg, rgba(34,211,238,.35), rgba(96,165,250,.35), rgba(124,58,237,.35), rgba(34,211,238,.35));
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude; padding:1px; opacity:.25;
+}
+
+/* Lists */
+.ticks{padding-left:0}
+.ticks li{list-style:none; position:relative; padding-left:26px; margin:6px 0}
+.ticks li:before{content:"✓"; position:absolute; left:0; color:var(--ok); font-weight:800}
+
+/* Roadmap */
+.road{list-style:none; margin:0; padding:0; position:relative}
+.road__item{display:flex; gap:14px; align-items:flex-start; position:relative; padding:14px 0}
+.road__dot{width:14px; height:14px; border-radius:50%; background:linear-gradient(135deg, var(--a), var(--b)); box-shadow:0 0 22px rgba(34,211,238,.65); flex:0 0 auto; position:relative; top:6px}
+.road__item::before{content:""; position:absolute; left:6px; top:14px; bottom:-14px; width:2px; background:linear-gradient(180deg, rgba(34,211,238,.25), rgba(96,165,250,.05))}
+.road__card{flex:1; padding:14px; border:1px solid rgba(120,170,255,.22); border-radius:12px; background:rgba(255,255,255,.03)}
+
+/* Footer */
+.footer{border-top:1px solid var(--line); padding:22px 0; background:#0A1322}
+.footer__inner{display:flex; align-items:center; justify-content:space-between}
+.footer a{color:#A5F3FC}
+
+/* ===================== SPLASH (optional) ===================== */
+#splash{position:fixed; inset:0; background:black; display:none; justify-content:center; align-items:center; z-index:9999; transition:opacity .6s ease}
+#splash video{width:100%; height:100%; object-fit:cover}
+#skipBtn{position:absolute; bottom:40px; right:40px; padding:10px 20px; font-size:14px; font-weight:800; border:none; border-radius:8px; cursor:pointer; color:#fff; background:rgba(255,255,255,.18); backdrop-filter:blur(6px); transition:.25s background}
+#skipBtn:hover{background:rgba(255,255,255,.35)}
+
+/* ===================== MICRO ANIMS / REVEALS ===================== */
+.reveal{opacity:0; transform:translateY(16px); transition:.6s ease}
+.reveal.on{opacity:1; transform:none}
+.tilt:hover{transition:transform .15s linear}
+</style>
 </head>
-
 <body>
-  <!-- =================== SPLASH VIDEO (plays once per tab) =================== -->
-  <div id="splash" aria-hidden="true">
-    <video id="introVideo" autoplay muted playsinline>
-      <source src="intro.mp4" type="video/mp4" />
-      <!-- Fallback text for very old browsers -->
-      Your browser does not support the video tag.
-    </video>
-    <button id="skipBtn" type="button" aria-label="Skip intro">Skip</button>
+<!-- =============== OPTIONAL INTRO VIDEO (controlled by JS flag) =============== -->
+<div id="splash" aria-hidden="true">
+  <video id="introVideo" autoplay muted playsinline>
+    <source src="intro.mp4" type="video/mp4" />
+  </video>
+  <button id="skipBtn" type="button" aria-label="Skip intro">Skip</button>
+</div>
+
+<!-- =============== NAV =============== -->
+<header class="nav">
+  <div class="container nav__inner">
+    <a class="brand" href="#home" aria-label="QuantumCoin home">
+      <span class="brand__logo"></span>
+      <span class="brand__name">MONETA VERA PROPRIETATE</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#features">Features</a>
+      <a href="#tokenomics">Tokenomics</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </div>
+</header>
 
-  <!-- =================== SITE CONTENT =================== -->
-  <div id="siteContent" style="display:none">
-    <!-- NAVBAR -->
-    <header class="nav">
-      <div class="container nav__inner">
-        <a class="brand" href="#home" aria-label="QuantumCoin home">
-          <img class="brand__logo" src="logo-mark.png" alt="" />
-          <span class="brand__name">MONETA VERA PROPRIETATE</span>
-        </a>
-        <nav class="nav__links" aria-label="Primary">
-          <a href="#home">Home</a>
-          <a href="#about">About</a>
-          <a href="#features">Features</a>
-          <a href="#contact">Contact</a>
-        </nav>
-      </div>
-    </header>
+<!-- =============== HERO =============== -->
+<section id="home" class="hero">
+  <canvas id="hex" class="layer"></canvas>
+  <canvas id="net" class="layer"></canvas>
+  <div class="scanline layer" aria-hidden="true"></div>
+  <div class="vignette layer" aria-hidden="true"></div>
 
-    <!-- HERO -->
-    <section id="home" class="hero">
-      <div class="hero__bg"></div>
-      <div class="hero__scrim"></div>
+  <div class="container hero__inner">
+    <div class="badge">Layer-1 • Proof-of-Work • Post-Quantum</div>
+    <h1 class="glitch" data-text="QUANTUMCOIN™">QUANTUMCOIN™</h1>
+    <p class="lead">
+      <strong>22,000,000</strong> hard cap • <strong>RevStop™</strong> self-protection •
+      Pruned/archival nodes • <strong>wQC</strong> wrapped IOU for early liquidity (1:1 redemption at mainnet).
+    </p>
+    <div class="actions">
+      <a href="#about" class="btn btn--primary">What is QC?</a>
+      <a href="#features" class="btn btn--wire">See the Tech</a>
+    </div>
+    <div class="pills">
+      <span class="pill">Post-Quantum Signatures</span>
+      <span class="pill">Proof-of-Work</span>
+      <span class="pill">Pruned Nodes</span>
+      <span class="pill">Open & Auditable</span>
+    </div>
+  </div>
+</section>
 
-      <div class="container hero__inner">
-        <h1 class="hero__title">MONETA VERA PROPRIETATE</h1>
-        <h2 class="hero__subtitle">REVOLUTIONIZE DIGITAL OWNERSHIP</h2>
-        <p class="hero__lead">
-          <strong>QuantumCoin™ (QC)</strong> is a post-quantum, Proof-of-Work Layer-1 with a
-          fixed <strong>22,000,000</strong> supply and <em>RevStop™</em> self-protection.
-          This site is informational—learn the protocol, tokenomics, and the wrapped IOU
-          <strong>wQC</strong> plan for early liquidity and 1:1 redemption at mainnet.
-        </p>
+<!-- =============== ABOUT =============== -->
+<section id="about" class="section">
+  <div class="container grid two">
+    <div class="card neon tilt reveal">
+      <h3 class="kicker">Introduction</h3>
+      <h2>Moneta Vera Proprietate</h2>
+      <p>
+        <strong>QuantumCoin™ (QC)</strong> keeps Bitcoin-style issuance and decentralization while
+        upgrading signatures for a post-quantum world. No premine; every QC is mined under PoW with a deterministic
+        halving schedule and a hard cap of <strong>22,000,000</strong>.
+      </p>
+      <ul class="ticks">
+        <li>Future-resilient signature scheme (post-quantum design)</li>
+        <li>RevStop™ owner-local, opt-in emergency pause</li>
+        <li>Node modes: archival, <strong>pruned</strong>, and light/SPV</li>
+        <li>Reproducible builds & transparent accounting</li>
+      </ul>
+    </div>
 
-        <div class="hero__actions">
-          <a class="btn btn--primary" href="#about">Discover More</a>
-          <a class="btn btn--ghost" href="#features">See the Features</a>
+    <div class="card glass tilt reveal">
+      <h3 class="kicker">wQC — Wrapped QC</h3>
+      <h2>Early Liquidity, Clear Redemption</h2>
+      <p>
+        <strong>wQC</strong> is a fixed-cap ERC-20 IOU (e.g., 100k) to bootstrap liquidity and discovery.
+        At mainnet, holders redeem 1:1 for native QC via a public, auditable process.
+      </p>
+      <div class="grid two">
+        <div>
+          <h4>Fixed Cap</h4>
+          <p>Immutable max supply set at deploy; no further mint.</p>
+        </div>
+        <div>
+          <h4>Burn-to-Claim</h4>
+          <p>Burn wQC to record intent; burns map 1:1 to QC delivery.</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
 
-      <div class="hero__sparks" aria-hidden="true"></div>
-      <div class="vignette" aria-hidden="true"></div>
-    </section>
+<!-- =============== FEATURES =============== -->
+<section id="features" class="section dim">
+  <div class="container">
+    <h3 class="kicker center">Core Systems</h3>
+    <h2 class="center">Why the Tech Matters</h2>
 
-    <!-- INTRO / ABOUT -->
-    <section id="about" class="section intro">
-      <div class="container intro__grid">
-        <div class="intro__text card glass">
-          <h3 class="kicker">Introduction</h3>
-          <h2 class="h2">What is QuantumCoin™?</h2>
-          <p>
-            <strong>QuantumCoin™ (QC)</strong> keeps Bitcoin-style issuance and decentralization,
-            while upgrading signatures for a post-quantum world. Supply is hard-capped at
-            <strong>22,000,000</strong> coins via Proof-of-Work—no premine, no discretionary inflation.
-          </p>
-          <ul class="ticks">
-            <li>Post-quantum signature scheme</li>
-            <li>RevStop™ owner-local pause (opt-in emergency safety)</li>
-            <li>Node modes: archival, <strong>pruned</strong>, and light/SPV</li>
-            <li>Transparent economics, predictable halvings</li>
-          </ul>
+    <div class="grid three">
+      <div class="card wire tilt reveal">
+        <h3>Post-Quantum Ready</h3>
+        <p>Signature layer designed to resist quantum adversaries while remaining practical for wallets and nodes.</p>
+      </div>
+      <div class="card wire tilt reveal">
+        <h3>RevStop™</h3>
+        <p>Owner-local, opt-in pause if a key/device is compromised—no global killswitch, no custodial freeze.</p>
+      </div>
+      <div class="card wire tilt reveal">
+        <h3>Deterministic Supply</h3>
+        <p>Bitcoin-like emission curve, predictable halvings, and a hard cap of 22M. No discretionary inflation.</p>
+      </div>
+    </div>
+
+    <div class="grid three">
+      <div class="card glass tilt reveal">
+        <h3>Pruned Nodes</h3>
+        <p>Validate on modest storage (≈5–20&nbsp;GB typical). Full archives power explorers and research.</p>
+      </div>
+      <div class="card glass tilt reveal">
+        <h3>Open & Auditable</h3>
+        <p>Reproducible builds with published hashes and on-chain accounting for redemption events.</p>
+      </div>
+      <div class="card glass tilt reveal">
+        <h3>Community-First</h3>
+        <p>Transparent docs, public repos, and open discussion around upgrades and parameters.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== TOKENOMICS =============== -->
+<section id="tokenomics" class="section">
+  <div class="container grid two">
+    <div class="card tilt reveal">
+      <h3 class="kicker">Economics</h3>
+      <h2>Supply & Issuance</h2>
+      <p>
+        Hard cap: <strong>22,000,000 QC</strong>. Issuance follows a predictable halving schedule.
+        wQC is a fixed-cap IOU (e.g., 100k) redeemable 1:1 at mainnet—no premine; all QC is mined.
+      </p>
+      <ul class="ticks">
+        <li>Max supply: 22,000,000 QC</li>
+        <li>Premine: 0</li>
+        <li>wQC cap (example): 100,000 (IOU)</li>
+      </ul>
+      <hr class="sep" />
+      <div class="grid two">
+        <canvas id="donut1" width="320" height="220" aria-label="Supply donut"></canvas>
+        <canvas id="donut2" width="320" height="220" aria-label="wQC donut"></canvas>
+      </div>
+    </div>
+
+    <div class="card glass tilt reveal">
+      <h3 class="kicker">Nodes</h3>
+      <h2>Run What You Can</h2>
+      <p>
+        QC supports archival, pruned, and light modes. <strong>Pruned nodes</strong> keep consensus while discarding
+        old blocks beyond checkpoints, enabling lower-cost hardware and broader participation.
+      </p>
+      <div class="grid two">
+        <div>
+          <h4>Archival</h4>
+          <p>Full history for explorers & analytics. Highest storage.</p>
         </div>
-
-        <div class="intro__art">
-          <img src="coin-focus.png" alt="QuantumCoin™ emblem" />
-          <div class="ring"></div>
+        <div>
+          <h4>Pruned</h4>
+          <p>≈5–20 GB typical; validates current state, ideal for small devices.</p>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <!-- FEATURES -->
-    <section id="features" class="section features">
-      <div class="container">
-        <h3 class="kicker center">Core Features</h3>
-        <h2 class="h2 center">Why QuantumCoin™</h2>
-
-        <div class="grid three">
-          <div class="card glow">
-            <h3>Post-Quantum Ready</h3>
-            <p>
-              Signature layer designed to resist future quantum adversaries while remaining
-              practical for nodes and wallets.
-            </p>
-          </div>
-          <div class="card glow">
-            <h3>RevStop™</h3>
-            <p>
-              Owner-local, opt-in pause for emergencies (compromised key/device).
-              No global killswitch, no custodial freeze.
-            </p>
-          </div>
-          <div class="card glow">
-            <h3>Deterministic Supply</h3>
-            <p>Bitcoin-like emission curve, hard cap 22M, no premine. All QC is mined under PoW rules.</p>
-          </div>
+<!-- =============== ROADMAP =============== -->
+<section id="roadmap" class="section dim">
+  <div class="container">
+    <h3 class="kicker center">Trajectory</h3>
+    <h2 class="center">Roadmap</h2>
+    <ol class="road">
+      <li class="road__item reveal">
+        <span class="road__dot"></span>
+        <div class="road__card">
+          <h4>Wrapped Phase</h4>
+          <p>Deploy wQC (fixed cap), initial liquidity, and publish the audited redemption plan.</p>
         </div>
-
-        <div class="grid three">
-          <div class="card">
-            <h3>Pruned Nodes</h3>
-            <p>
-              Run a validating node on modest disks (≈5–20&nbsp;GB typical) while full archives
-              power explorers & research.
-            </p>
-          </div>
-          <div class="card">
-            <h3>wQC IOU</h3>
-            <p>
-              Fixed-cap ERC-20 (e.g., 100k) to bootstrap liquidity; redeemable 1:1 for native QC at mainnet launch.
-            </p>
-          </div>
-          <div class="card">
-            <h3>Open & Auditable</h3>
-            <p>Reproducible builds, open code, and transparent redemption/accounting flows.</p>
-          </div>
+      </li>
+      <li class="road__item reveal">
+        <span class="road__dot"></span>
+        <div class="road__card">
+          <h4>Testnet</h4>
+          <p>PoW mining, RevStop trials, pruned benchmarks, signature-layer review, and security hardening.</p>
         </div>
-      </div>
-    </section>
-
-    <!-- CONTACT / FOOTER -->
-    <section id="contact" class="section contact">
-      <div class="container grid two">
-        <div class="card glass">
-          <h3 class="kicker">Documentation</h3>
-          <p>Explore the whitepaper, node guides, and the wQC redemption plan when released.</p>
-          <a class="btn btn--primary" href="#" aria-disabled="true">Docs (soon)</a>
+      </li>
+      <li class="road__item reveal">
+        <span class="road__dot"></span>
+        <div class="road__card">
+          <h4>Mainnet</h4>
+          <p>Genesis, explorer + light wallets, ongoing audits, documentation, and community growth.</p>
         </div>
-        <div class="card glass">
-          <h3 class="kicker">Contact</h3>
-          <p>
-            Email:
-            <a href="mailto:contact@quantumcoincrypto.com">contact@quantumcoincrypto.com</a><br />
-            GitHub:
-            <a href="https://github.com/aeonith/quantumcoin-ui-" target="_blank" rel="noreferrer">@aeonith</a>
-          </p>
-        </div>
-      </div>
-    </section>
+      </li>
+    </ol>
+  </div>
+</section>
 
-    <footer class="footer">
-      <div class="container footer__inner">
-        <p>© <span id="y"></span> QuantumCoin™ • Informational site</p>
-        <div class="social">
-          <a href="#">Explorer</a>
-          <a href="#">wQC Contract (soon)</a>
-          <a href="#">Audit (soon)</a>
-        </div>
-      </div>
-      <script>
-        document.getElementById('y').textContent = new Date().getFullYear();
-      </script>
-    </footer>
-  </div><!-- /#siteContent -->
+<!-- =============== FAQ =============== -->
+<section id="faq" class="section">
+  <div class="container">
+    <h3 class="kicker center">Knowledge</h3>
+    <h2 class="center">FAQ</h2>
+    <div class="grid two">
+      <details class="card reveal"><summary><strong>Is wQC the same as QC?</strong></summary><p>No—wQC is an ERC-20 IOU used to bootstrap liquidity and awareness. At mainnet, wQC burns are mapped 1:1 to native QC delivery under a transparent redemption process.</p></details>
+      <details class="card reveal"><summary><strong>What is RevStop™?</strong></summary><p>An owner-local, opt-in pause meant for emergencies (e.g., compromised device). It is not a custodial freeze and does not add a global killswitch.</p></details>
+      <details class="card reveal"><summary><strong>Do I need a huge disk?</strong></summary><p>No. Run a pruned node (≈5–20 GB typical) to validate current state. Full archival nodes remain for explorers and research.</p></details>
+      <details class="card reveal"><summary><strong>Is there any premine?</strong></summary><p>No. QC is mined via Proof-of-Work with a fixed 22M cap and a deterministic halving schedule.</p></details>
+    </div>
+  </div>
+</section>
 
-  <!-- =================== SPLASH LOGIC =================== -->
-  <script>
-    const splash = document.getElementById('splash');
-    const site   = document.getElementById('siteContent');
-    const video  = document.getElementById('introVideo');
-    const skip   = document.getElementById('skipBtn');
+<!-- =============== CONTACT =============== -->
+<section id="contact" class="section dim">
+  <div class="container grid two">
+    <div class="card glass reveal">
+      <h3 class="kicker">Documentation</h3>
+      <p>Whitepaper, node guides, and the wQC redemption spec will be published here.</p>
+      <a class="btn btn--primary" href="#" aria-disabled="true">Docs (soon)</a>
+    </div>
+    <div class="card glass reveal">
+      <h3 class="kicker">Contact</h3>
+      <p>
+        Email: <a href="mailto:contact@quantumcoincrypto.com">contact@quantumcoincrypto.com</a><br/>
+        GitHub: <a href="https://github.com/aeonith/quantumcoin-ui-" target="_blank" rel="noreferrer">@aeonith</a>
+      </p>
+    </div>
+  </div>
+</section>
 
-    // Play once per tab/session (remove these 2 lines to always play)
-    if (sessionStorage.getItem('qcIntroSeen') === '1') {
-      splash.style.display = 'none'; site.style.display = 'block';
-    } else {
-      // Reveal site after 29s, on ended, or on Skip
-      const endSplash = () => {
-        splash.style.opacity = '0';
-        setTimeout(() => { splash.style.display = 'none'; site.style.display = 'block'; }, 600);
-        sessionStorage.setItem('qcIntroSeen', '1');
-      };
-      setTimeout(endSplash, 29000);
-      video.addEventListener('ended', endSplash);
-      skip.addEventListener('click', endSplash);
+<footer class="footer">
+  <div class="container footer__inner">
+    <p>© <span id="y"></span> QuantumCoin™ • Informational site</p>
+    <div class="social">
+      <a href="#">Explorer</a>
+      <a href="#">wQC Contract (soon)</a>
+      <a href="#">Audit (soon)</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* =================== CONFIG =================== */
+const INTRO_VIDEO_ENABLED = false; // set true to play intro.mp4 on load
+
+/* =================== SPLASH (optional) =================== */
+const splash  = document.getElementById('splash');
+const site    = document.body; // we'll just fade splash over the body
+const video   = document.getElementById('introVideo');
+const skipBtn = document.getElementById('skipBtn');
+
+function endSplash(){
+  splash.style.opacity='0';
+  setTimeout(()=> splash.style.display='none', 600);
+  sessionStorage.setItem('qcIntroSeen','1');
+}
+if(INTRO_VIDEO_ENABLED){
+  if(sessionStorage.getItem('qcIntroSeen')!=='1'){
+    splash.style.display='flex';
+    setTimeout(endSplash, 29000);
+    video.addEventListener('ended', endSplash);
+    skipBtn.addEventListener('click', endSplash);
+  }
+}
+
+/* =================== HERO CANVASES =================== */
+const DPR = Math.max(1, Math.min(2, window.devicePixelRatio||1));
+/* Hex grid */
+const hex = document.getElementById('hex'); const hx = hex.getContext('2d');
+/* Particle network */
+const net = document.getElementById('net'); const nx = net.getContext('2d');
+
+function sizeCanvas(c){
+  c.width  = innerWidth  * DPR;
+  c.height = innerHeight * DPR;
+  c.style.width  = innerWidth  + 'px';
+  c.style.height = innerHeight + 'px';
+}
+function resizeAll(){ sizeCanvas(hex); sizeCanvas(net); }
+resizeAll(); addEventListener('resize', resizeAll);
+
+/* Draw hex grid */
+let ht = 0;
+function drawHex(){
+  hx.clearRect(0,0,hex.width,hex.height);
+  hx.lineWidth = 1*DPR;
+  const HEX = 34, step = HEX*Math.sqrt(3)*DPR*0.5, r = HEX*DPR*0.58;
+  const w = hex.width, h = hex.height;
+  for(let y=-r; y<h+r; y+=step){
+    for(let x=-r; x<w+r; x+=HEX*DPR){
+      const px = x + ((Math.floor(y/step)%2)? HEX*DPR*0.5 : 0);
+      const glow = (Math.sin((px+y)*0.002+ht)*0.5+0.5)*0.35+0.05;
+      hx.strokeStyle = `rgba(96,165,250,${glow})`;
+      hx.beginPath();
+      for(let i=0;i<=6;i++){
+        const a = (Math.PI*2/6)*i, X = px+Math.cos(a)*r, Y = y+Math.sin(a)*r;
+        i? hx.lineTo(X,Y) : hx.moveTo(X,Y);
+      }
+      hx.stroke();
     }
-  </script>
+  }
+  ht += 0.02;
+  requestAnimationFrame(drawHex);
+}
+requestAnimationFrame(drawHex);
+
+/* Particle net */
+const N = 120, P = [];
+for(let i=0;i<N;i++){
+  P.push({x:Math.random()*net.width, y:Math.random()*net.height,
+          vx:(Math.random()-0.5)*0.35*DPR, vy:(Math.random()-0.5)*0.35*DPR});
+}
+function drawNet(){
+  nx.clearRect(0,0,net.width,net.height);
+  for(let i=0;i<N;i++){
+    const a=P[i]; a.x+=a.vx; a.y+=a.vy;
+    if(a.x<0||a.x>net.width) a.vx*=-1;
+    if(a.y<0||a.y>net.height) a.vy*=-1;
+    nx.fillStyle='rgba(34,211,238,.85)'; nx.beginPath(); nx.arc(a.x,a.y,1.6*DPR,0,7); nx.fill();
+    for(let j=i+1;j<N;j++){
+      const b=P[j], dx=a.x-b.x, dy=a.y-b.y, d=Math.hypot(dx,dy);
+      if(d<110*DPR){
+        nx.strokeStyle=`rgba(96,165,250,${(1-d/(110*DPR))*0.35})`;
+        nx.lineWidth=0.7*DPR; nx.beginPath(); nx.moveTo(a.x,a.y); nx.lineTo(b.x,b.y); nx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(drawNet);
+}
+requestAnimationFrame(drawNet);
+
+/* Parallax on hero */
+const hero = document.querySelector('.hero');
+hero.addEventListener('mousemove', (e)=>{
+  const r = hero.getBoundingClientRect();
+  const x = (e.clientX - r.width/2)/r.width;
+  const y = (e.clientY - r.height/2)/r.height;
+  document.documentElement.style.setProperty('--parx', (x*8)+'px');
+  document.documentElement.style.setProperty('--pary', (y*8)+'px');
+});
+
+/* =================== 3D TILT =================== */
+for(const el of document.querySelectorAll('.tilt')){
+  el.addEventListener('mousemove', e=>{
+    const r=el.getBoundingClientRect();
+    const rx = ((e.clientY - r.top)/r.height - 0.5)*-10;
+    const ry = ((e.clientX - r.left)/r.width - 0.5)* 10;
+    el.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) translateZ(0)`;
+  });
+  el.addEventListener('mouseleave', ()=> el.style.transform='');
+}
+
+/* =================== SCROLL REVEAL =================== */
+const io = new IntersectionObserver(es => es.forEach(e=>{
+  if(e.isIntersecting) e.target.classList.add('on');
+}), {threshold:.15});
+document.querySelectorAll('.reveal').forEach(n=>io.observe(n));
+
+/* =================== DONUT CHARTS =================== */
+function donut(canvas, segments, labels){
+  const ctx = canvas.getContext('2d'), W=canvas.width, H=canvas.height, cx=W/2, cy=H/2, r=Math.min(W,H)*0.35;
+  const colors = ['#22D3EE','#60A5FA','#7C3AED','#F59E0B','#10B981','#F43F5E','#A78BFA'];
+  let total = segments.reduce((a,b)=>a+b,0), a0 = -Math.PI/2;
+  ctx.clearRect(0,0,W,H);
+  segments.forEach((v,i)=>{
+    const a1 = a0 + (v/total)*Math.PI*2;
+    ctx.beginPath(); ctx.arc(cx,cy,r, a0,a1); ctx.arc(cx,cy,r*0.62, a1,a0,true); ctx.closePath();
+    ctx.fillStyle = colors[i%colors.length]; ctx.globalAlpha = .88; ctx.fill(); ctx.globalAlpha = 1;
+    a0 = a1;
+  });
+  // label
+  ctx.fillStyle='#bfe1ff'; ctx.font = `${Math.round(r*0.35)}px Inter`; ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.fillText(labels, cx, cy);
+}
+donut(document.getElementById('donut1'), [22_000_000], '22M');
+donut(document.getElementById('donut2'), [100_000, 22_000_000-100_000], 'wQC');
+
+/* =================== FOOTER YEAR =================== */
+document.getElementById('y').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
