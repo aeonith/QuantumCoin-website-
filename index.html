@@ -25,9 +25,9 @@
   </nav>
 </header>
 
+<!-- HERO -->
 <section class="hero" id="home" role="banner">
   <div class="hero-bg">
-    <!-- Optional image: put coin_bg.jpg next to these files -->
     <div class="bg-img"></div>
     <div class="glow one"></div>
     <div class="glow two"></div>
@@ -47,6 +47,11 @@
       <a href="#story" class="btn primary">Why QC</a>
       <a href="#design" class="btn ghost">See the Design</a>
     </div>
+
+    <!-- Spinning coin display -->
+    <div class="spin-wrap">
+      <canvas id="coinSpin" width="320" height="320" aria-label="Spinning QuantumCoin emblem"></canvas>
+    </div>
   </div>
 
   <div class="ticker" aria-hidden="true">
@@ -62,6 +67,7 @@
   </div>
 </section>
 
+<!-- STORY -->
 <section id="story" class="section card">
   <h2 class="h">The Story</h2>
   <p class="p">
@@ -76,6 +82,7 @@
   </p>
 </section>
 
+<!-- THREAT -->
 <section id="threat" class="section">
   <h2 class="h">The Quantum Threat (Plainly)</h2>
   <ul class="list">
@@ -90,6 +97,7 @@
   </div>
 </section>
 
+<!-- DESIGN -->
 <section id="design" class="section card">
   <h2 class="h">Design Response</h2>
   <div class="grid4">
@@ -114,6 +122,7 @@
   </div>
 </section>
 
+<!-- TOKENOMICS + ISSUANCE SPIRAL -->
 <section id="tokenomics" class="section">
   <h2 class="h">Monetary Policy</h2>
   <div class="kv">
@@ -124,12 +133,16 @@
     <div><span>Premine</span><b>None</b></div>
     <div><span>Distribution</span><b>Proof-of-Work mining</b></div>
   </div>
-  <p class="p m8">
-    Predictable issuance with decreasing block rewards mirrors the scarcity curve users already understand,
-    while the cryptography and safety model are modernized for a post-quantum world.
-  </p>
+
+  <div class="spiral-wrap">
+    <canvas id="issuanceSpiral" width="360" height="360" aria-label="Issuance spiral showing halving scarcity"></canvas>
+    <p class="p small center">
+      Animated halving spiral: each orbit represents a ~2-year epoch; radius fades with reward size until the 22M cap.
+    </p>
+  </div>
 </section>
 
+<!-- REVSTOP -->
 <section id="revstop" class="section card">
   <h2 class="h">RevStop™ in Detail</h2>
   <ul class="list">
@@ -139,6 +152,7 @@
   </ul>
 </section>
 
+<!-- NODES -->
 <section id="run" class="section">
   <h2 class="h">Run the Network</h2>
   <div class="node-cards">
@@ -161,6 +175,7 @@
   </div>
 </section>
 
+<!-- ROADMAP -->
 <section id="roadmap" class="section card">
   <h2 class="h">Roadmap</h2>
   <ol class="road">
@@ -182,8 +197,88 @@
   <small>© <span id="y"></span> QuantumCoin™</small>
 </footer>
 
+<!-- ========= SCRIPTS: SPINNING COIN + ISSUANCE SPIRAL ========= -->
 <script>
   document.getElementById('y').textContent = new Date().getFullYear();
+
+  /* Spinning coin (neon rim + faux 3D shading) */
+  (function(){
+    const c = document.getElementById('coinSpin'); if(!c) return;
+    const ctx = c.getContext('2d');
+    const DPR = Math.min(2, window.devicePixelRatio || 1);
+    c.width = c.width * DPR; c.height = c.height * DPR; ctx.scale(DPR,DPR);
+
+    let t=0;
+    function loop(){
+      const w=c.width/DPR, h=c.height/DPR, r=Math.min(w,h)/2-12;
+      ctx.clearRect(0,0,w,h);
+      ctx.save(); ctx.translate(w/2,h/2); ctx.rotate(t*0.9);
+
+      // rim
+      const grd = ctx.createConicGradient(t,0,0);
+      grd.addColorStop(0,'#22d3ee'); grd.addColorStop(.5,'#60a5fa'); grd.addColorStop(1,'#22d3ee');
+      ctx.lineWidth=8; ctx.strokeStyle=grd; ctx.beginPath(); ctx.arc(0,0,r,0,Math.PI*2); ctx.stroke();
+
+      // face
+      const face = ctx.createRadialGradient(-12,-10,8,0,0,r-10);
+      face.addColorStop(0,'rgba(34,211,238,.28)');
+      face.addColorStop(1,'rgba(96,165,250,.08)');
+      ctx.fillStyle=face; ctx.beginPath(); ctx.arc(0,0,r-8,0,Math.PI*2); ctx.fill();
+
+      // emblem (QC stylized)
+      ctx.save();
+      ctx.rotate(-t*0.7);
+      ctx.strokeStyle='#22d3ee'; ctx.lineWidth=5; ctx.lineCap='round';
+      const rr=r*0.38;
+      ctx.beginPath(); ctx.arc(-rr,0,rr,Math.PI*1.1,Math.PI*1.9); ctx.stroke();
+      ctx.beginPath(); ctx.arc( rr,0,rr,Math.PI*0.1,Math.PI*0.9); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(-rr,rr); ctx.lineTo(0,0); ctx.lineTo(rr,-rr); ctx.stroke();
+      ctx.restore();
+
+      ctx.restore();
+      t+=0.01; requestAnimationFrame(loop);
+    }
+    loop();
+  })();
+
+  /* Issuance spiral (halving epochs as shrinking orbits) */
+  (function(){
+    const c = document.getElementById('issuanceSpiral'); if(!c) return;
+    const ctx = c.getContext('2d');
+    const DPR = Math.min(2, window.devicePixelRatio || 1);
+    c.width = c.width * DPR; c.height = c.height * DPR; ctx.scale(DPR,DPR);
+
+    const w=c.width/DPR, h=c.height/DPR, cx=w/2, cy=h/2;
+    const epochs = 33;             // ~66 years / 2-year halving
+    const r0 = Math.min(w,h)/2-18; // starting radius
+    let t=0;
+
+    function draw(){
+      ctx.clearRect(0,0,w,h);
+      ctx.translate(cx,cy);
+
+      // grid glow
+      ctx.globalCompositeOperation='lighter';
+      for(let i=0;i<epochs;i++){
+        const k = i/epochs;
+        const r = r0 * Math.pow(0.94,i);                 // shrink per epoch
+        const a = t*0.6 + i*0.25;                        // offset angle
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(${34+120*k}, ${211-80*k}, ${238-80*k}, ${0.85-k*0.75})`;
+        ctx.lineWidth = 2.2 - k*1.6;
+        for(let j=0;j<=120;j++){
+          const th = a + j/120 * (Math.PI*2*0.85);
+          const rr = r * (0.96 + 0.04*Math.sin(j/6 + t));
+          const x = rr * Math.cos(th), y = rr * Math.sin(th);
+          j===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+        }
+        ctx.stroke();
+      }
+      ctx.setTransform(1,0,0,1,0,0);
+      t+=0.012; requestAnimationFrame(draw);
+    }
+    draw();
+  })();
 </script>
 </body>
 </html>
