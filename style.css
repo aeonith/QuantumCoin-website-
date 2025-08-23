@@ -1,13 +1,12 @@
 :root{
-  /* Mobile-first sizes & colors */
   --bg:#04070f; --ink:#eaf4ff; --mut:#a8c3e6;
   --a:#22d3ee; --b:#60a5fa; --line:#11203b;
 
-  /* Typography scale (tuned for phones) */
+  /* Mobile-first type scale */
   --fs-sm:.92rem;
   --fs-base:1rem;
-  --fs-h:1.28rem;
-  --fs-hero:2.1rem;
+  --fs-h:1.34rem;
+  --fs-hero:2.35rem;
 }
 
 *{box-sizing:border-box}
@@ -18,7 +17,7 @@ body{
   -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
 }
 
-/* Header / Drawer (mobile) */
+/* Header / Drawer */
 .top{
   position:sticky; top:0; z-index:50;
   display:flex; align-items:center; justify-content:space-between;
@@ -26,32 +25,49 @@ body{
   border-bottom:1px solid #0e1730; backdrop-filter:blur(8px)
 }
 .brand{display:flex; align-items:center; gap:10px}
-.spark{width:14px; height:14px; border-radius:50%; background:radial-gradient(circle at 40% 40%, var(--a), var(--b)); box-shadow:0 0 18px rgba(34,211,238,.7)}
-.name{font-weight:800; letter-spacing:.02em; font-size:var(--fs-base)}
-.burger{all:unset; display:grid; gap:3px; cursor:pointer}
+.spark{width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 40% 40%,var(--a),var(--b));box-shadow:0 0 18px rgba(34,211,238,.7)}
+.name{font-weight:800;letter-spacing:.02em}
+.burger{all:unset;display:grid;gap:3px;cursor:pointer}
 .burger span{width:20px;height:2px;background:#bfe1ff;border-radius:3px}
+
+/* FULL-HEIGHT Drawer so “Governance” is always reachable */
 .drawer{
-  position:fixed; inset:48px 0 auto 0; height:0; overflow:hidden;
-  display:flex; flex-direction:column; gap:10px; padding:0 14px;
-  background:linear-gradient(180deg, rgba(5,10,20,.98), rgba(5,10,20,.85));
-  border-bottom:1px solid #0e1730; transition:height .25s ease;
+  position:fixed; left:0; right:0;
+  top:var(--drawer-top, 56px); /* updated in JS via header height if desired */
+  max-height:0; overflow:auto;
+  display:flex; flex-direction:column; gap:6px; padding:0 14px;
+  background:linear-gradient(180deg, rgba(5,10,20,.98), rgba(5,10,20,.9));
+  border-bottom:1px solid #0e1730; transition:max-height .25s ease, padding .25s ease;
+  z-index:49; overscroll-behavior:contain;
 }
-.drawer.open{height:286px}
-.drawer a{color:#cfe8ff;text-decoration:none;font-weight:700;font-size:var(--fs-sm)}
+.drawer.open{
+  /* take full device height minus header; guarantees last item is visible */
+  max-height:calc(100vh - var(--drawer-top, 56px));
+  padding:10px 14px 14px;
+}
+.drawer a{
+  color:#cfe8ff; text-decoration:none; font-weight:700; font-size:var(--fs-sm);
+  padding:10px 6px; border-radius:8px;
+}
+.drawer a:active{background:rgba(255,255,255,.06)}
 
 /* Hero */
 .hero{position:relative; overflow:hidden; padding:20px 16px 74px; border-bottom:1px solid var(--line)}
-.hero-copy{position:relative; z-index:1; text-align:center}
-.chip{display:inline-block; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:#062033;
-  background:linear-gradient(135deg,var(--a),var(--b)); padding:6px 10px; border-radius:999px; font-weight:800}
+.hero-copy{text-align:center}
+.chip{
+  display:inline-block; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:#062033;
+  background:linear-gradient(135deg,var(--a),var(--b)); padding:6px 10px; border-radius:999px; font-weight:800
+}
 .t{margin:10px 0 6px; font-size:var(--fs-hero); line-height:1.06; font-weight:800}
 .t span{background:linear-gradient(135deg,var(--a),var(--b)); -webkit-background-clip:text; background-clip:text; color:transparent}
 .lead{color:#cfe8ff; margin:6px auto 14px; max-width:42ch}
 
 .spin-wrap{display:flex; justify-content:center; margin-top:10px}
-#coinSpin{max-width:88vw; width:360px; height:auto; border-radius:16px;
+#coinSpin{
+  max-width:88vw; width:360px; height:auto; border-radius:16px;
   background:radial-gradient(circle at 50% 50%, rgba(0,255,255,.05), transparent 70%);
-  box-shadow:0 16px 34px rgba(8,16,32,.55), inset 0 1px 0 rgba(255,255,255,.06)}
+  box-shadow:0 16px 34px rgba(8,16,32,.55), inset 0 1px 0 rgba(255,255,255,.06)
+}
 
 .ticker{position:absolute; left:0; right:0; bottom:12px; overflow:hidden; height:26px}
 .ticker .track{display:flex; gap:24px; width:max-content; animation:slide 23s linear infinite}
@@ -60,9 +76,12 @@ body{
 
 /* Sections */
 main{display:block}
-.section{padding:20px 16px; border-top:1px solid var(--line); max-width:760px; margin:0 auto}
-.card{border-radius:14px; background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-  border:1px solid rgba(120,170,255,.22); box-shadow:inset 0 1px 0 rgba(255,255,255,.04), 0 10px 30px rgba(8,16,32,.5)}
+.section{padding:20px 16px; border-top:1px solid var(--line); max-width:760px; margin:0 auto; scroll-margin-top:72px}
+.card{
+  border-radius:14px; background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  border:1px solid rgba(120,170,255,.22);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04), 0 10px 30px rgba(8,16,32,.5)
+}
 .h{margin:2px 0 8px; font-size:var(--fs-h)}
 .p{margin:0 0 10px}
 .small{font-size:var(--fs-sm); color:var(--mut)}
@@ -71,10 +90,13 @@ main{display:block}
 
 .list{margin:8px 0 0; padding:0}
 .list li{list-style:none; padding-left:22px; position:relative; margin:6px 0}
-.list li:before{content:""; position:absolute; left:0; top:.55rem; width:8px; height:8px; border-radius:50%;
-  background:radial-gradient(circle at 40% 40%, var(--a),var(--b))}
+.list li:before{
+  content:""; position:absolute; left:0; top:.55rem; width:8px; height:8px; border-radius:50%;
+  background:radial-gradient(circle at 40% 40%, var(--a), var(--b))
+}
+.list-wrap{margin-top:6px}
 
-/* Tiles & grids (mobile 1-col, auto wraps wider) */
+/* Tiles & grids */
 .grid{display:grid; grid-template-columns:1fr; gap:10px; margin-top:6px}
 .tile{padding:12px; border-radius:12px; border:1px solid rgba(120,170,255,.22); background:rgba(255,255,255,.03)}
 .tile h3{margin:0 0 6px; font-size:1.02rem}
@@ -101,14 +123,12 @@ main{display:block}
 
 /* Larger phones / small tablets */
 @media (min-width:480px){
-  :root{ --fs-h:1.34rem; --fs-hero:2.35rem }
+  :root{ --fs-h:1.42rem; --fs-hero:2.6rem }
   .kv{grid-template-columns:1fr 1fr 1fr}
 }
 
 /* Tablets and up */
 @media (min-width:768px){
-  :root{ --fs-hero:2.6rem }
   .grid{grid-template-columns:1fr 1fr}
-  .spin-wrap{margin-top:14px}
   #coinSpin{max-width:420px}
 }
