@@ -4,10 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>QuantumCoin™ — Post-Quantum Proof-of-Work Layer-1</title>
-  <meta name="description" content="QuantumCoin™ (QC) is a post-quantum Proof-of-Work Layer-1 with a 22,000,000 hard cap, ~10-minute blocks, and 2-year halvings (~66 years). RevStop™ provides owner-local protection.">
+  <meta name="description" content="QuantumCoin™ (QC) is a post-quantum PoW Layer-1 with a 22,000,000 hard cap, ~10-minute blocks, 2-year halvings (~66 years), and RevStop™ owner-local protection." />
   <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
 </head>
 <body>
 
@@ -47,9 +47,9 @@
       <a href="#design" class="btn ghost">See the Design</a>
     </div>
 
-    <!-- Spinning coin (uses qc_coin.png) -->
+    <!-- Cinematic coin: drop-in + bounce + continuous 360 spin -->
     <div class="spin-wrap">
-      <canvas id="coinSpin" width="320" height="320" aria-label="Spinning QuantumCoin emblem"></canvas>
+      <canvas id="coinSpin" width="360" height="360" aria-label="QuantumCoin emblem animation"></canvas>
     </div>
   </div>
 
@@ -71,8 +71,8 @@
   <p class="p">
     Ledgers outlive hardware generations. When large-scale quantum computers arrive, classical signatures
     become forgeable. Keys that look safe today could be <i>harvested now and drained later</i>. QuantumCoin™
-    (QC) exists to keep a Bitcoin-style ethos—<b>no premine, predictable monetary policy, PoW fairness</b>—
-    while upgrading the cryptography and the safety model <b>before</b> that moment arrives.
+    (QC) keeps a Bitcoin-style ethos—<b>no premine, predictable monetary policy, PoW fairness</b>—while
+    upgrading the cryptography and the safety model <b>before</b> that moment arrives.
   </p>
   <p class="p">
     The design is simple on purpose: transparent issuance, widely runnable nodes, and a wallet-holder
@@ -98,8 +98,8 @@
   <h2 class="h">Design Response</h2>
   <div class="grid4">
     <div class="tile">
-      <h3>PQ Signatures</h3>
-      <p>Adopts post-quantum signature schemes to resist key-recovery and forgery attacks.</p>
+      <h3>Post-Quantum Signatures</h3>
+      <p>Adopts PQ schemes to resist key-recovery and forgery attacks.</p>
     </div>
     <div class="tile">
       <h3>Proof-of-Work</h3>
@@ -128,14 +128,9 @@
     <div><span>Premine</span><b>None</b></div>
     <div><span>Distribution</span><b>Proof-of-Work mining</b></div>
   </div>
-
-  <!-- Calming animated neon grid (replaces the orbits) -->
-  <div class="gridviz">
-    <canvas id="matrixGrid" width="360" height="360" aria-label="Animated grid"></canvas>
-    <p class="p small center">
-      A living network grid — simple, readable, and easy on the eyes.
-    </p>
-  </div>
+  <p class="p small center m10">
+    Simple, transparent economics — no gimmicks. Issuance predictably decays to the hard cap.
+  </p>
 </section>
 
 <section id="revstop" class="section card">
@@ -190,116 +185,82 @@
   <small>© <span id="y"></span> QuantumCoin™</small>
 </footer>
 
-<!-- ====== Scripts: spinning coin (image) + neon grid ====== -->
+<!-- ====== Single animation: drop-in bounce + 360 spin (uses qc_coin.png) ====== -->
 <script>
   document.getElementById('y').textContent = new Date().getFullYear();
 
-  /* Spinning coin rendered from image (qc_coin.png) with neon rim + parallax tilt */
   (function(){
     const c = document.getElementById('coinSpin'); if(!c) return;
     const ctx = c.getContext('2d');
     const DPR = Math.min(2, window.devicePixelRatio || 1);
-    c.width *= DPR; c.height *= DPR; ctx.scale(DPR,DPR);
+    const W = c.width, H = c.height;
+    c.width = W * DPR; c.height = H * DPR; ctx.scale(DPR, DPR);
 
-    const w = c.width / DPR, h = c.height / DPR, r = Math.min(w,h)/2 - 8;
+    const w = W, h = H, R = Math.min(w,h)/2 - 10;
     const img = new Image(); img.src = 'qc_coin.png';
-    let t=0, mx=0, my=0;
 
-    c.addEventListener('pointermove', e=>{
-      const rect = c.getBoundingClientRect();
-      mx = ((e.clientX-rect.left)/rect.width - .5)*2;
-      my = ((e.clientY-rect.top)/rect.height - .5)*2;
-    });
+    // state
+    let t = 0;                 // rotation time
+    let y = -h;                // start far above canvas
+    let vy = 0;                // velocity for drop
+    const g = 0.9;             // gravity
+    const bounce = 0.58;       // energy kept after bounce
+    const floor = h/2 + 6;     // vertical center floor
+    let settled = false;       // after a couple bounces
 
-    function loop(){
-      ctx.clearRect(0,0,w,h);
+    // shimmer sweep params
+    let sweep = 0;
 
-      const g = ctx.createRadialGradient(w/2, h/2, r*0.2, w/2, h/2, r*1.1);
-      g.addColorStop(0,'rgba(34,211,238,.20)');
-      g.addColorStop(1,'rgba(34,211,238,0)');
-      ctx.fillStyle = g;
-      ctx.beginPath(); ctx.arc(w/2,h/2,r*1.05,0,Math.PI*2); ctx.fill();
-
-      ctx.save();
-      ctx.translate(w/2 + mx*6, h/2 + my*6);
-      ctx.rotate(t*0.8);
-
-      const rim = ctx.createConicGradient(t,0,0);
-      rim.addColorStop(0,'#22d3ee');
-      rim.addColorStop(.5,'#60a5fa');
-      rim.addColorStop(1,'#22d3ee');
-      ctx.lineWidth = 8; ctx.strokeStyle = rim;
-      ctx.beginPath(); ctx.arc(0,0,r,0,Math.PI*2); ctx.stroke();
-
-      const size = r*1.8;
-      ctx.drawImage(img, -size/2, -size/2, size, size);
-
-      ctx.restore();
-      t += 0.01;
-      requestAnimationFrame(loop);
-    }
-    img.onload = loop;
-  })();
-
-  /* Animated neon grid: subtle, soothing, and not busy */
-  (function(){
-    const c = document.getElementById('matrixGrid'); if(!c) return;
-    const ctx = c.getContext('2d');
-    const DPR = Math.min(2, window.devicePixelRatio || 1);
-    const wCSS = c.width, hCSS = c.height;
-    c.width = wCSS * DPR; c.height = hCSS * DPR; ctx.scale(DPR, DPR);
-
-    let t = 0;
     function draw(){
-      const w = wCSS, h = hCSS;
       ctx.clearRect(0,0,w,h);
 
-      const bg = ctx.createRadialGradient(w/2, h/2, 40, w/2, h/2, Math.max(w,h)*0.65);
-      bg.addColorStop(0, 'rgba(34,211,238,0.08)');
-      bg.addColorStop(1, 'rgba(34,211,238,0.00)');
-      ctx.fillStyle = bg;
-      ctx.fillRect(0,0,w,h);
+      // soft stage glow
+      const glow = ctx.createRadialGradient(w/2, h*0.72, R*0.4, w/2, h*0.72, R*1.6);
+      glow.addColorStop(0,'rgba(34,211,238,.16)');
+      glow.addColorStop(1,'rgba(34,211,238,0)');
+      ctx.fillStyle = glow; ctx.fillRect(0,0,w,h);
 
-      const gap = 22;
-      const cols = Math.floor(w / gap);
-      const rows = Math.floor(h / gap);
-      const amp = 6;
-      const speed = 0.018;
-
-      for(let i=0;i<=cols;i++){
-        for(let j=0;j<=rows;j++){
-          const x = i * gap + (w % gap)/2;
-          const yBase = j * gap + (h % gap)/2;
-
-          const y = yBase
-                  + Math.sin((i*0.45) + t)*amp*0.6
-                  + Math.cos((j*0.55) - t*0.7)*amp*0.4;
-
-          const dx = (x - w/2) / (w/2);
-          const dy = (y - h/2) / (h/2);
-          const falloff = Math.max(0, 1 - Math.sqrt(dx*dx + dy*dy));
-
-          const r = 1.2 + 1.0*falloff;
-          const hue = 190 - 12*falloff;
-          ctx.fillStyle = `hsla(${hue}, 85%, ${60 + 10*falloff}%, ${0.75*falloff + 0.15})`;
-          ctx.beginPath();
-          ctx.arc(x, y, r, 0, Math.PI*2);
-          ctx.fill();
-
-          const g = ctx.createRadialGradient(x, y, 0, x, y, 8);
-          g.addColorStop(0, `hsla(${hue}, 85%, 60%, ${0.11*falloff})`);
-          g.addColorStop(1, 'transparent');
-          ctx.fillStyle = g;
-          ctx.beginPath();
-          ctx.arc(x, y, 8, 0, Math.PI*2);
-          ctx.fill();
-        }
+      // drop physics
+      if(!settled){
+        vy += g;
+        y += vy;
+        if(y > floor){ y = floor; vy *= -bounce; if(Math.abs(vy) < 1.6){ settled = true; } }
+      } else {
+        // tiny idle bob
+        y = floor + Math.sin(t*2)*2;
       }
 
-      t += speed;
+      ctx.save();
+      ctx.translate(w/2, y);
+
+      // continuous 360 spin (2D rotation + light conic rim)
+      ctx.rotate(t*0.9);
+
+      // neon rim
+      const rim = ctx.createConicGradient(t,0,0);
+      rim.addColorStop(0,'#22d3ee'); rim.addColorStop(.5,'#60a5fa'); rim.addColorStop(1,'#22d3ee');
+      ctx.lineWidth = 10; ctx.strokeStyle = rim;
+      ctx.beginPath(); ctx.arc(0,0,R,0,Math.PI*2); ctx.stroke();
+
+      const size = R*1.85;
+      ctx.drawImage(img, -size/2, -size/2, size, size);
+
+      // shimmering sweep
+      sweep += 0.02;
+      const sx = Math.cos(sweep)*R*0.9, sy = Math.sin(sweep)*R*0.6;
+      const shine = ctx.createRadialGradient(sx, sy, 0, sx, sy, R*0.9);
+      shine.addColorStop(0, 'rgba(255,255,255,.075)');
+      shine.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.fillStyle = shine; ctx.beginPath(); ctx.arc(0,0,R*0.98,0,Math.PI*2); ctx.fill();
+      ctx.globalCompositeOperation = 'source-over';
+
+      ctx.restore();
+
+      t += 0.016; // rotation speed
       requestAnimationFrame(draw);
     }
-    draw();
+    img.onload = draw;
   })();
 </script>
 </body>
