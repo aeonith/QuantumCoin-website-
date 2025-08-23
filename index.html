@@ -3,210 +3,187 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>QuantumCoin™ — Post-Quantum Proof-of-Work L1</title>
-  <meta name="description" content="QuantumCoin™ (QC): quantum-resistant PoW Layer-1 with 22M hard cap, ~10-min blocks, two-year halving over ~66 years, RevStop™, pruned nodes, and an open explorer API."/>
+  <title>QuantumCoin™ — Post-Quantum Proof-of-Work Layer-1</title>
+  <meta name="description" content="QuantumCoin™ (QC) is a post-quantum Proof-of-Work Layer-1 with a 22,000,000 hard cap, ~10-minute blocks, and 2-year halvings (~66 years). RevStop™ provides owner-local protection.">
   <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<!-- TOP BAR (compact, mobile) -->
 <header class="top">
   <div class="brand">
-    <span class="dot"></span>
+    <span class="spark"></span>
     <span class="name">QuantumCoin™</span>
   </div>
-  <button class="cta" onclick="document.querySelector('#why').scrollIntoView({behavior:'smooth'})">Why PQ?</button>
+  <nav class="tabs">
+    <a href="#story">Story</a>
+    <a href="#threat">Threat</a>
+    <a href="#design">Design</a>
+    <a href="#tokenomics">Policy</a>
+    <a href="#run">Run</a>
+  </nav>
 </header>
 
-<!-- HERO (mobile-first diagonal layout) -->
-<section class="hero" id="home" role="banner" aria-label="QuantumCoin introduction">
+<section class="hero" id="home" role="banner">
   <div class="hero-bg">
-    <div class="glow glow-a"></div>
-    <div class="glow glow-b"></div>
-    <div class="grid"></div>
+    <!-- Optional image: put coin_bg.jpg next to these files -->
+    <div class="bg-img"></div>
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+    <div class="mesh"></div>
+    <div class="scan"></div>
   </div>
 
-  <div class="hero-card">
-    <div class="chip">Layer-1 • PoW • Post-Quantum</div>
-    <h1 class="title">QUANTUM<span>COIN</span>™</h1>
-    <p class="subtitle">
-      A quantum-resistant Proof-of-Work chain with a <b>22,000,000</b> hard cap,
-      <b>~10-minute</b> blocks, and a <b>2-year halving</b> over ~<b>66 years</b>.
+  <div class="hero-copy">
+    <span class="chip">Layer-1 • Proof-of-Work • Post-Quantum</span>
+    <h1 class="t">QUANTUM<span>COIN</span>™</h1>
+    <p class="lead">
+      A chain engineered for the quantum era: <b>post-quantum signatures</b>, a fixed <b>22,000,000</b> cap,
+      <b>~10-minute</b> blocks, <b>2-year halvings</b> over ~<b>66 years</b>, and <b>RevStop™</b> — an
+      owner-local safety circuit you control.
     </p>
-
-    <div class="hero-actions">
-      <a href="#about" class="btn btn-primary">What is QC?</a>
-      <a href="#tech"  class="btn btn-ghost">See the Tech</a>
-    </div>
-
-    <div class="tags">
-      <span>Post-Quantum Signatures</span>
-      <span>RevStop™ (owner-local)</span>
-      <span>Pruned Nodes</span>
-      <span>Open Explorer • API</span>
+    <div class="cta-row">
+      <a href="#story" class="btn primary">Why QC</a>
+      <a href="#design" class="btn ghost">See the Design</a>
     </div>
   </div>
 
-  <!-- Ticker marquee (smooth, battery-friendly) -->
   <div class="ticker" aria-hidden="true">
     <div class="track">
-      <span>22M MAX SUPPLY</span>
-      <span>~10 MIN BLOCKS</span>
-      <span>2-YEAR HALVING</span>
-      <span>REVSTOP™</span>
-      <span>PRUNED NODES</span>
-      <span>OPEN API</span>
+      <b>22M HARD CAP</b>
+      <b>~10 MIN BLOCKS</b>
+      <b>2-YEAR HALVING</b>
+      <b>POST-QUANTUM SIGS</b>
+      <b>REVSTOP™</b>
+      <b>PRUNED / LIGHT NODES</b>
+      <b>OPEN EXPLORER & API</b>
     </div>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about" class="section">
-  <h2 class="h">Purpose-Built for a Post-Quantum Era</h2>
+<section id="story" class="section card">
+  <h2 class="h">The Story</h2>
   <p class="p">
-    <b>QuantumCoin™ (QC)</b> keeps Bitcoin-style issuance and decentralization while upgrading to
-    <b>post-quantum signatures</b>. No premine. Transparent monetary policy. Mobile-friendly node options
-    so more people can validate.
+    Ledgers outlive hardware generations. When large-scale quantum computers arrive, classical signatures
+    become forgeable. Keys that look safe today could be <i>harvested now and drained later</i>. QuantumCoin™
+    (QC) exists to keep a Bitcoin-style ethos—<b>no premine, predictable monetary policy, PoW fairness</b>—
+    while upgrading the cryptography and the safety model <b>before</b> that moment arrives.
   </p>
+  <p class="p">
+    The design is simple on purpose: transparent issuance, widely runnable nodes, and a wallet-holder
+    safety tool (<b>RevStop™</b>) that’s local to you, not a global kill switch.
+  </p>
+</section>
 
+<section id="threat" class="section">
+  <h2 class="h">The Quantum Threat (Plainly)</h2>
   <ul class="list">
-    <li><b>Dilithium-class signatures</b> to resist key-recovery/forgery attacks.</li>
-    <li><b>RevStop™:</b> owner-local, opt-in pause if your keys are compromised (no global switch).</li>
-    <li><b>Node modes:</b> archival, pruned (low storage), and light/SPV.</li>
-    <li><b>Open explorer + REST API</b> for blocks, txs, and addresses.</li>
+    <li><b>Signature forgeries:</b> Shor’s algorithm could recover private keys from public keys and forge spends.</li>
+    <li><b>Harvest-Now-Decrypt-Later:</b> attackers record data today, unlock it once quantum scales.</li>
+    <li><b>Chain longevity:</b> monetary networks must be safe for decades, not product cycles.</li>
   </ul>
-</section>
-
-<!-- TECH -->
-<section id="tech" class="section card">
-  <h2 class="h">Protocol at a Glance</h2>
-  <div class="kv">
-    <div><span>Consensus</span><b>Proof-of-Work</b></div>
-    <div><span>Block Time</span><b>~10 min</b></div>
-    <div><span>Supply Cap</span><b>22,000,000 QC</b></div>
-    <div><span>Halving</span><b>Every ~2 years</b></div>
-    <div><span>Wallet Safety</span><b>Post-Quantum + RevStop™</b></div>
-    <div><span>Nodes</span><b>Archival • Pruned • Light</b></div>
-  </div>
-
-  <details class="accordion">
-    <summary>Explorer / API endpoints</summary>
-    <pre><code>GET /status
-GET /blocks?limit=20
-GET /blocks/:height
-GET /tx/:hash
-GET /address/:addr</code></pre>
-  </details>
-</section>
-
-<!-- WHY POST-QUANTUM -->
-<section id="why" class="section highlight">
-  <h2 class="h">Why Post-Quantum?</h2>
-  <p class="p">
-    Big quantum machines could run <b>Shor’s algorithm</b> to extract private keys from public keys,
-    forging signatures and draining wallets. Adversaries can also <i>harvest now, decrypt later</i>:
-    record data today, break it tomorrow. QC moves to <b>post-quantum signatures</b> now, not after it’s too late.
-  </p>
-
   <div class="pill-row">
-    <span class="pill good">PQ Signatures</span>
-    <span class="pill good">Owner-Local RevStop™</span>
-    <span class="pill good">Broader Validation</span>
+    <span class="pill good">Act before it’s urgent</span>
+    <span class="pill good">Post-quantum by default</span>
+    <span class="pill good">Owner-local controls</span>
   </div>
 </section>
 
-<!-- TOKENOMICS -->
-<section id="tokenomics" class="section card">
-  <h2 class="h">Tokenomics (Simple & Honest)</h2>
-  <ul class="list">
-    <li><b>Hard cap:</b> 22,000,000 QC</li>
-    <li><b>Premine:</b> 0</li>
-    <li><b>Distribution:</b> PoW mining with two-year halvings over ~66 years</li>
-  </ul>
-  <div class="stat">
-    <div class="ring"></div>
-    <div class="stat-copy">
-      <b>22M</b>
-      <span>Fixed cap • predictable issuance</span>
+<section id="design" class="section card">
+  <h2 class="h">Design Response</h2>
+  <div class="grid4">
+    <div class="tile">
+      <h3>PQ Signatures</h3>
+      <p>Adopts post-quantum signature schemes to resist key-recovery and forgery attacks.</p>
+    </div>
+    <div class="tile">
+      <h3>Proof-of-Work</h3>
+      <p>Fair, permissionless distribution. Open hardware race with <b>~10-minute</b> blocks.</p>
+    </div>
+    <div class="tile">
+      <h3>RevStop™</h3>
+      <p>Owner-local “circuit breaker.” If your keys are compromised, <b>you</b> can temporarily stop spends
+         for your UTXOs. Not a global freeze. Optional and verifiable.</p>
+    </div>
+    <div class="tile">
+      <h3>Broad Nodes</h3>
+      <p>Archival for explorers, <b>pruned</b> for lower storage, and <b>light/SPV</b> for phones—so more
+         people can validate.</p>
     </div>
   </div>
 </section>
 
-<!-- NODES -->
-<section id="nodes" class="section">
-  <h2 class="h">Run a Node (Your Hardware, Your Rules)</h2>
+<section id="tokenomics" class="section">
+  <h2 class="h">Monetary Policy</h2>
+  <div class="kv">
+    <div><span>Supply Cap</span><b>22,000,000 QC</b></div>
+    <div><span>Block Time</span><b>~10 minutes</b></div>
+    <div><span>Halving</span><b>Every ~2 years</b></div>
+    <div><span>Horizon</span><b>~66 years</b></div>
+    <div><span>Premine</span><b>None</b></div>
+    <div><span>Distribution</span><b>Proof-of-Work mining</b></div>
+  </div>
+  <p class="p m8">
+    Predictable issuance with decreasing block rewards mirrors the scarcity curve users already understand,
+    while the cryptography and safety model are modernized for a post-quantum world.
+  </p>
+</section>
+
+<section id="revstop" class="section card">
+  <h2 class="h">RevStop™ in Detail</h2>
+  <ul class="list">
+    <li><b>Local, not global:</b> affects only UTXOs you control; protocol rejects conflicting spends while active.</li>
+    <li><b>Opt-in:</b> wallets can enable/disable; no central authority required.</li>
+    <li><b>Forensics-friendly:</b> on-chain signals help you and exchanges verify a protective pause, not a seizure.</li>
+  </ul>
+</section>
+
+<section id="run" class="section">
+  <h2 class="h">Run the Network</h2>
   <div class="node-cards">
     <div class="node">
-      <b>Archival</b>
-      <p>Full history for explorers & research; highest storage.</p>
+      <b>Archival Node</b>
+      <p>Complete history for research and block explorers; highest storage.</p>
     </div>
     <div class="node">
-      <b>Pruned</b>
-      <p>Low-tens-of-GB footprint; validates tip without full history.</p>
+      <b>Pruned Node</b>
+      <p>Validates the tip with a low storage footprint; ideal for most operators.</p>
     </div>
     <div class="node">
-      <b>Light/SPV</b>
-      <p>Phone-friendly verification via headers & proofs.</p>
+      <b>Light / SPV</b>
+      <p>Phone-friendly verification using headers & proofs.</p>
     </div>
+  </div>
+  <div class="cta-row m12">
+    <a class="btn primary" href="https://github.com/aeonith/quantumcoin-ui-" target="_blank" rel="noopener">GitHub</a>
+    <a class="btn ghost" href="#home">Back to Top</a>
   </div>
 </section>
 
-<!-- ROADMAP -->
 <section id="roadmap" class="section card">
   <h2 class="h">Roadmap</h2>
   <ol class="road">
-    <li><span class="dot"></span><b>Testnet</b> — PoW mining, PQ signature review, pruned benchmarks.</li>
-    <li><span class="dot"></span><b>Mainnet</b> — Genesis, explorer, wallets, audits.</li>
-    <li><span class="dot"></span><b>Tooling</b> — SDKs, reproducible builds, extended docs.</li>
+    <li><span class="dot"></span><b>Testnet</b> — PoW mining, PQ audits, pruned benchmarks.</li>
+    <li><span class="dot"></span><b>Mainnet</b> — Genesis, explorer, wallets, independent reviews.</li>
+    <li><span class="dot"></span><b>Tooling</b> — SDKs, reproducible builds, docs & integrations.</li>
   </ol>
 </section>
 
-<!-- FAQ -->
-<section id="faq" class="section">
-  <h2 class="h">FAQ</h2>
-  <details class="qa"><summary>No premine?</summary><p>None. All QC is mined via PoW.</p></details>
-  <details class="qa"><summary>Why not wait for quantum?</summary><p>Ledgers are long-lived. Mitigate before the threat matures.</p></details>
-  <details class="qa"><summary>What’s RevStop™?</summary><p>Owner-local, opt-in pause in case of key compromise. Not a global freeze.</p></details>
+<section id="legal" class="section">
+  <h2 class="h">Notes</h2>
+  <p class="p small">
+    This site is informational and technical. It is not financial advice, an offer, or a solicitation.
+    Timelines and features may evolve as research and review continue.
+  </p>
 </section>
-
-<!-- CONTACT -->
-<section id="contact" class="section card">
-  <h2 class="h">Contact</h2>
-  <p class="p">Email: <a href="mailto:contact@quantumcoincrypto.com">contact@quantumcoincrypto.com</a></p>
-  <p class="p">GitHub: <a href="https://github.com/aeonith/quantumcoin-ui-" target="_blank" rel="noopener">@aeonith</a></p>
-  <a class="btn btn-primary block" href="#home">Back to top</a>
-</section>
-
-<!-- STICKY BOTTOM TABS (mobile) -->
-<nav class="tabs" aria-label="Sections">
-  <a href="#home">Home</a>
-  <a href="#tech">Tech</a>
-  <a href="#why">PQ</a>
-  <a href="#nodes">Nodes</a>
-  <a href="#faq">FAQ</a>
-</nav>
 
 <footer class="foot">
-  <small>© <span id="y"></span> QuantumCoin™ — Informational site</small>
+  <small>© <span id="y"></span> QuantumCoin™</small>
 </footer>
 
 <script>
-  // year
   document.getElementById('y').textContent = new Date().getFullYear();
-
-  // snap highlight active tab
-  const links = [...document.querySelectorAll('.tabs a')];
-  const ids   = links.map(a=>document.querySelector(a.getAttribute('href')));
-  const io = new IntersectionObserver(es=>{
-    es.forEach(e=>{
-      if(e.isIntersecting){
-        links.forEach(a=>a.classList.toggle('on', a.getAttribute('href')==='#'+e.target.id));
-      }
-    });
-  },{rootMargin:'-40% 0% -55% 0%', threshold:.01});
-  ids.forEach(el=>el && io.observe(el));
 </script>
 </body>
 </html>
