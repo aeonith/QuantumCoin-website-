@@ -1,7 +1,7 @@
 :root{
   --bg:#04070f; --ink:#eaf4ff; --mut:#a8c3e6;
   --a:#22d3ee; --b:#60a5fa; --c:#7c3aed;
-  --glass:rgba(255,255,255,.05); --line:#11203b;
+  --line:#11203b;
 }
 
 *{box-sizing:border-box}
@@ -23,7 +23,7 @@ body{
 .tabs a:active{opacity:.9}
 
 /* Hero */
-.hero{position:relative; overflow:hidden; padding:28px 16px 88px; border-bottom:1px solid var(--line)}
+.hero{position:relative; overflow:hidden; padding:24px 16px 88px; border-bottom:1px solid var(--line)}
 .hero-bg{position:absolute; inset:-10% -30% -10% -30%; z-index:0}
 .bg-img{position:absolute; inset:0; background:#061022 url('coin_bg.jpg') center/cover no-repeat; opacity:.25; mix-blend:screen}
 .mesh{position:absolute; inset:-2% -2% 0 -2%; background:
@@ -47,6 +47,10 @@ body{
 .btn.primary{color:#051728; background:linear-gradient(135deg,var(--a),var(--b))}
 .btn.ghost{color:#bfe1ff; border:1px solid #183054; background:rgba(12,20,36,.35)}
 
+.spin-wrap{display:flex; justify-content:center; margin-top:14px}
+#coinSpin{max-width:90vw; width:320px; height:auto; border-radius:20px; background:radial-gradient(circle at 50% 50%, rgba(0,255,255,.05), transparent 70%);
+  box-shadow:0 20px 40px rgba(8,16,32,.55), inset 0 1px 0 rgba(255,255,255,.06)}
+
 .ticker{position:absolute; left:0; right:0; bottom:16px; overflow:hidden; height:28px}
 .ticker .track{display:flex; gap:28px; width:max-content; animation:slide 24s linear infinite}
 .ticker b{font-size:.8rem; letter-spacing:.14em; color:#aee4ff; opacity:.85}
@@ -59,6 +63,7 @@ body{
 .h{margin:2px 0 8px; font-size:1.28rem}
 .p{margin:0 0 10px}
 .small{font-size:.9rem; color:var(--mut)}
+.center{text-align:center}
 
 .list{margin:8px 0 0; padding:0}
 .list li{list-style:none; padding-left:22px; position:relative; margin:6px 0}
@@ -77,8 +82,12 @@ body{
 .kv div{background:rgba(255,255,255,.04); border:1px solid rgba(120,170,255,.22); border-radius:12px; padding:10px}
 .kv span{display:block; color:var(--mut); font-size:.78rem}
 .kv b{font-size:.95rem}
-.m8{margin-top:8px}
 .m12{margin-top:12px}
+
+/* Issuance spiral */
+.spiral-wrap{display:flex; flex-direction:column; align-items:center; margin-top:14px}
+#issuanceSpiral{max-width:92vw; width:360px; height:auto; border-radius:20px; background:radial-gradient(circle at 50% 50%, rgba(96,165,250,.06), transparent 70%);
+  box-shadow:0 20px 40px rgba(8,16,32,.55), inset 0 1px 0 rgba(255,255,255,.06)}
 
 /* Nodes */
 .node-cards{display:grid; gap:10px}
@@ -97,7 +106,7 @@ body{
 a{color:#bfe1ff}
 a:hover{text-decoration:underline}
 
-/* Small devices */
+/* Small devices upscale */
 @media (min-width:540px){
   .t{font-size:2.6rem}
 }
