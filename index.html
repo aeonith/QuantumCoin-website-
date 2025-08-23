@@ -48,7 +48,7 @@
       <a href="#design" class="btn ghost">See the Design</a>
     </div>
 
-    <!-- Spinning coin display -->
+    <!-- Spinning coin (uses qc_coin.png) -->
     <div class="spin-wrap">
       <canvas id="coinSpin" width="320" height="320" aria-label="Spinning QuantumCoin emblem"></canvas>
     </div>
@@ -122,7 +122,7 @@
   </div>
 </section>
 
-<!-- TOKENOMICS + ISSUANCE SPIRAL -->
+<!-- TOKENOMICS + CLEAN ORBITS (no X-shapes) -->
 <section id="tokenomics" class="section">
   <h2 class="h">Monetary Policy</h2>
   <div class="kv">
@@ -134,10 +134,11 @@
     <div><span>Distribution</span><b>Proof-of-Work mining</b></div>
   </div>
 
+  <!-- Concentric, gentle-rotating orbits (no crossing, no X) -->
   <div class="spiral-wrap">
-    <canvas id="issuanceSpiral" width="360" height="360" aria-label="Issuance spiral showing halving scarcity"></canvas>
+    <canvas id="issuanceOrbits" width="360" height="360" aria-label="Halving orbits showing capped issuance"></canvas>
     <p class="p small center">
-      Animated halving spiral: each orbit represents a ~2-year epoch; radius fades with reward size until the 22M cap.
+      Concentric halving orbits: reward decreases every ~2 years, converging to the <b>22M</b> cap.
     </p>
   </div>
 </section>
@@ -197,85 +198,104 @@
   <small>© <span id="y"></span> QuantumCoin™</small>
 </footer>
 
-<!-- ========= SCRIPTS: SPINNING COIN + ISSUANCE SPIRAL ========= -->
+<!-- ========= SCRIPTS: COIN (image) + CLEAN ORBITS ========= -->
 <script>
   document.getElementById('y').textContent = new Date().getFullYear();
 
-  /* Spinning coin (neon rim + faux 3D shading) */
+  /* Spinning coin rendered from image (qc_coin.png) with neon rim + parallax tilt */
   (function(){
     const c = document.getElementById('coinSpin'); if(!c) return;
     const ctx = c.getContext('2d');
     const DPR = Math.min(2, window.devicePixelRatio || 1);
-    c.width = c.width * DPR; c.height = c.height * DPR; ctx.scale(DPR,DPR);
+    c.width *= DPR; c.height *= DPR; ctx.scale(DPR,DPR);
 
-    let t=0;
+    const w = c.width / DPR, h = c.height / DPR, r = Math.min(w,h)/2 - 8;
+    const img = new Image(); img.src = 'qc_coin.png';
+    let t=0, mx=0, my=0;
+
+    c.addEventListener('pointermove', e=>{
+      const rect = c.getBoundingClientRect();
+      mx = ((e.clientX-rect.left)/rect.width - .5)*2;
+      my = ((e.clientY-rect.top)/rect.height - .5)*2;
+    });
+
     function loop(){
-      const w=c.width/DPR, h=c.height/DPR, r=Math.min(w,h)/2-12;
       ctx.clearRect(0,0,w,h);
-      ctx.save(); ctx.translate(w/2,h/2); ctx.rotate(t*0.9);
 
-      // rim
-      const grd = ctx.createConicGradient(t,0,0);
-      grd.addColorStop(0,'#22d3ee'); grd.addColorStop(.5,'#60a5fa'); grd.addColorStop(1,'#22d3ee');
-      ctx.lineWidth=8; ctx.strokeStyle=grd; ctx.beginPath(); ctx.arc(0,0,r,0,Math.PI*2); ctx.stroke();
+      // background subtle glow
+      const g = ctx.createRadialGradient(w/2, h/2, r*0.2, w/2, h/2, r*1.1);
+      g.addColorStop(0,'rgba(34,211,238,.20)');
+      g.addColorStop(1,'rgba(34,211,238,0)');
+      ctx.fillStyle = g;
+      ctx.beginPath(); ctx.arc(w/2,h/2,r*1.05,0,Math.PI*2); ctx.fill();
 
-      // face
-      const face = ctx.createRadialGradient(-12,-10,8,0,0,r-10);
-      face.addColorStop(0,'rgba(34,211,238,.28)');
-      face.addColorStop(1,'rgba(96,165,250,.08)');
-      ctx.fillStyle=face; ctx.beginPath(); ctx.arc(0,0,r-8,0,Math.PI*2); ctx.fill();
-
-      // emblem (QC stylized)
       ctx.save();
-      ctx.rotate(-t*0.7);
-      ctx.strokeStyle='#22d3ee'; ctx.lineWidth=5; ctx.lineCap='round';
-      const rr=r*0.38;
-      ctx.beginPath(); ctx.arc(-rr,0,rr,Math.PI*1.1,Math.PI*1.9); ctx.stroke();
-      ctx.beginPath(); ctx.arc( rr,0,rr,Math.PI*0.1,Math.PI*0.9); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(-rr,rr); ctx.lineTo(0,0); ctx.lineTo(rr,-rr); ctx.stroke();
-      ctx.restore();
+      ctx.translate(w/2 + mx*6, h/2 + my*6);
+      ctx.rotate(t*0.8);
+
+      // neon rim
+      const rim = ctx.createConicGradient(t,0,0);
+      rim.addColorStop(0,'#22d3ee');
+      rim.addColorStop(.5,'#60a5fa');
+      rim.addColorStop(1,'#22d3ee');
+      ctx.lineWidth = 8; ctx.strokeStyle = rim;
+      ctx.beginPath(); ctx.arc(0,0,r,0,Math.PI*2); ctx.stroke();
+
+      // coin image (centered)
+      const size = r*1.8; // your PNG already has glow—fill generously
+      ctx.drawImage(img, -size/2, -size/2, size, size);
 
       ctx.restore();
-      t+=0.01; requestAnimationFrame(loop);
+      t += 0.01;
+      requestAnimationFrame(loop);
     }
-    loop();
+    img.onload = loop;
   })();
 
-  /* Issuance spiral (halving epochs as shrinking orbits) */
+  /* Clean halving orbits (no crossing “X” look). Each orbit rotates gently. */
   (function(){
-    const c = document.getElementById('issuanceSpiral'); if(!c) return;
+    const c = document.getElementById('issuanceOrbits'); if(!c) return;
     const ctx = c.getContext('2d');
     const DPR = Math.min(2, window.devicePixelRatio || 1);
-    c.width = c.width * DPR; c.height = c.height * DPR; ctx.scale(DPR,DPR);
+    c.width *= DPR; c.height *= DPR; ctx.scale(DPR,DPR);
 
     const w=c.width/DPR, h=c.height/DPR, cx=w/2, cy=h/2;
-    const epochs = 33;             // ~66 years / 2-year halving
-    const r0 = Math.min(w,h)/2-18; // starting radius
+    const epochs = 33;         // ~66 years / 2
+    const r0 = Math.min(w,h)/2 - 16;
     let t=0;
+
+    function ring(r, hue, rot){
+      ctx.save();
+      ctx.translate(cx,cy);
+      ctx.rotate(rot);
+
+      // glow ring (no lines through center)
+      const grad = ctx.createRadialGradient(0,0,r*0.4,0,0,r*1.02);
+      grad.addColorStop(0,`hsla(${hue}, 85%, 60%, .10)`);
+      grad.addColorStop(1,`hsla(${hue}, 85%, 60%, 0)`);
+      ctx.fillStyle = grad;
+      ctx.beginPath(); ctx.arc(0,0,r*1.06,0,Math.PI*2); ctx.fill();
+
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = `hsla(${hue}, 85%, 65%, .85)`;
+      ctx.beginPath(); ctx.arc(0,0,r,0,Math.PI*2*0.995); ctx.stroke();
+
+      ctx.restore();
+    }
 
     function draw(){
       ctx.clearRect(0,0,w,h);
-      ctx.translate(cx,cy);
 
-      // grid glow
-      ctx.globalCompositeOperation='lighter';
       for(let i=0;i<epochs;i++){
         const k = i/epochs;
-        const r = r0 * Math.pow(0.94,i);                 // shrink per epoch
-        const a = t*0.6 + i*0.25;                        // offset angle
-        ctx.beginPath();
-        ctx.strokeStyle = `rgba(${34+120*k}, ${211-80*k}, ${238-80*k}, ${0.85-k*0.75})`;
-        ctx.lineWidth = 2.2 - k*1.6;
-        for(let j=0;j<=120;j++){
-          const th = a + j/120 * (Math.PI*2*0.85);
-          const rr = r * (0.96 + 0.04*Math.sin(j/6 + t));
-          const x = rr * Math.cos(th), y = rr * Math.sin(th);
-          j===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
-        }
-        ctx.stroke();
+        const r = r0 * Math.pow(0.94,i);   // shrink per halving
+        const hue = 190 - k*40;            // teal → blue
+        const rot = t*0.3 + i*0.08;        // gentle rotation, no crossing strokes
+        ring(r, hue, rot);
       }
-      ctx.setTransform(1,0,0,1,0,0);
-      t+=0.012; requestAnimationFrame(draw);
+
+      t += 0.012;
+      requestAnimationFrame(draw);
     }
     draw();
   })();
