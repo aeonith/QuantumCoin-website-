@@ -1,418 +1,212 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>QuantumCoin™ — Quantum-Resistant Proof-of-Work Layer-1</title>
-  <meta name="description" content="QuantumCoin™ (QC): post-quantum Proof-of-Work L1 with a 22M hard cap, two-year halving over ~66 years, ~10-minute blocks, RevStop™, pruned nodes, explorer & API."/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>QuantumCoin™ — Post-Quantum Proof-of-Work L1</title>
+  <meta name="description" content="QuantumCoin™ (QC): quantum-resistant PoW Layer-1 with 22M hard cap, ~10-min blocks, two-year halving over ~66 years, RevStop™, pruned nodes, and an open explorer API."/>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-  <!-- NAV -->
-  <header class="nav">
-    <div class="container nav__inner">
-      <a class="brand" href="#home" aria-label="QuantumCoin home">
-        <span class="brand__logo"></span>
-        <span class="brand__name">QuantumCoin™</span>
-      </a>
-      <nav class="nav__links" aria-label="Primary">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#protocol">Protocol</a>
-        <a href="#tokenomics">Tokenomics</a>
-        <a href="#nodes">Nodes</a>
-        <a href="#security">Security</a>
-        <a href="#quantum">Why Post-Quantum</a>
-        <a href="#api">API</a>
-        <a href="#roadmap">Roadmap</a>
-        <a href="#faq">FAQ</a>
-        <a href="#contact">Contact</a>
-      </nav>
+<!-- TOP BAR (compact, mobile) -->
+<header class="top">
+  <div class="brand">
+    <span class="dot"></span>
+    <span class="name">QuantumCoin™</span>
+  </div>
+  <button class="cta" onclick="document.querySelector('#why').scrollIntoView({behavior:'smooth'})">Why PQ?</button>
+</header>
+
+<!-- HERO (mobile-first diagonal layout) -->
+<section class="hero" id="home" role="banner" aria-label="QuantumCoin introduction">
+  <div class="hero-bg">
+    <div class="glow glow-a"></div>
+    <div class="glow glow-b"></div>
+    <div class="grid"></div>
+  </div>
+
+  <div class="hero-card">
+    <div class="chip">Layer-1 • PoW • Post-Quantum</div>
+    <h1 class="title">QUANTUM<span>COIN</span>™</h1>
+    <p class="subtitle">
+      A quantum-resistant Proof-of-Work chain with a <b>22,000,000</b> hard cap,
+      <b>~10-minute</b> blocks, and a <b>2-year halving</b> over ~<b>66 years</b>.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#about" class="btn btn-primary">What is QC?</a>
+      <a href="#tech"  class="btn btn-ghost">See the Tech</a>
     </div>
-  </header>
 
-  <!-- HERO -->
-  <section id="home" class="hero">
-    <canvas id="hex" class="layer"></canvas>
-    <canvas id="net" class="layer"></canvas>
-    <div class="scanline layer" aria-hidden="true"></div>
-    <div class="vignette layer" aria-hidden="true"></div>
-
-    <div class="container hero__inner">
-      <div class="badge">Layer-1 • Proof-of-Work • Post-Quantum</div>
-      <h1 class="glitch" data-text="QUANTUMCOIN™">QUANTUMCOIN™</h1>
-      <p class="lead">
-        A quantum-resistant PoW chain with a hard cap of <strong>22,000,000</strong> coins,
-        a <strong>2-year halving</strong> schedule over ~<strong>66 years</strong>,
-        and ~<strong>10-minute</strong> blocks. RevStop™ owner-local protection and pruned nodes broaden participation.
-      </p>
-      <div class="actions">
-        <a href="#about" class="btn btn--primary">What is QC?</a>
-        <a href="#protocol" class="btn btn--wire">See the Tech</a>
-      </div>
-      <div class="pills">
-        <span class="pill">Post-Quantum Signatures</span>
-        <span class="pill">Proof-of-Work</span>
-        <span class="pill">Pruned Nodes</span>
-        <span class="pill">Open Explorer & API</span>
-      </div>
+    <div class="tags">
+      <span>Post-Quantum Signatures</span>
+      <span>RevStop™ (owner-local)</span>
+      <span>Pruned Nodes</span>
+      <span>Open Explorer • API</span>
     </div>
-  </section>
+  </div>
 
-  <!-- ABOUT -->
-  <section id="about" class="section">
-    <div class="container grid two">
-      <div class="card neon tilt reveal">
-        <h3 class="kicker">Introduction</h3>
-        <h2>Purpose-Built for a Post-Quantum Era</h2>
-        <p>
-          <strong>QuantumCoin™ (QC)</strong> keeps Bitcoin-style issuance and decentralization while upgrading to
-          <strong>post-quantum signatures</strong>. No premine, predictable monetary policy, and a transparent, verifiable implementation.
-        </p>
-        <ul class="ticks">
-          <li>Post-quantum signature scheme (Dilithium class)</li>
-          <li>RevStop™ owner-local, opt-in emergency pause (no global freeze)</li>
-          <li>Node modes: archival, <strong>pruned</strong>, and light/SPV</li>
-          <li>Open architecture: Rust node, modern web UI, OpenAPI explorer</li>
-        </ul>
-      </div>
-
-      <div class="card glass tilt reveal" id="protocol">
-        <h3 class="kicker">Protocol</h3>
-        <h2>Stack & Architecture</h2>
-        <p>
-          Rust async backend (tokio/axum), modern UI, SQLite→PostgreSQL, and an OpenAPI explorer for status, blocks, txs, and addresses.
-          Containerized deployment for bare-metal, VPS, or Kubernetes.
-        </p>
-        <div class="grid two">
-          <div>
-            <h4>Consensus</h4>
-            <p>Proof-of-Work, ~10-minute blocks, predictable halvings.</p>
-          </div>
-          <div>
-            <h4>Explorer API</h4>
-            <p>REST endpoints: <code>/status</code>, <code>/blocks</code>, <code>/tx/:hash</code>, <code>/address/:addr</code>.</p>
-          </div>
-        </div>
-      </div>
+  <!-- Ticker marquee (smooth, battery-friendly) -->
+  <div class="ticker" aria-hidden="true">
+    <div class="track">
+      <span>22M MAX SUPPLY</span>
+      <span>~10 MIN BLOCKS</span>
+      <span>2-YEAR HALVING</span>
+      <span>REVSTOP™</span>
+      <span>PRUNED NODES</span>
+      <span>OPEN API</span>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- TOKENOMICS -->
-  <section id="tokenomics" class="section">
-    <div class="container grid two">
-      <div class="card tilt reveal">
-        <h3 class="kicker">Economics</h3>
-        <h2>Supply & Issuance</h2>
-        <p>
-          Hard cap: <strong>22,000,000 QC</strong> with a <strong>two-year halving</strong> cadence across ~<strong>66 years</strong>.
-          No premine. Monetary policy converges to the cap.
-        </p>
-        <ul class="ticks">
-          <li>Max supply: 22,000,000 QC</li>
-          <li>Premine: 0</li>
-          <li>Block time: ~10 minutes</li>
-        </ul>
-        <hr class="sep"/>
-        <div class="grid two">
-          <canvas id="donut1" width="320" height="220" aria-label="Supply donut"></canvas>
-          <div>
-            <pre><code># Issuance (conceptual)
-halving_period_years = 2
-total_duration_years = 66
-block_time_seconds  = 600
-max_supply_qc       = 22_000_000
-</code></pre>
-          </div>
-        </div>
-      </div>
+<!-- ABOUT -->
+<section id="about" class="section">
+  <h2 class="h">Purpose-Built for a Post-Quantum Era</h2>
+  <p class="p">
+    <b>QuantumCoin™ (QC)</b> keeps Bitcoin-style issuance and decentralization while upgrading to
+    <b>post-quantum signatures</b>. No premine. Transparent monetary policy. Mobile-friendly node options
+    so more people can validate.
+  </p>
 
-      <div class="card glass tilt reveal" id="nodes">
-        <h3 class="kicker">Nodes</h3>
-        <h2>Run What You Can</h2>
-        <p>
-          QC supports archival, pruned, and light modes. <strong>Pruned nodes</strong> retain consensus while discarding older blocks,
-          enabling lower storage and broader validation.
-        </p>
-        <div class="grid two">
-          <div>
-            <h4>Archival</h4>
-            <p>Full history for explorers/research; highest storage.</p>
-          </div>
-          <div>
-            <h4>Pruned</h4>
-            <p>Validate current state with low-tens-of-GB footprints; ideal for small devices.</p>
-          </div>
-        </div>
-      </div>
+  <ul class="list">
+    <li><b>Dilithium-class signatures</b> to resist key-recovery/forgery attacks.</li>
+    <li><b>RevStop™:</b> owner-local, opt-in pause if your keys are compromised (no global switch).</li>
+    <li><b>Node modes:</b> archival, pruned (low storage), and light/SPV.</li>
+    <li><b>Open explorer + REST API</b> for blocks, txs, and addresses.</li>
+  </ul>
+</section>
+
+<!-- TECH -->
+<section id="tech" class="section card">
+  <h2 class="h">Protocol at a Glance</h2>
+  <div class="kv">
+    <div><span>Consensus</span><b>Proof-of-Work</b></div>
+    <div><span>Block Time</span><b>~10 min</b></div>
+    <div><span>Supply Cap</span><b>22,000,000 QC</b></div>
+    <div><span>Halving</span><b>Every ~2 years</b></div>
+    <div><span>Wallet Safety</span><b>Post-Quantum + RevStop™</b></div>
+    <div><span>Nodes</span><b>Archival • Pruned • Light</b></div>
+  </div>
+
+  <details class="accordion">
+    <summary>Explorer / API endpoints</summary>
+    <pre><code>GET /status
+GET /blocks?limit=20
+GET /blocks/:height
+GET /tx/:hash
+GET /address/:addr</code></pre>
+  </details>
+</section>
+
+<!-- WHY POST-QUANTUM -->
+<section id="why" class="section highlight">
+  <h2 class="h">Why Post-Quantum?</h2>
+  <p class="p">
+    Big quantum machines could run <b>Shor’s algorithm</b> to extract private keys from public keys,
+    forging signatures and draining wallets. Adversaries can also <i>harvest now, decrypt later</i>:
+    record data today, break it tomorrow. QC moves to <b>post-quantum signatures</b> now, not after it’s too late.
+  </p>
+
+  <div class="pill-row">
+    <span class="pill good">PQ Signatures</span>
+    <span class="pill good">Owner-Local RevStop™</span>
+    <span class="pill good">Broader Validation</span>
+  </div>
+</section>
+
+<!-- TOKENOMICS -->
+<section id="tokenomics" class="section card">
+  <h2 class="h">Tokenomics (Simple & Honest)</h2>
+  <ul class="list">
+    <li><b>Hard cap:</b> 22,000,000 QC</li>
+    <li><b>Premine:</b> 0</li>
+    <li><b>Distribution:</b> PoW mining with two-year halvings over ~66 years</li>
+  </ul>
+  <div class="stat">
+    <div class="ring"></div>
+    <div class="stat-copy">
+      <b>22M</b>
+      <span>Fixed cap • predictable issuance</span>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- SECURITY -->
-  <section id="security" class="section dim">
-    <div class="container grid two">
-      <div class="card wire tilt reveal">
-        <h3 class="kicker">Security</h3>
-        <h2>Post-Quantum & Supply Chain</h2>
-        <ul class="ticks">
-          <li>Dilithium-class signatures for quantum resistance.</li>
-          <li>RevStop™: owner-local, opt-in emergency pause; no global killswitch.</li>
-          <li>SBOM for releases; signed containers; regular dependency audits.</li>
-        </ul>
-      </div>
-      <div class="card glass tilt reveal">
-        <h3 class="kicker">Wallets & Confirmations</h3>
-        <p>
-          Standard address model and confirmation policy; integrate via RPC/REST. Explorer/OpenAPI described below.
-        </p>
-        <pre><code># Example Explorer calls
-GET /status
-GET /blocks?limit=10
-GET /tx/{hash}
-GET /address/{addr}
-</code></pre>
-      </div>
+<!-- NODES -->
+<section id="nodes" class="section">
+  <h2 class="h">Run a Node (Your Hardware, Your Rules)</h2>
+  <div class="node-cards">
+    <div class="node">
+      <b>Archival</b>
+      <p>Full history for explorers & research; highest storage.</p>
     </div>
-  </section>
-
-  <!-- WHY POST-QUANTUM -->
-  <section id="quantum" class="section quantum">
-    <div class="container">
-      <div class="q-head">
-        <div class="q-kicker">Risk & Rationale</div>
-        <h2 class="q-title">Why <span>Post-Quantum</span> Matters <span class="q-underline" aria-hidden="true"></span></h2>
-        <p class="q-lead">
-          Classical chains rely on elliptic curves (ECDSA). A sufficiently powerful quantum computer running
-          <strong>Shor’s algorithm</strong> could derive private keys from public keys—enabling theft and signature forgery.
-          Adversaries can also <em>harvest now, decrypt later</em> by recording today’s data and breaking it in the future.
-        </p>
-      </div>
-
-      <div class="q-grid">
-        <div class="q-left">
-          <div class="q-card holo">
-            <h3 class="q-h3">Threat Landscape</h3>
-            <ul class="q-ticks">
-              <li><span class="dot dot-warn"></span><strong>Key Extraction:</strong> Public-key → private-key recovery destroys account safety.</li>
-              <li><span class="dot dot-warn"></span><strong>Signature Forgery:</strong> Spend without the owner; breaks finality & trust.</li>
-              <li><span class="dot dot-warn"></span><strong>Harvest-Later:</strong> Archive now, unlock later when quantum scales.</li>
-              <li><span class="dot dot-ok"></span><strong>Timeline Unknown:</strong> Long-lived ledgers need defenses <em>before</em> quantum arrives.</li>
-            </ul>
-          </div>
-
-          <div class="q-callout glass">
-            <div class="q-chip">QuantumCoin™ Approach</div>
-            <p>
-              QC adopts <strong>post-quantum signatures</strong> (Dilithium class), keeps <strong>Proof-of-Work</strong>, and adds
-              <strong>RevStop™</strong>—an owner-local, opt-in pause for key-compromise events. Pruned nodes reduce hardware cost so more people can validate.
-            </p>
-          </div>
-        </div>
-
-        <div class="q-right">
-          <div class="q-panel">
-            <div class="q-panel-head">
-              <div class="q-badge">Network Posture</div>
-              <div class="pulse"></div>
-            </div>
-
-            <div class="q-stats">
-              <div class="q-stat"><div class="q-stat-label">Signature Class</div><div class="q-stat-value">Post-Quantum</div></div>
-              <div class="q-stat"><div class="q-stat-label">Monetary Policy</div><div class="q-stat-value">22M Hard Cap</div></div>
-              <div class="q-stat"><div class="q-stat-label">Block Time</div><div class="q-stat-value">~10 min</div></div>
-            </div>
-
-            <div class="q-ring">
-              <div class="q-ring-core">
-                <div class="q-ring-title">QC</div>
-                <div class="q-ring-sub">PQ-Ready</div>
-              </div>
-              <div class="q-ring-slice slice-a" title="Key-recovery risk"></div>
-              <div class="q-ring-slice slice-b" title="Harvest-later risk"></div>
-              <div class="q-ring-slice slice-c" title="Supply chain risk"></div>
-            </div>
-
-            <div class="q-legends">
-              <span class="leg l-a">Key Recovery</span>
-              <span class="leg l-b">Harvest-Later</span>
-              <span class="leg l-c">Supply Chain</span>
-            </div>
-
-            <div class="q-foot">
-              <div class="q-pill">RevStop™</div>
-              <div class="q-pill">Pruned Nodes</div>
-              <div class="q-pill">Open Audits</div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="node">
+      <b>Pruned</b>
+      <p>Low-tens-of-GB footprint; validates tip without full history.</p>
     </div>
-  </section>
-
-  <!-- API -->
-  <section id="api" class="section">
-    <div class="container">
-      <h3 class="kicker center">Explorer & RPC</h3>
-      <h2 class="center">OpenAPI-Driven</h2>
-      <div class="grid three">
-        <div class="card tilt reveal">
-          <h3>Status</h3>
-          <pre><code>GET /status
-200 OK → { height, tipHash, difficulty, mempool, ... }</code></pre>
-        </div>
-        <div class="card tilt reveal">
-          <h3>Blocks</h3>
-          <pre><code>GET /blocks?limit=10
-GET /blocks/:height</code></pre>
-        </div>
-        <div class="card tilt reveal">
-          <h3>Addresses & Tx</h3>
-          <pre><code>GET /address/:addr
-GET /tx/:hash</code></pre>
-        </div>
-      </div>
+    <div class="node">
+      <b>Light/SPV</b>
+      <p>Phone-friendly verification via headers & proofs.</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ROADMAP -->
-  <section id="roadmap" class="section dim">
-    <div class="container">
-      <h3 class="kicker center">Trajectory</h3>
-      <h2 class="center">Roadmap</h2>
-      <ol class="road">
-        <li class="road__item reveal">
-          <span class="road__dot"></span>
-          <div class="road__card">
-            <h4>Testnet</h4>
-            <p>Mining, RevStop trials, pruned node benchmarks, PQ signature review, and security hardening.</p>
-          </div>
-        </li>
-        <li class="road__item reveal">
-          <span class="road__dot"></span>
-          <div class="road__card">
-            <h4>Mainnet</h4>
-            <p>Genesis, explorer + light wallets, RPC/API docs, ongoing audits, and community growth.</p>
-          </div>
-        </li>
-        <li class="road__item reveal">
-          <span class="road__dot"></span>
-          <div class="road__card">
-            <h4>Tooling</h4>
-            <p>SDKs, wallet integrations, reproducible build pipelines for node and UI.</p>
-          </div>
-        </li>
-      </ol>
-    </div>
-  </section>
+<!-- ROADMAP -->
+<section id="roadmap" class="section card">
+  <h2 class="h">Roadmap</h2>
+  <ol class="road">
+    <li><span class="dot"></span><b>Testnet</b> — PoW mining, PQ signature review, pruned benchmarks.</li>
+    <li><span class="dot"></span><b>Mainnet</b> — Genesis, explorer, wallets, audits.</li>
+    <li><span class="dot"></span><b>Tooling</b> — SDKs, reproducible builds, extended docs.</li>
+  </ol>
+</section>
 
-  <!-- FAQ -->
-  <section id="faq" class="section">
-    <div class="container grid two">
-      <details class="card reveal"><summary><strong>Is there any premine?</strong></summary><p>No. QC is mined via Proof-of-Work with a fixed 22M cap and deterministic halving.</p></details>
-      <details class="card reveal"><summary><strong>Target block time?</strong></summary><p>~10 minutes per block (≈600s).</p></details>
-      <details class="card reveal"><summary><strong>What makes QC “quantum-resistant”?</strong></summary><p>Use of post-quantum signatures (Dilithium class) and an upgrade path as standards evolve.</p></details>
-      <details class="card reveal"><summary><strong>What is RevStop™?</strong></summary><p>An owner-local, opt-in emergency pause to protect an individual wallet (no global killswitch).</p></details>
-    </div>
-  </section>
+<!-- FAQ -->
+<section id="faq" class="section">
+  <h2 class="h">FAQ</h2>
+  <details class="qa"><summary>No premine?</summary><p>None. All QC is mined via PoW.</p></details>
+  <details class="qa"><summary>Why not wait for quantum?</summary><p>Ledgers are long-lived. Mitigate before the threat matures.</p></details>
+  <details class="qa"><summary>What’s RevStop™?</summary><p>Owner-local, opt-in pause in case of key compromise. Not a global freeze.</p></details>
+</section>
 
-  <!-- CONTACT -->
-  <section id="contact" class="section dim">
-    <div class="container grid two">
-      <div class="card glass reveal">
-        <h3 class="kicker">Documentation</h3>
-        <p>Whitepaper, node guides, and explorer docs will be published here as they’re finalized.</p>
-        <a class="btn btn--primary" href="#" aria-disabled="true">Docs (soon)</a>
-      </div>
-      <div class="card glass reveal">
-        <h3 class="kicker">Contact</h3>
-        <p>Email: <a href="mailto:contact@quantumcoincrypto.com">contact@quantumcoincrypto.com</a><br/>
-           GitHub: <a href="https://github.com/aeonith/quantumcoin-ui-" target="_blank" rel="noreferrer">@aeonith</a></p>
-      </div>
-    </div>
-  </section>
+<!-- CONTACT -->
+<section id="contact" class="section card">
+  <h2 class="h">Contact</h2>
+  <p class="p">Email: <a href="mailto:contact@quantumcoincrypto.com">contact@quantumcoincrypto.com</a></p>
+  <p class="p">GitHub: <a href="https://github.com/aeonith/quantumcoin-ui-" target="_blank" rel="noopener">@aeonith</a></p>
+  <a class="btn btn-primary block" href="#home">Back to top</a>
+</section>
 
-  <footer class="footer">
-    <div class="container footer__inner">
-      <p>© <span id="y"></span> QuantumCoin™ • Informational site</p>
-      <div class="social">
-        <a href="#api">Explorer API</a>
-        <a href="#nodes">Nodes</a>
-        <a href="#security">Security</a>
-      </div>
-    </div>
-  </footer>
+<!-- STICKY BOTTOM TABS (mobile) -->
+<nav class="tabs" aria-label="Sections">
+  <a href="#home">Home</a>
+  <a href="#tech">Tech</a>
+  <a href="#why">PQ</a>
+  <a href="#nodes">Nodes</a>
+  <a href="#faq">FAQ</a>
+</nav>
 
-  <!-- JS (animations, charts) -->
-  <script>
-    // DPR and canvas helpers
-    const DPR=Math.max(1,Math.min(2,window.devicePixelRatio||1));
-    const hex=document.getElementById('hex'), hx=hex.getContext('2d');
-    const net=document.getElementById('net'), nx=net.getContext('2d');
-    function sizeCanvas(c){c.width=innerWidth*DPR;c.height=innerHeight*DPR;c.style.width=innerWidth+'px';c.style.height=innerHeight+'px'}
-    function resizeAll(){sizeCanvas(hex);sizeCanvas(net)} resizeAll(); addEventListener('resize',resizeAll);
+<footer class="foot">
+  <small>© <span id="y"></span> QuantumCoin™ — Informational site</small>
+</footer>
 
-    // Hex grid
-    let ht=0;
-    (function drawHex(){
-      hx.clearRect(0,0,hex.width,hex.height);
-      hx.lineWidth=1*DPR;
-      const HEX=34, step=HEX*Math.sqrt(3)*DPR*0.5, r=HEX*DPR*0.58, w=hex.width, h=hex.height;
-      for(let y=-r;y<h+r;y+=step){
-        for(let x=-r;x<w+r;x+=HEX*DPR){
-          const px=x+((Math.floor(y/step)%2)?HEX*DPR*0.5:0);
-          const glow=(Math.sin((px+y)*0.002+ht)*0.5+0.5)*0.35+0.05;
-          hx.strokeStyle=`rgba(96,165,250,${glow})`;
-          hx.beginPath();
-          for(let i=0;i<=6;i++){const a=(Math.PI*2/6)*i,X=px+Math.cos(a)*r,Y=y+Math.sin(a)*r;i?hx.lineTo(X,Y):hx.moveTo(X,Y)}
-          hx.stroke();
-        }
+<script>
+  // year
+  document.getElementById('y').textContent = new Date().getFullYear();
+
+  // snap highlight active tab
+  const links = [...document.querySelectorAll('.tabs a')];
+  const ids   = links.map(a=>document.querySelector(a.getAttribute('href')));
+  const io = new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(e.isIntersecting){
+        links.forEach(a=>a.classList.toggle('on', a.getAttribute('href')==='#'+e.target.id));
       }
-      ht+=0.02; requestAnimationFrame(drawHex);
-    })();
-
-    // Particle network
-    const N=120,P=[];
-    for(let i=0;i<N;i++) P.push({x:Math.random()*net.width,y:Math.random()*net.height,vx:(Math.random()-0.5)*0.35*DPR,vy:(Math.random()-0.5)*0.35*DPR});
-    (function drawNet(){
-      nx.clearRect(0,0,net.width,net.height);
-      for(let i=0;i<N;i++){
-        const a=P[i]; a.x+=a.vx; a.y+=a.vy;
-        if(a.x<0||a.x>net.width) a.vx*=-1; if(a.y<0||a.y>net.height) a.vy*=-1;
-        nx.fillStyle='rgba(34,211,238,.85)'; nx.beginPath(); nx.arc(a.x,a.y,1.6*DPR,0,7); nx.fill();
-        for(let j=i+1;j<N;j++){const b=P[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.hypot(dx,dy);
-          if(d<110*DPR){ nx.strokeStyle=`rgba(96,165,250,${(1-d/(110*DPR))*0.35})`; nx.lineWidth=0.7*DPR; nx.beginPath(); nx.moveTo(a.x,a.y); nx.lineTo(b.x,b.y); nx.stroke(); }
-        }
-      }
-      requestAnimationFrame(drawNet);
-    })();
-
-    // Tilt & reveal
-    for(const el of document.querySelectorAll('.tilt')){
-      el.addEventListener('mousemove',e=>{const r=el.getBoundingClientRect();
-        const rx=((e.clientY-r.top)/r.height-0.5)*-10, ry=((e.clientX-r.left)/r.width-0.5)*10;
-        el.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg) translateZ(0)`});
-      el.addEventListener('mouseleave',()=> el.style.transform='');
-    }
-    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')}),{threshold:.15});
-    document.querySelectorAll('.reveal').forEach(n=>io.observe(n));
-
-    // Donut
-    function donut(canvas,segments,label){
-      const ctx=canvas.getContext('2d'),W=canvas.width,H=canvas.height,cx=W/2,cy=H/2,r=Math.min(W,H)*0.35;
-      const colors=['#22D3EE','#60A5FA','#7C3AED','#F59E0B','#10B981','#F43F5E','#A78BFA'];
-      let total=segments.reduce((a,b)=>a+b,0),a0=-Math.PI/2; ctx.clearRect(0,0,W,H);
-      segments.forEach((v,i)=>{const a1=a0+(v/total)*Math.PI*2;
-        ctx.beginPath();ctx.arc(cx,cy,r,a0,a1);ctx.arc(cx,cy,r*0.62,a1,a0,true);ctx.closePath();
-        ctx.fillStyle=colors[i%colors.length];ctx.globalAlpha=.88;ctx.fill();ctx.globalAlpha=1;a0=a1;});
-      ctx.fillStyle='#bfe1ff';ctx.font=`${Math.round(r*0.35)}px Inter`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(label,cx,cy);
-    }
-    donut(document.getElementById('donut1'),[22_000_000],'22M');
-
-    // Footer year
-    document.getElementById('y').textContent=new Date().getFullYear();
-  </script>
+    });
+  },{rootMargin:'-40% 0% -55% 0%', threshold:.01});
+  ids.forEach(el=>el && io.observe(el));
+</script>
 </body>
 </html>
