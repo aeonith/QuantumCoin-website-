@@ -25,7 +25,6 @@
   </nav>
 </header>
 
-<!-- HERO -->
 <section class="hero" id="home" role="banner">
   <div class="hero-bg">
     <div class="bg-img"></div>
@@ -67,7 +66,6 @@
   </div>
 </section>
 
-<!-- STORY -->
 <section id="story" class="section card">
   <h2 class="h">The Story</h2>
   <p class="p">
@@ -82,7 +80,6 @@
   </p>
 </section>
 
-<!-- THREAT -->
 <section id="threat" class="section">
   <h2 class="h">The Quantum Threat (Plainly)</h2>
   <ul class="list">
@@ -97,7 +94,6 @@
   </div>
 </section>
 
-<!-- DESIGN -->
 <section id="design" class="section card">
   <h2 class="h">Design Response</h2>
   <div class="grid4">
@@ -122,7 +118,6 @@
   </div>
 </section>
 
-<!-- TOKENOMICS + CLEAN ORBITS (no X-shapes) -->
 <section id="tokenomics" class="section">
   <h2 class="h">Monetary Policy</h2>
   <div class="kv">
@@ -134,16 +129,15 @@
     <div><span>Distribution</span><b>Proof-of-Work mining</b></div>
   </div>
 
-  <!-- Concentric, gentle-rotating orbits (no crossing, no X) -->
-  <div class="spiral-wrap">
-    <canvas id="issuanceOrbits" width="360" height="360" aria-label="Halving orbits showing capped issuance"></canvas>
+  <!-- Calming animated neon grid (replaces the orbits) -->
+  <div class="gridviz">
+    <canvas id="matrixGrid" width="360" height="360" aria-label="Animated grid"></canvas>
     <p class="p small center">
-      Concentric halving orbits: reward decreases every ~2 years, converging to the <b>22M</b> cap.
+      A living network grid — simple, readable, and easy on the eyes.
     </p>
   </div>
 </section>
 
-<!-- REVSTOP -->
 <section id="revstop" class="section card">
   <h2 class="h">RevStop™ in Detail</h2>
   <ul class="list">
@@ -153,7 +147,6 @@
   </ul>
 </section>
 
-<!-- NODES -->
 <section id="run" class="section">
   <h2 class="h">Run the Network</h2>
   <div class="node-cards">
@@ -176,7 +169,6 @@
   </div>
 </section>
 
-<!-- ROADMAP -->
 <section id="roadmap" class="section card">
   <h2 class="h">Roadmap</h2>
   <ol class="road">
@@ -198,7 +190,7 @@
   <small>© <span id="y"></span> QuantumCoin™</small>
 </footer>
 
-<!-- ========= SCRIPTS: COIN (image) + CLEAN ORBITS ========= -->
+<!-- ====== Scripts: spinning coin (image) + neon grid ====== -->
 <script>
   document.getElementById('y').textContent = new Date().getFullYear();
 
@@ -222,7 +214,6 @@
     function loop(){
       ctx.clearRect(0,0,w,h);
 
-      // background subtle glow
       const g = ctx.createRadialGradient(w/2, h/2, r*0.2, w/2, h/2, r*1.1);
       g.addColorStop(0,'rgba(34,211,238,.20)');
       g.addColorStop(1,'rgba(34,211,238,0)');
@@ -233,7 +224,6 @@
       ctx.translate(w/2 + mx*6, h/2 + my*6);
       ctx.rotate(t*0.8);
 
-      // neon rim
       const rim = ctx.createConicGradient(t,0,0);
       rim.addColorStop(0,'#22d3ee');
       rim.addColorStop(.5,'#60a5fa');
@@ -241,8 +231,7 @@
       ctx.lineWidth = 8; ctx.strokeStyle = rim;
       ctx.beginPath(); ctx.arc(0,0,r,0,Math.PI*2); ctx.stroke();
 
-      // coin image (centered)
-      const size = r*1.8; // your PNG already has glow—fill generously
+      const size = r*1.8;
       ctx.drawImage(img, -size/2, -size/2, size, size);
 
       ctx.restore();
@@ -252,49 +241,62 @@
     img.onload = loop;
   })();
 
-  /* Clean halving orbits (no crossing “X” look). Each orbit rotates gently. */
+  /* Animated neon grid: subtle, soothing, and not busy */
   (function(){
-    const c = document.getElementById('issuanceOrbits'); if(!c) return;
+    const c = document.getElementById('matrixGrid'); if(!c) return;
     const ctx = c.getContext('2d');
     const DPR = Math.min(2, window.devicePixelRatio || 1);
-    c.width *= DPR; c.height *= DPR; ctx.scale(DPR,DPR);
+    const wCSS = c.width, hCSS = c.height;
+    c.width = wCSS * DPR; c.height = hCSS * DPR; ctx.scale(DPR, DPR);
 
-    const w=c.width/DPR, h=c.height/DPR, cx=w/2, cy=h/2;
-    const epochs = 33;         // ~66 years / 2
-    const r0 = Math.min(w,h)/2 - 16;
-    let t=0;
-
-    function ring(r, hue, rot){
-      ctx.save();
-      ctx.translate(cx,cy);
-      ctx.rotate(rot);
-
-      // glow ring (no lines through center)
-      const grad = ctx.createRadialGradient(0,0,r*0.4,0,0,r*1.02);
-      grad.addColorStop(0,`hsla(${hue}, 85%, 60%, .10)`);
-      grad.addColorStop(1,`hsla(${hue}, 85%, 60%, 0)`);
-      ctx.fillStyle = grad;
-      ctx.beginPath(); ctx.arc(0,0,r*1.06,0,Math.PI*2); ctx.fill();
-
-      ctx.lineWidth = 2;
-      ctx.strokeStyle = `hsla(${hue}, 85%, 65%, .85)`;
-      ctx.beginPath(); ctx.arc(0,0,r,0,Math.PI*2*0.995); ctx.stroke();
-
-      ctx.restore();
-    }
-
+    let t = 0;
     function draw(){
+      const w = wCSS, h = hCSS;
       ctx.clearRect(0,0,w,h);
 
-      for(let i=0;i<epochs;i++){
-        const k = i/epochs;
-        const r = r0 * Math.pow(0.94,i);   // shrink per halving
-        const hue = 190 - k*40;            // teal → blue
-        const rot = t*0.3 + i*0.08;        // gentle rotation, no crossing strokes
-        ring(r, hue, rot);
+      const bg = ctx.createRadialGradient(w/2, h/2, 40, w/2, h/2, Math.max(w,h)*0.65);
+      bg.addColorStop(0, 'rgba(34,211,238,0.08)');
+      bg.addColorStop(1, 'rgba(34,211,238,0.00)');
+      ctx.fillStyle = bg;
+      ctx.fillRect(0,0,w,h);
+
+      const gap = 22;
+      const cols = Math.floor(w / gap);
+      const rows = Math.floor(h / gap);
+      const amp = 6;
+      const speed = 0.018;
+
+      for(let i=0;i<=cols;i++){
+        for(let j=0;j<=rows;j++){
+          const x = i * gap + (w % gap)/2;
+          const yBase = j * gap + (h % gap)/2;
+
+          const y = yBase
+                  + Math.sin((i*0.45) + t)*amp*0.6
+                  + Math.cos((j*0.55) - t*0.7)*amp*0.4;
+
+          const dx = (x - w/2) / (w/2);
+          const dy = (y - h/2) / (h/2);
+          const falloff = Math.max(0, 1 - Math.sqrt(dx*dx + dy*dy));
+
+          const r = 1.2 + 1.0*falloff;
+          const hue = 190 - 12*falloff;
+          ctx.fillStyle = `hsla(${hue}, 85%, ${60 + 10*falloff}%, ${0.75*falloff + 0.15})`;
+          ctx.beginPath();
+          ctx.arc(x, y, r, 0, Math.PI*2);
+          ctx.fill();
+
+          const g = ctx.createRadialGradient(x, y, 0, x, y, 8);
+          g.addColorStop(0, `hsla(${hue}, 85%, 60%, ${0.11*falloff})`);
+          g.addColorStop(1, 'transparent');
+          ctx.fillStyle = g;
+          ctx.beginPath();
+          ctx.arc(x, y, 8, 0, Math.PI*2);
+          ctx.fill();
+        }
       }
 
-      t += 0.012;
+      t += speed;
       requestAnimationFrame(draw);
     }
     draw();
