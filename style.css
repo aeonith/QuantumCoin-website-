@@ -1,84 +1,84 @@
-/* ========== MOBILE-FIRST, PERFORMANCE-TUNED ========== */
 :root{
-  --bg:#05080f; --ink:#eaf6ff; --mut:#9dbee0;
-  --a:#22d3ee; --b:#60a5fa; --c:#7c3aed; --ok:#86efac;
-  --glass:rgba(255,255,255,.06); --line:#13233f;
+  --bg:#04070f; --ink:#eaf4ff; --mut:#a8c3e6;
+  --a:#22d3ee; --b:#60a5fa; --c:#7c3aed;
+  --glass:rgba(255,255,255,.05); --line:#11203b;
 }
-*{box-sizing:border-box} html,body{height:100%}
+
+*{box-sizing:border-box}
+html,body{height:100%}
 body{
   margin:0; background:var(--bg); color:var(--ink);
   font:400 16px/1.65 Inter,system-ui,Segoe UI,Arial,sans-serif;
   -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
 }
 
-/* Top bar */
-.top{position:sticky; top:0; z-index:40; display:flex; justify-content:space-between; align-items:center;
-  padding:12px 16px; background:linear-gradient(180deg, rgba(7,12,23,.95), rgba(7,12,23,.6)); border-bottom:1px solid #0e1a31; backdrop-filter:blur(8px)}
-.brand{display:flex; gap:10px; align-items:center}
-.dot{width:12px; height:12px; border-radius:50%; background:radial-gradient(circle at 40% 40%, var(--a), var(--b))}
+/* Top */
+.top{position:sticky; top:0; z-index:40; display:flex; align-items:center; justify-content:space-between;
+  padding:12px 14px; background:linear-gradient(180deg, rgba(5,10,20,.98), rgba(5,10,20,.78)); border-bottom:1px solid #0e1730; backdrop-filter:blur(8px)}
+.brand{display:flex; align-items:center; gap:10px}
+.spark{width:14px; height:14px; border-radius:50%; background:radial-gradient(circle at 40% 40%, var(--a), var(--b)); box-shadow:0 0 18px rgba(34,211,238,.7)}
 .name{font-weight:800; letter-spacing:.02em}
-.cta{border:0; padding:10px 12px; border-radius:12px; font-weight:800; color:#062033;
-  background:linear-gradient(135deg,var(--a),var(--b)); box-shadow:0 10px 22px rgba(34,211,238,.25)}
-.cta:active{transform:translateY(1px)}
+.tabs{display:flex; gap:14px}
+.tabs a{color:#bfe1ff; text-decoration:none; font-weight:700; font-size:.9rem}
+.tabs a:active{opacity:.9}
 
 /* Hero */
-.hero{position:relative; padding:24px 16px 80px; overflow:hidden; border-bottom:1px solid var(--line)}
+.hero{position:relative; overflow:hidden; padding:28px 16px 88px; border-bottom:1px solid var(--line)}
 .hero-bg{position:absolute; inset:-10% -30% -10% -30%; z-index:0}
-.glow{position:absolute; width:90vw; height:90vw; border-radius:50%; filter:blur(40px); opacity:.45}
-.glow-a{top:-10vh; left:-10vw; background:radial-gradient(closest-side, rgba(34,211,238,.35), transparent 70%)}
-.glow-b{bottom:-12vh; right:-20vw; background:radial-gradient(closest-side, rgba(96,165,250,.35), transparent 70%)}
-.grid{position:absolute; inset:0; background:
-  radial-gradient(circle at 50% 50%, rgba(255,255,255,.08) 1px, transparent 1px) 0 0/14px 14px;
-  mask:linear-gradient(180deg, transparent, #000 16%, #000 84%, transparent);
-  opacity:.18; transform:skewY(-6deg)}
-.hero-card{position:relative; z-index:1; border-radius:20px; padding:18px; background:
-  linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(120,170,255,.22);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.04), 0 10px 36px rgba(8,16,32,.5)}
-.chip{display:inline-block; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase;
-  color:#062033; background:linear-gradient(135deg, var(--a), var(--b)); padding:6px 10px; border-radius:999px; font-weight:800}
-.title{margin:10px 0 6px; font-size:2.2rem; line-height:1.05; font-weight:800; letter-spacing:.02em}
-.title span{background:linear-gradient(135deg, var(--a), var(--b)); -webkit-background-clip:text; background-clip:text; color:transparent}
-.subtitle{color:#cfe8ff; margin:4px 0 10px}
-.hero-actions{display:flex; gap:10px; margin:8px 0 10px}
-.btn{flex:1; text-align:center; padding:12px 14px; border-radius:14px; font-weight:800; letter-spacing:.1px}
-.btn-primary{color:#051728; background:linear-gradient(135deg, var(--a), var(--b))}
-.btn-ghost{color:#bfe1ff; border:1px solid #183054; background:rgba(12,20,36,.35)}
-.tags{display:flex; flex-wrap:wrap; gap:8px}
-.tags span{border:1px solid #183054; color:#aee4ff; font-size:.78rem; padding:6px 10px; border-radius:999px; background:rgba(12,20,36,.35)}
+.bg-img{position:absolute; inset:0; background:#061022 url('coin_bg.jpg') center/cover no-repeat; opacity:.25; mix-blend:screen}
+.mesh{position:absolute; inset:-2% -2% 0 -2%; background:
+  radial-gradient(circle at 50% 50%, rgba(255,255,255,.09) 1px, transparent 1px) 0 0/16px 16px;
+  opacity:.22; transform:skewY(-6deg)}
+.glow{position:absolute; width:110vw; height:110vw; border-radius:50%; filter:blur(42px); opacity:.45}
+.glow.one{top:-12vh; left:-18vw; background:radial-gradient(closest-side, rgba(34,211,238,.35), transparent 70%)}
+.glow.two{bottom:-16vh; right:-26vw; background:radial-gradient(closest-side, rgba(96,165,250,.35), transparent 70%)}
+.scan{position:absolute; inset:0; background:linear-gradient(180deg, transparent 0%, rgba(255,255,255,.05) 50%, transparent 100%);
+  animation:scan 7s linear infinite; mix-blend:overlay}
+@keyframes scan{0%{transform:translateY(-100%)}100%{transform:translateY(100%)}}
+
+.hero-copy{position:relative; z-index:1}
+.chip{display:inline-block; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:#062033;
+  background:linear-gradient(135deg,var(--a),var(--b)); padding:6px 10px; border-radius:999px; font-weight:800}
+.t{margin:12px 0 6px; font-size:2.35rem; line-height:1.05; font-weight:800}
+.t span{background:linear-gradient(135deg,var(--a),var(--b)); -webkit-background-clip:text; background-clip:text; color:transparent}
+.lead{color:#cfe8ff; margin:6px 0 12px}
+.cta-row{display:flex; gap:10px}
+.btn{flex:1; text-align:center; padding:12px 14px; border-radius:14px; font-weight:800; letter-spacing:.1px; text-decoration:none}
+.btn.primary{color:#051728; background:linear-gradient(135deg,var(--a),var(--b))}
+.btn.ghost{color:#bfe1ff; border:1px solid #183054; background:rgba(12,20,36,.35)}
+
 .ticker{position:absolute; left:0; right:0; bottom:16px; overflow:hidden; height:28px}
-.ticker .track{display:flex; gap:30px; width:max-content; animation:slide 24s linear infinite}
-.ticker span{font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:#aee4ff; opacity:.8}
+.ticker .track{display:flex; gap:28px; width:max-content; animation:slide 24s linear infinite}
+.ticker b{font-size:.8rem; letter-spacing:.14em; color:#aee4ff; opacity:.85}
 @keyframes slide{to{transform:translateX(-50%)}}
 
 /* Sections */
 .section{padding:22px 16px; border-top:1px solid var(--line)}
-.h{margin:4px 0 6px; font-size:1.25rem}
+.card{border-radius:16px; background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  border:1px solid rgba(120,170,255,.22); box-shadow:inset 0 1px 0 rgba(255,255,255,.04), 0 10px 36px rgba(8,16,32,.5)}
+.h{margin:2px 0 8px; font-size:1.28rem}
 .p{margin:0 0 10px}
-.list{margin:10px 0 0; padding:0}
+.small{font-size:.9rem; color:var(--mut)}
+
+.list{margin:8px 0 0; padding:0}
 .list li{list-style:none; padding-left:22px; position:relative; margin:6px 0}
 .list li:before{content:""; position:absolute; left:0; top:.55rem; width:8px; height:8px; border-radius:50%;
   background:radial-gradient(circle at 40% 40%, var(--a), var(--b))}
-.card{border-radius:16px; background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-  border:1px solid rgba(120,170,255,.22); box-shadow:inset 0 1px 0 rgba(255,255,255,.04), 0 10px 36px rgba(8,16,32,.5)}
-.highlight{background:linear-gradient(180deg, rgba(124,58,237,.08), rgba(34,211,238,.06)); border-top:1px solid #1b2d52}
 
-/* Key-value grid (mobile stack) */
+.pill-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px}
+.pill{padding:6px 10px; border-radius:999px; border:1px solid #183054; font-size:.82rem}
+.pill.good{background:rgba(12,20,36,.4); color:#aee4ff}
+
+/* Tiles / Key values */
+.grid4{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:6px}
+.tile{padding:12px; border-radius:14px; border:1px solid rgba(120,170,255,.22); background:rgba(255,255,255,.03)}
+.tile h3{margin:0 0 6px; font-size:1.02rem}
 .kv{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px}
 .kv div{background:rgba(255,255,255,.04); border:1px solid rgba(120,170,255,.22); border-radius:12px; padding:10px}
 .kv span{display:block; color:var(--mut); font-size:.78rem}
 .kv b{font-size:.95rem}
-
-/* Accordion */
-.accordion summary{cursor:pointer; padding:12px 0; font-weight:700}
-.accordion pre{background:#091428; border:1px solid #183054; border-radius:12px; padding:12px; overflow:auto}
-
-/* Tokenomics stat */
-.stat{display:flex; align-items:center; gap:12px; margin-top:12px}
-.ring{width:46px; height:46px; border-radius:50%; border:6px solid transparent; mask:radial-gradient(circle, transparent 56%, #000 57%);
-  border-top-color:var(--a); border-right-color:var(--b); border-left-color:var(--c); animation:spin 10s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.stat-copy b{display:block; font-size:1.2rem}
-.stat-copy span{font-size:.84rem; color:var(--mut)}
+.m8{margin-top:8px}
+.m12{margin-top:12px}
 
 /* Nodes */
 .node-cards{display:grid; gap:10px}
@@ -90,26 +90,14 @@ body{
 .road li{display:flex; gap:10px; margin:10px 0}
 .road .dot{width:10px; height:10px; border-radius:50%; background:linear-gradient(135deg,var(--a),var(--b)); box-shadow:0 0 16px rgba(34,211,238,.6)}
 
-/* FAQ */
-.qa{border-top:1px solid var(--line); padding:10px 0}
-.qa summary{font-weight:700; cursor:pointer}
-.qa p{margin:8px 0 0}
-
-/* Pills */
-.pill-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px}
-.pill{padding:6px 10px; border-radius:999px; border:1px solid #183054; font-size:.82rem}
-.pill.good{background:rgba(12,20,36,.35); color:#aee4ff}
-
-/* Bottom tabs */
-.tabs{position:sticky; bottom:0; z-index:50; display:grid; grid-template-columns:repeat(5,1fr);
-  background:rgba(7,12,23,.9); backdrop-filter:blur(8px); border-top:1px solid #0e1a31}
-.tabs a{padding:12px 6px; text-align:center; color:#bfe1ff; text-decoration:none; font-weight:700; font-size:.82rem; letter-spacing:.01em}
-.tabs a.on{color:#062033; background:linear-gradient(135deg,var(--a),var(--b))}
-.tabs a:active{opacity:.9}
-
 /* Footer */
-.foot{padding:16px; text-align:center; color:#a9c5e2; border-top:1px solid var(--line)}
-.block{display:block; text-align:center; margin-top:10px}
+.foot{padding:18px; text-align:center; color:#a9c5e2; border-top:1px solid var(--line)}
 
 /* Links */
-a{color:#bfe1ff} a:hover{text-decoration:underline}
+a{color:#bfe1ff}
+a:hover{text-decoration:underline}
+
+/* Small devices */
+@media (min-width:540px){
+  .t{font-size:2.6rem}
+}
