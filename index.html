@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <!-- ✅ Added for social icons -->
+  <!-- Added for social icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
@@ -237,19 +237,27 @@
 
 <footer class="foot">
   <small>© <span id="y"></span> QuantumCoin™</small>
-  <!-- ✅ Social Links with Icons -->
-  <div style="margin-top: 15px; font-size: 26px;">
-    <a href="https://x.com/aeonith22" target="_blank" style="margin: 0 10px; color: #000;">
-      <i class="fa-brands fa-x-twitter"></i>
+
+  <!-- Social Links with bigger icons -->
+  <div style="margin-top: 15px; font-size: 34px; line-height: 1;">
+    <a href="https://x.com/aeonith22" target="_blank" rel="noopener" style="margin: 0 12px; color: #000;">
+      <i class="fa-brands fa-x-twitter" aria-label="X (Twitter)"></i>
     </a>
-    <a href="https://www.instagram.com/quantumcoin22" target="_blank" style="margin: 0 10px; color: #E4405F;">
-      <i class="fa-brands fa-instagram"></i>
+    <a href="https://www.instagram.com/quantumcoin22" target="_blank" rel="noopener" style="margin: 0 12px; color: #E4405F;">
+      <i class="fa-brands fa-instagram" aria-label="Instagram"></i>
     </a>
-    <a href="https://youtube.com/@aeonith22" target="_blank" style="margin: 0 10px; color: #FF0000;">
-      <i class="fa-brands fa-youtube"></i>
+    <a href="https://youtube.com/@aeonith22" target="_blank" rel="noopener" style="margin: 0 12px; color: #FF0000;">
+      <i class="fa-brands fa-youtube" aria-label="YouTube"></i>
     </a>
-    <a href="https://t.me/aeoniththeownerofquantumcoin" target="_blank" style="margin: 0 10px; color: #0088cc;">
-      <i class="fa-brands fa-telegram"></i>
+    <a href="https://t.me/aeoniththeownerofquantumcoin" target="_blank" rel="noopener" style="margin: 0 12px; color: #0088cc;">
+      <i class="fa-brands fa-telegram" aria-label="Telegram"></i>
+    </a>
+  </div>
+
+  <!-- Whitepaper link -->
+  <div style="margin-top: 10px;">
+    <a href="QuantumCoin_Whitepaper_FairLaunch.pdf" target="_blank" rel="noopener" style="text-decoration: underline;">
+      Download the QuantumCoin™ Whitepaper (PDF)
     </a>
   </div>
 </footer>
@@ -327,4 +335,27 @@
     const R = 130;
     const rim = ctx.createConicGradient(t,0,0);
     rim.addColorStop(0,'#22d3ee'); rim.addColorStop(.5,'#60a5fa'); rim.addColorStop(1,'#22d3ee');
-    ctx.lineWidth =
+    ctx.lineWidth = 10; ctx.strokeStyle = rim;
+    ctx.beginPath(); ctx.arc(0,0,R,0,Math.PI*2); ctx.stroke();
+
+    const size = 260;
+    ctx.drawImage(img, -size/2, -size/2, size, size);
+
+    // Shimmer
+    sweep += 0.02;
+    const sx = Math.cos(sweep)*R*0.9, sy = Math.sin(sweep)*R*0.6;
+    const shine = ctx.createRadialGradient(sx, sy, 0, sx, sy, R*0.95);
+    shine.addColorStop(0, 'rgba(255,255,255,.07)');
+    shine.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.globalCompositeOperation = 'lighter';
+    ctx.fillStyle = shine; ctx.beginPath(); ctx.arc(0,0,R*0.96,0,Math.PI*2); ctx.fill();
+    ctx.globalCompositeOperation = 'source-over';
+
+    ctx.restore();
+    t += 0.016;
+    requestAnimationFrame(draw);
+  }
+  img.onload = draw;
+</script>
+</body>
+</html>
