@@ -37,7 +37,6 @@
   </nav>
 </header>
 
-<!-- Hero section unchanged -->
 <section class="hero" id="home">
   <div class="hero-copy">
     <span class="chip">Layer-1 • Proof-of-Work • Post-Quantum</span>
@@ -66,36 +65,33 @@
 
 <main>
 
-<!-- Other sections unchanged ... -->
+<!-- your other sections (story, founder, threat, design, tokenomics, revstop, mining, nodes, governance, roadmap, faq) remain unchanged -->
 
-<!-- Whitepaper section with site link added -->
 <section id="whitepaper" class="section card">
   <h2 class="h">Whitepaper (Fair Launch Edition)</h2>
   <p class="p">Read online below, download the PDF, or visit the dedicated whitepaper site.</p>
 
   <div class="wp-actions" style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
-    <a class="btn" href="QuantumCoin_Whitepaper_FairLaunch.pdf" target="_blank" rel="noopener">
-      Open PDF
-    </a>
-    <a class="btn" href="QuantumCoin_Whitepaper_FairLaunch.pdf" download>
-      Download PDF
-    </a>
-    <a class="btn" href="http://www.quantumcoinwhitepaper.com/" target="_blank" rel="noopener">
-      Visit Whitepaper Site
-    </a>
+    <a class="btn" href="QuantumCoin_Whitepaper_FairLaunch.pdf" target="_blank" rel="noopener">Open PDF</a>
+    <a class="btn" href="QuantumCoin_Whitepaper_FairLaunch.pdf" download>Download PDF</a>
+    <a class="btn" href="http://www.quantumcoinwhitepaper.com/" target="_blank" rel="noopener">Visit Whitepaper Site</a>
   </div>
 
   <div class="wp-viewer" style="margin-top:16px;">
     <object data="QuantumCoin_Whitepaper_FairLaunch.pdf#toolbar=1&navpanes=0&scrollbar=1"
-            type="application/pdf" width="100%" height="760">
-      <p>Your browser can’t display embedded PDFs. 
-         <a href="QuantumCoin_Whitepaper_FairLaunch.pdf" target="_blank">Open the PDF here</a>.
-      </p>
+            type="application/pdf" width="100%" height="760" aria-label="QuantumCoin™ Whitepaper">
+      <p>Your browser can’t display embedded PDFs.
+         <a href="QuantumCoin_Whitepaper_FairLaunch.pdf" target="_blank">Open it here</a>.</p>
     </object>
   </div>
 </section>
 
-<!-- Notes + Footer unchanged ... -->
+<section id="legal" class="section">
+  <h2 class="h">Notes</h2>
+  <p class="p small">This site is informational and technical. It is not financial advice. Timelines and features can evolve through open review.</p>
+</section>
+
+</main>
 
 <footer class="foot">
   <small>© <span id="y"></span> QuantumCoin™</small>
@@ -121,7 +117,7 @@
 </footer>
 
 <script>
-  // Drawer + year + smooth scroll + coin animation (unchanged)
+  // nav drawer
   const menuBtn = document.getElementById('menuBtn');
   const drawer  = document.getElementById('drawer');
   menuBtn.addEventListener('click', ()=>{
@@ -132,6 +128,8 @@
   drawer.addEventListener('click', e=>{
     if(e.target.tagName==='A'){ drawer.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false'); }
   });
+
+  // smooth scroll
   const header = document.getElementById('topbar');
   document.querySelectorAll('a[href^="#"]').forEach(a=>{
     a.addEventListener('click', e=>{
@@ -143,7 +141,11 @@
       window.scrollTo({top:y, behavior:'smooth'});
     });
   });
+
+  // year
   document.getElementById('y').textContent = new Date().getFullYear();
+
+  // coin animation
   const c = document.getElementById('coinSpin');
   const ctx = c.getContext('2d');
   const DPR = Math.min(2, window.devicePixelRatio || 1);
@@ -164,12 +166,9 @@
     ctx.beginPath(); ctx.arc(0,0,80,0,Math.PI*2); ctx.fill();
     ctx.restore();
     if(!settled){
-      vy += 0.9;
-      y += vy;
+      vy += 0.9; y += vy;
       if(y > floor){ y=floor; vy *= -0.56; if(Math.abs(vy) < 1.4) settled = true; }
-    } else {
-      y = floor + Math.sin(t*2)*1.2;
-    }
+    } else { y = floor + Math.sin(t*2)*1.2; }
     ctx.save();
     ctx.translate(W/2, y);
     const tilt = Math.sin(t*0.8) * 0.22;
