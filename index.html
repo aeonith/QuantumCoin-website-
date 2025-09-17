@@ -327,3 +327,39 @@
       if(y > floor){ y=floor; vy *= -0.56; if(Math.abs(vy) < 1.4) settled = true; }
     } else {
       y = floor + Math.sin(t*2)*1.2;
+    }
+
+    // Coin
+    ctx.save();
+    ctx.translate(W/2, y);
+    const tilt = Math.sin(t*0.8) * 0.22;
+    ctx.transform(1, tilt, tilt, 1, 0, 0);
+    ctx.rotate(t*1.15);
+
+    const R = 130;
+    const rim = ctx.createConicGradient(t,0,0);
+    rim.addColorStop(0,'#22d3ee'); rim.addColorStop(.5,'#60a5fa'); rim.addColorStop(1,'#22d3ee');
+    ctx.lineWidth = 10; ctx.strokeStyle = rim;
+    ctx.beginPath(); ctx.arc(0,0,R,0,Math.PI*2); ctx.stroke();
+
+    const size = 260;
+    ctx.drawImage(img, -size/2, -size/2, size, size);
+
+    // Shimmer
+    sweep += 0.02;
+    const sx = Math.cos(sweep)*R*0.9, sy = Math.sin(sweep)*R*0.6;
+    const shine = ctx.createRadialGradient(sx, sy, 0, sx, sy, R*0.95);
+    shine.addColorStop(0, 'rgba(255,255,255,.07)');
+    shine.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.globalCompositeOperation = 'lighter';
+    ctx.fillStyle = shine; ctx.beginPath(); ctx.arc(0,0,R*0.96,0,Math.PI*2); ctx.fill();
+    ctx.globalCompositeOperation = 'source-over';
+
+    ctx.restore();
+    t += 0.016;
+    requestAnimationFrame(draw);
+  }
+  img.onload = draw;
+</script>
+</body>
+</html>
